@@ -100,7 +100,9 @@ The website presents my professional experience, technical skills, hands-on DevO
 rafeek-devops-portfolio/
 │
 ├── public/
-│   └── favicon.svg
+│   ├── favicon.svg
+│   ├── Rafeek_Ahamed_DevOps_Resume.pdf
+│   └── Rafeek_Ahamed_DevOps_Resume.docx
 │
 ├── src/
 │   ├── components/
