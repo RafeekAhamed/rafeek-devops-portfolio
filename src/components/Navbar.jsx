@@ -84,7 +84,7 @@ function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50">
       <nav
         aria-label="Primary navigation"
-        className="border-b border-slate-800/50 bg-slate-950/75 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-2xl"
+        className="border-b border-slate-800/50 bg-slate-950/75 shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
           {/* Brand */}
@@ -169,7 +169,7 @@ function Navbar() {
         {/* Mobile Navigation */}
         <div
           id="mobile-navigation"
-          className={`border-t border-slate-800/60 bg-slate-950/95 backdrop-blur-2xl transition-all duration-300 lg:hidden ${
+          className={`border-t border-slate-800/60 bg-slate-950/95 transition-all duration-300 lg:hidden ${
             isOpen
               ? "max-h-[calc(100vh-5rem)] opacity-100"
               : "pointer-events-none max-h-0 overflow-hidden opacity-0"

@@ -1,48 +1,32 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
-
-function SectionReveal({
-  children,
-  className = "",
-  y = 32,
-  duration = 0.7,
-}) {
+function SectionReveal({ children, className = "" }) {
   const sectionRef = useRef(null);
 
-  useGSAP(
-    () => {
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
+  useEffect(() => {
+    const element = sectionRef.current;
 
-      if (prefersReducedMotion) {
-        return;
-      }
-
-      gsap.from(sectionRef.current, {
-        y,
-        autoAlpha: 0,
-        duration,
-        ease: "power2.out",
-        clearProps: "transform,opacity,visibility",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 88%",
-          once: true,
-        },
-      });
-    },
-    {
-      scope: sectionRef,
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
     }
-  );
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          element.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.01 }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div ref={sectionRef} className={className}>
+    <div ref={sectionRef} className={`section-reveal ${className}`}>
       {children}
     </div>
   );

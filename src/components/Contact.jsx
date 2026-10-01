@@ -38,7 +38,7 @@ function Contact() {
       className="relative overflow-hidden border-t border-slate-800/60 bg-[#050817] px-6 py-24 sm:px-8 lg:px-12"
     >
       {/* Background glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-96 w-96 -translate-x-1/2 rounded-full bg-cyan-400/5 blur-3xl" />
+      <div className="pointer-events-none absolute left-1/2 top-1/3 h-96 w-96 -translate-x-1/2 rounded-full bg-cyan-400/5" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section heading */}
