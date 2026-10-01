@@ -96,7 +96,7 @@ function Footer() {
             {/* Availability */}
             <div className="flex items-center gap-2 text-slate-500">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400/20" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
 

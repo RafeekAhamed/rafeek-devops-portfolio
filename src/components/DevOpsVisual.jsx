@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import {
   Cloud,
   Container,
@@ -9,41 +8,8 @@ import {
 } from "lucide-react";
 
 function DevOpsVisual() {
-  const visualRef = useRef(null);
-
-  useEffect(() => {
-    const visual = visualRef.current;
-
-    if (!visual || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
-
-    const handlePointerMove = (event) => {
-      const rect = visual.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 10;
-      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 10;
-
-      visual.style.setProperty("--pointer-x", `${x}px`);
-      visual.style.setProperty("--pointer-y", `${y}px`);
-    };
-
-    const handlePointerLeave = () => {
-      visual.style.setProperty("--pointer-x", "0px");
-      visual.style.setProperty("--pointer-y", "0px");
-    };
-
-    visual.addEventListener("pointermove", handlePointerMove, { passive: true });
-    visual.addEventListener("pointerleave", handlePointerLeave, { passive: true });
-
-    return () => {
-      visual.removeEventListener("pointermove", handlePointerMove);
-      visual.removeEventListener("pointerleave", handlePointerLeave);
-    };
-  }, []);
-
   return (
     <div
-      ref={visualRef}
       aria-hidden="true"
       className="devops-visual relative mx-auto h-[470px] w-full max-w-[500px] perspective-[1000px]"
     >

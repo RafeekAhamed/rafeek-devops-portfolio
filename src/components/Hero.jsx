@@ -34,7 +34,7 @@ function Hero() {
         <div className="relative z-10 max-w-3xl">
           <div className="hero-reveal inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-3 py-1.5 text-xs font-medium text-cyan-300 [--delay:0ms]">
             <span aria-hidden="true" className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
+              <span className="absolute inline-flex h-full w-full rounded-full bg-cyan-400/20" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
             </span>
             Available for opportunities

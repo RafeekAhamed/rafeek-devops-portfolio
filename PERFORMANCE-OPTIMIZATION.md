@@ -23,3 +23,12 @@ Applied for the Vercel Speed Insights desktop Real Experience Score issue.
 ## Expected result
 
 The changes reduce JavaScript animation work and GPU/compositing pressure, especially on desktop. The Vercel RES score must be re-measured from real visitors after deployment; the existing sample of 3 visitors is too small to guarantee a particular score.
+
+
+## Second performance pass
+
+- Removed hero entrance delays so the primary heading can render immediately for faster LCP.
+- Removed the continuous pointer-tracking JavaScript from the desktop DevOps visual.
+- Stopped decorative orbit animations to reduce compositor work.
+- Enabled `content-visibility: auto` for below-the-fold sections to defer off-screen rendering work.
+- Kept Vercel Analytics and Speed Insights enabled.

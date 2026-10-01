@@ -121,28 +121,19 @@ header {
     font-size: 15px;
   }
 }
-/* Performance-friendly animation primitives. Keep expensive visual effects out of the main thread. */
+/* Performance-friendly animation primitives. */
 .hero-reveal {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  animation: hero-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: var(--delay, 0ms);
-}
-
-@keyframes hero-reveal {
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+  opacity: 1;
+  transform: none;
 }
 
 .section-reveal {
   opacity: 0;
-  transform: translate3d(0, 24px, 0);
+  transform: translate3d(0, 18px, 0);
 }
 
 .section-reveal.is-visible {
-  animation: section-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: section-reveal 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes section-reveal {
@@ -171,20 +162,9 @@ header {
   transform: translate3d(calc(-50% + var(--pointer-x) * 0.65), calc(var(--pointer-y) * 0.65), 0);
 }
 
-.devops-orbit-outer {
-  animation: orbit-clockwise 30s linear infinite;
-}
-
+.devops-orbit-outer,
 .devops-orbit-inner {
-  animation: orbit-counter 22s linear infinite;
-}
-
-@keyframes orbit-clockwise {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes orbit-counter {
-  to { transform: translate(-50%, -50%) rotate(-360deg); }
+  transform: translate(-50%, -50%);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -195,9 +175,10 @@ header {
     transform: none;
     animation: none;
   }
+}
 
-  .devops-orbit-outer,
-  .devops-orbit-inner {
-    animation: none;
-  }
+/* Avoid rendering work for content well below the initial viewport. */
+.section-reveal {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
