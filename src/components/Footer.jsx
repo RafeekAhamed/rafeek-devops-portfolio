@@ -88,7 +88,7 @@ function Footer() {
         <div className="flex flex-col gap-5 text-sm sm:flex-row sm:items-center sm:justify-between">
           {/* Copyright */}
           <p className="text-slate-600">
-            © {currentYear} All rights reserved.
+            © {currentYear} Rafeek Ahamed M. All rights reserved.
           </p>
 
           {/* Status + Back to top */}

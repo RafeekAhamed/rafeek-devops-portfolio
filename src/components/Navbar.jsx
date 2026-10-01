@@ -92,7 +92,7 @@ function Navbar() {
             href="#home"
             onClick={() => handleNavClick("#home")}
             className="group inline-flex items-center gap-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-950"
-            aria-label="Rafeek Ahamed - Home"
+            aria-label="Rafeek Ahamed M - Home"
           >
             <span
               aria-hidden="true"
@@ -103,7 +103,7 @@ function Navbar() {
 
             <span className="hidden sm:block">
               <span className="block text-sm font-bold tracking-wide text-white">
-                Rafeek Ahamed
+                Rafeek Ahamed M
               </span>
 
               <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.2em] text-slate-500">
