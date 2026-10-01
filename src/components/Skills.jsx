@@ -3,7 +3,7 @@ const skillGroups = [
     number: "01",
     title: "Cloud & Infrastructure",
     description:
-      "Cloud platforms and infrastructure services used for deployment, administration, monitoring, and DevOps workflows.",
+      "Cloud platforms and infrastructure services used for deployment, administration, monitoring, networking, and DevOps workflows.",
     skills: [
       "Microsoft Azure",
       "Azure VMs",
@@ -13,13 +13,17 @@ const skillGroups = [
       "AWS",
       "IAM",
       "VPC",
+      "Microsoft Entra ID",
+      "RBAC",
+      "NSGs",
+      "Private Endpoints",
     ],
   },
   {
     number: "02",
     title: "DevOps & CI/CD",
     description:
-      "Tools and practices used to automate source control, builds, releases, and application delivery.",
+      "Tools and practices used to automate source control, builds, releases, deployment validation, and application delivery.",
     skills: [
       "Azure DevOps",
       "Azure Pipelines",
@@ -29,13 +33,14 @@ const skillGroups = [
       "CI/CD",
       "Build & Release",
       "Release Management",
+      "Deployment Validation",
     ],
   },
   {
     number: "03",
     title: "Containers & Kubernetes",
     description:
-      "Containerization and Kubernetes concepts used for application deployment and orchestration.",
+      "Containerization and Kubernetes concepts used for application deployment, orchestration, scaling, and workload management.",
     skills: [
       "Docker",
       "Kubernetes",
@@ -55,7 +60,7 @@ const skillGroups = [
     number: "04",
     title: "Infrastructure as Code",
     description:
-      "Infrastructure automation using declarative configuration and reusable infrastructure components.",
+      "Infrastructure automation using declarative configuration, reusable modules, and environment-specific infrastructure components.",
     skills: [
       "Terraform",
       "Terraform Modules",
@@ -63,13 +68,14 @@ const skillGroups = [
       "Infrastructure as Code",
       "Docker Provider",
       "Environment Configuration",
+      "PowerShell",
     ],
   },
   {
     number: "05",
     title: "Monitoring & Operations",
     description:
-      "Monitoring, troubleshooting, and operational practices for cloud and containerized workloads.",
+      "Monitoring, troubleshooting, deployment validation, and operational practices for cloud and containerized workloads.",
     skills: [
       "Azure Monitor",
       "Application Insights",
@@ -79,13 +85,14 @@ const skillGroups = [
       "Network Troubleshooting",
       "Release Validation",
       "Production Support",
+      "Deployment Validation",
     ],
   },
   {
     number: "06",
     title: "Scripting & Development",
     description:
-      "Programming and database technologies supporting automation, backend development, and application workflows.",
+      "Programming and database technologies supporting automation, backend development, API integration, and application workflows.",
     skills: [
       "PowerShell",
       "Python",

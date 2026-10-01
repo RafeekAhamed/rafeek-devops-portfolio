@@ -1,8 +1,8 @@
 const contactLinks = [
   {
     label: "Email",
-    value: "rafeekahamedm@gmail.com",
-    href: "mailto:rafeekahamedm@gmail.com",
+    value: "rafeekahamed046@gmail.com",
+    href: "mailto:rafeekahamed046@gmail.com",
     description: "For opportunities and professional inquiries",
   },
   {

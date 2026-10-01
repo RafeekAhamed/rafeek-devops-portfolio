@@ -11,8 +11,14 @@ body {
   overflow-x: hidden;
   background: #050817;
   color: #ffffff;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -40,7 +46,10 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Keyboard focus */
+/* =========================================
+   Accessibility
+   ========================================= */
+
 :focus-visible {
   outline: 2px solid #22d3ee;
   outline-offset: 3px;
@@ -50,7 +59,6 @@ a {
   outline: none;
 }
 
-/* Smooth focus treatment */
 a:focus-visible,
 button:focus-visible {
   box-shadow:
@@ -58,12 +66,22 @@ button:focus-visible {
     0 0 0 5px rgba(34, 211, 238, 0.85);
 }
 
-/* Section positioning */
+/* =========================================
+   Section positioning
+   ========================================= */
+
 section[id] {
   scroll-margin-top: 90px;
 }
 
-/* Premium dark scrollbar */
+section {
+  max-width: 100%;
+}
+
+/* =========================================
+   Scrollbar
+   ========================================= */
+
 html {
   scrollbar-width: thin;
   scrollbar-color: rgba(34, 211, 238, 0.35) #050817;
@@ -87,49 +105,25 @@ html {
   background: rgba(34, 211, 238, 0.55);
 }
 
-/* Prevent accidental horizontal overflow */
-section {
-  max-width: 100%;
-}
+/* =========================================
+   UI behavior
+   ========================================= */
 
-/* Better text selection on buttons/labels */
 button,
 nav,
 header {
   user-select: none;
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Small screen protection */
-@media (max-width: 359px) {
-  html {
-    font-size: 15px;
-  }
-}
-/* Performance-friendly animation primitives. */
-.hero-reveal {
-  opacity: 1;
-  transform: none;
-}
+/* =========================================
+   Section reveal
+   ========================================= */
 
 .section-reveal {
   opacity: 0;
   transform: translate3d(0, 18px, 0);
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 
 .section-reveal.is-visible {
@@ -143,42 +137,161 @@ header {
   }
 }
 
+/* =========================================
+   Hero reveal
+   ========================================= */
+
+.hero-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* =========================================
+   Premium design system
+   ========================================= */
+
+.premium-glass {
+  background: rgba(8, 15, 30, 0.68);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.premium-glow {
+  box-shadow:
+    0 0 40px rgba(34, 211, 238, 0.08),
+    0 0 100px rgba(59, 130, 246, 0.05);
+}
+
+.premium-card {
+  transition:
+    transform 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    background 300ms ease;
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 211, 238, 0.35);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.25),
+    0 0 35px rgba(34, 211, 238, 0.04);
+}
+
+/* =========================================
+   DevOps hero visual
+   ========================================= */
+
 .devops-visual {
   --pointer-x: 0px;
   --pointer-y: 0px;
+  transform-style: preserve-3d;
+}
+
+.devops-depth-layer {
+  transform-style: preserve-3d;
+}
+
+.depth-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(34, 211, 238, 0.10);
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.depth-ring-1 {
+  width: 280px;
+  height: 280px;
+}
+
+.depth-ring-2 {
+  width: 360px;
+  height: 360px;
+}
+
+.depth-ring-3 {
+  width: 440px;
+  height: 440px;
 }
 
 .devops-core {
-  transform: translate3d(calc(-50% + var(--pointer-x)), calc(-50% + var(--pointer-y)), 0);
-  transition: transform 180ms ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .devops-card {
-  transform: translate3d(calc(var(--pointer-x) * 0.65), calc(var(--pointer-y) * 0.65), 0);
-  transition: transform 180ms ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .devops-card-centered {
-  transform: translate3d(calc(-50% + var(--pointer-x) * 0.65), calc(var(--pointer-y) * 0.65), 0);
+  transform: translateX(-50%);
 }
 
 .devops-orbit-outer,
 .devops-orbit-inner {
   transform: translate(-50%, -50%);
+  transform-origin: center;
+  will-change: transform;
 }
 
+/* =========================================
+   Reduced motion
+   ========================================= */
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-reveal,
+  html {
+    scroll-behavior: auto;
+  }
+
   .section-reveal,
   .section-reveal.is-visible {
     opacity: 1;
     transform: none;
     animation: none;
   }
+
+  .premium-card {
+    transition: none;
+  }
+
+  .devops-core,
+  .devops-card,
+  .devops-orbit-outer,
+  .devops-orbit-inner {
+    transform: none !important;
+    animation: none !important;
+  }
 }
 
-/* Avoid rendering work for content well below the initial viewport. */
-.section-reveal {
-  content-visibility: auto;
-  contain-intrinsic-size: 900px;
+/* =========================================
+   Small screens
+   ========================================= */
+
+@media (max-width: 640px) {
+  .depth-ring-3 {
+    width: 380px;
+    height: 380px;
+  }
+
+  .depth-ring-2 {
+    width: 320px;
+    height: 320px;
+  }
+
+  .depth-ring-1 {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 359px) {
+  html {
+    font-size: 15px;
+  }
 }

@@ -13,7 +13,7 @@ const footerLinks = [
   },
   {
     label: "Email",
-    href: "mailto:rafeekahamedm@gmail.com",
+    href: "mailto:rafeekahamed046@gmail.com",
   },
   {
     label: "Phone",

@@ -6,7 +6,10 @@ function SectionReveal({ children, className = "" }) {
   useEffect(() => {
     const element = sectionRef.current;
 
-    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      !element ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       return;
     }
 
@@ -17,7 +20,10 @@ function SectionReveal({ children, className = "" }) {
           observer.disconnect();
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.01 }
+      {
+        rootMargin: "0px 0px -8% 0px",
+        threshold: 0.01,
+      }
     );
 
     observer.observe(element);
@@ -26,7 +32,10 @@ function SectionReveal({ children, className = "" }) {
   }, []);
 
   return (
-    <div ref={sectionRef} className={`section-reveal ${className}`}>
+    <div
+      ref={sectionRef}
+      className={`section-reveal ${className}`}
+    >
       {children}
     </div>
   );
