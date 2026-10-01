@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ArrowRight, Download, FileText } from "lucide-react";
+import { Download, FileText } from "lucide-react";
 
 import DevOpsVisual from "./DevOpsVisual";
 
@@ -140,30 +140,8 @@ function Hero() {
             ))}
           </div>
 
-          {/* Actions */}
+          {/* Resume Actions */}
           <div className="hero-buttons mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            {/* View Projects */}
-            <a
-              href="#projects"
-              className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-cyan-400 px-6 py-3.5 text-sm font-bold text-slate-950 transition-all duration-300 hover:-translate-y-1 hover:bg-cyan-300 hover:shadow-[0_10px_35px_rgba(34,211,238,0.18)] sm:w-auto"
-            >
-              View Projects
-
-              <ArrowRight
-                aria-hidden="true"
-                size={17}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </a>
-
-            {/* Contact */}
-            <a
-              href="#contact"
-              className="inline-flex min-h-12 w-full items-center justify-center rounded-xl border border-slate-700 bg-slate-900/50 px-6 py-3.5 text-sm font-semibold text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:text-cyan-300 sm:w-auto"
-            >
-              Contact Me
-            </a>
-
             {/* View Resume */}
             <a
               href="/Rafeek_Ahamed_DevOps_Resume.pdf"
@@ -205,24 +183,6 @@ function Hero() {
                 size={17}
               />
               DOCX
-            </a>
-
-            {/* GitHub */}
-            <a
-              href="https://github.com/RafeekAhamed"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit Rafeek Ahamed on GitHub"
-              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-slate-800 bg-slate-950/70 px-5 py-3.5 text-sm font-semibold text-slate-400 transition-all duration-300 hover:-translate-y-1 hover:border-slate-600 hover:text-white sm:w-auto"
-            >
-              <span
-                aria-hidden="true"
-                className="text-sm font-black"
-              >
-                GH
-              </span>
-
-              GitHub
             </a>
           </div>
         </div>
