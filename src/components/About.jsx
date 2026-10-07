@@ -1,141 +1,274 @@
+const metrics = [
+  {
+    value: "1+",
+    label: "YEAR EXPERIENCE",
+    detail: "DevOps / Cloud",
+  },
+  {
+    value: "06",
+    label: "CLIENT ENVIRONMENTS",
+    detail: "Enterprise releases",
+  },
+  {
+    value: "99%+",
+    label: "AVAILABILITY",
+    detail: "Application support",
+  },
+  {
+    value: "03+",
+    label: "CORE PROJECTS",
+    detail: "Cloud / DevOps",
+  },
+];
+
 const focusAreas = [
   {
     number: "01",
     title: "Cloud Engineering",
     description:
-      "Working with Azure infrastructure, cloud services, networking, monitoring, and AKS-based workloads.",
+      "Azure infrastructure, networking, identity, access management, monitoring, and operational support.",
+    technologies: [
+      "Azure",
+      "VMs",
+      "Storage",
+      "VNet",
+      "Entra ID",
+      "RBAC",
+    ],
   },
   {
     number: "02",
     title: "DevOps & CI/CD",
     description:
-      "Building practical CI/CD workflows with Azure DevOps, GitHub Actions, Git, YAML, and release automation.",
+      "Release management, deployment validation, build artifacts, CI/CD pipelines, Git workflows, and operational documentation.",
+    technologies: [
+      "Azure DevOps",
+      "Git",
+      "YAML",
+      "CI/CD",
+      "PowerShell",
+    ],
   },
   {
     number: "03",
     title: "Containers & IaC",
     description:
-      "Hands-on work with Docker, Kubernetes, Helm, and Terraform for repeatable application and infrastructure deployments.",
+      "Containerized workloads, Kubernetes operations, infrastructure automation, health checks, and deployment workflows.",
+    technologies: [
+      "Kubernetes",
+      "AKS",
+      "Docker",
+      "Terraform",
+      "Helm",
+    ],
   },
 ];
 
-function About() {
+export default function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden border-t border-slate-800/60 bg-[#050817] px-6 py-24 sm:px-8 lg:px-12"
+      className="section-shell py-24 md:py-32"
     >
-      <div className="mx-auto max-w-7xl">
-        {/* Heading */}
-        <div className="mb-14 max-w-3xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
-            About
-          </p>
+      <div className="container">
+        {/* Header */}
+        <div className="mb-12 md:mb-16">
+          <div className="section-label">
+            02 / About
+          </div>
 
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Building practical DevOps and cloud engineering skills.
-          </h2>
+          <div className="mt-6 max-w-5xl">
+            <h2 className="editorial-title">
+              Engineering /
+              <br />
+              with purpose.
+            </h2>
+          </div>
         </div>
 
-        {/* Main content */}
-        <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-          {/* Profile */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/30 p-7 sm:p-9">
-            <p className="text-base leading-8 text-slate-300 sm:text-lg">
-              I am a DevOps Engineer focused on Azure cloud infrastructure,
-              CI/CD, Kubernetes, Docker, and Terraform. My professional
-              experience includes release management, deployment validation,
-              Kubernetes workload checks, cloud monitoring, and production
-              support.
+        {/* Intro */}
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+          <div>
+            <p className="max-w-3xl text-lg leading-8 text-slate-300 md:text-xl md:leading-9">
+              I am a DevOps Engineer focused on Azure cloud operations,
+              CI/CD release management, Kubernetes, containerization,
+              infrastructure automation, and production support.
             </p>
 
-            <p className="mt-6 text-base leading-8 text-slate-400 sm:text-lg">
-              Alongside professional experience, I build hands-on projects
-              around infrastructure automation, container orchestration, and
-              CI/CD to strengthen my practical understanding of modern DevOps
-              workflows.
+            <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-500 md:text-base">
+              My experience includes supporting enterprise application
+              releases across multiple client environments, validating
+              deployments, monitoring Azure infrastructure and AKS
+              workloads, troubleshooting operational issues, and
+              maintaining release documentation and runbooks.
             </p>
+          </div>
 
-            <p className="mt-6 text-base leading-8 text-slate-400 sm:text-lg">
-              I am particularly interested in opportunities involving cloud
-              engineering, DevOps, platform operations, infrastructure
-              automation, and reliable application delivery.
-            </p>
+          {/* Identity panel */}
+          <div className="system-card self-start">
+            <div className="system-card-header">
+              <span className="system-card-number">
+                PROFILE
+              </span>
 
-            {/* Quick facts */}
-            <div className="mt-8 grid gap-3 border-t border-slate-800/80 pt-7 sm:grid-cols-3">
-              <div>
-                <p className="text-xs uppercase tracking-[0.15em] text-slate-600">
-                  Focus
-                </p>
-                <p className="mt-2 text-sm font-semibold text-white">
-                  DevOps & Cloud
-                </p>
-              </div>
+              <span className="system-card-type">
+                ENGINEERING / FOCUS
+              </span>
+            </div>
 
-              <div>
-                <p className="text-xs uppercase tracking-[0.15em] text-slate-600">
-                  Core Platform
-                </p>
-                <p className="mt-2 text-sm font-semibold text-white">
-                  Microsoft Azure
-                </p>
-              </div>
+            <div className="p-6 md:p-7">
+              <p className="micro-label micro-label-cyan">
+                PRIMARY ROLE
+              </p>
 
-              <div>
-                <p className="text-xs uppercase tracking-[0.15em] text-slate-600">
-                  Availability
-                </p>
-                <p className="mt-2 text-sm font-semibold text-emerald-400">
-                  Open to Opportunities
-                </p>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">
+                DevOps Engineer
+              </h3>
+
+              <p className="mt-2 text-sm text-slate-500">
+                Azure Cloud Engineer
+              </p>
+
+              <div className="system-divider my-6" />
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="micro-label">
+                    CLOUD
+                  </span>
+
+                  <span className="text-sm text-slate-300">
+                    Microsoft Azure
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between gap-4">
+                  <span className="micro-label">
+                    CONTAINERS
+                  </span>
+
+                  <span className="text-sm text-slate-300">
+                    Kubernetes / Docker
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between gap-4">
+                  <span className="micro-label">
+                    AUTOMATION
+                  </span>
+
+                  <span className="text-sm text-slate-300">
+                    Terraform / CI/CD
+                  </span>
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Focus areas */}
-          <div className="space-y-4">
+        {/* Metrics */}
+        <div className="mt-16 border-y border-white/[0.07]">
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {metrics.map((metric, index) => (
+              <div
+                key={metric.label}
+                className={`px-5 py-7 md:px-7 md:py-8 ${
+                  index % 2 === 0
+                    ? "border-r border-white/[0.07]"
+                    : ""
+                } ${
+                  index >= 2
+                    ? "border-t border-white/[0.07] md:border-t-0"
+                    : ""
+                } ${
+                  index === 2
+                    ? "md:border-l md:border-white/[0.07]"
+                    : ""
+                }`}
+              >
+                <p className="font-mono text-3xl font-semibold tracking-tight text-white md:text-4xl">
+                  {metric.value}
+                </p>
+
+                <p className="mt-3 font-mono text-[9px] font-bold uppercase tracking-[0.17em] text-cyan-400">
+                  {metric.label}
+                </p>
+
+                <p className="mt-2 text-xs text-slate-600">
+                  {metric.detail}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Focus areas */}
+        <div className="mt-16">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="micro-label">
+              ENGINEERING / FOCUS AREAS
+            </p>
+
+            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-600">
+              Cloud → Delivery → Operations
+            </span>
+          </div>
+
+          <div className="system-grid">
             {focusAreas.map((area) => (
               <article
                 key={area.number}
-                className="group rounded-2xl border border-slate-800 bg-slate-900/30 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-cyan-400/40 hover:bg-slate-900/60 sm:p-7"
+                className="system-card"
               >
-                <div className="flex gap-5">
-                  <span className="shrink-0 text-sm font-semibold text-cyan-400">
+                <div className="system-card-header">
+                  <span className="system-card-number">
                     {area.number}
                   </span>
 
-                  <div>
-                    <h3 className="text-lg font-bold text-white">
-                      {area.title}
-                    </h3>
-
-                    <p className="mt-3 text-sm leading-7 text-slate-400">
-                      {area.description}
-                    </p>
-                  </div>
+                  <span className="system-card-type">
+                    FOCUS
+                  </span>
                 </div>
 
-                <div className="mt-5 ml-9 h-px w-8 bg-slate-700 transition-all duration-500 group-hover:w-16 group-hover:bg-cyan-400" />
+                <div className="p-6 md:p-7">
+                  <h3 className="text-xl font-semibold tracking-tight text-white">
+                    {area.title}
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-7 text-slate-500">
+                    {area.description}
+                  </p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {area.technologies.map((technology) => (
+                      <span
+                        key={technology}
+                        className="tech-chip"
+                      >
+                        {technology}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </article>
             ))}
           </div>
         </div>
 
         {/* Bottom statement */}
-        <div className="mt-10 rounded-2xl border border-cyan-400/10 bg-cyan-400/[0.03] px-6 py-7 sm:px-8">
-          <p className="text-sm leading-7 text-slate-400 sm:text-base">
-            <span className="font-semibold text-cyan-300">
-              Current direction:
-            </span>{" "}
-            developing deeper expertise in Azure, Kubernetes, CI/CD,
-            infrastructure as code, and cloud operations through professional
-            experience and hands-on engineering projects.
-          </p>
+        <div className="mt-10 border-t border-white/[0.07] pt-6">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <span className="micro-label">
+              ENGINEERING PRINCIPLE
+            </span>
+
+            <p className="max-w-2xl text-sm leading-6 text-slate-500 md:text-right">
+              Reliable deployments, observable systems, repeatable
+              infrastructure, and clear operational processes.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 }
-
-export default About;

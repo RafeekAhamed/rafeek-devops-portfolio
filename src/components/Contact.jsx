@@ -1,174 +1,171 @@
+import { Mail, ArrowUpRight, Download } from "lucide-react";
+
 const contactLinks = [
   {
-    label: "Email",
+    label: "EMAIL",
     value: "rafeekahamed046@gmail.com",
     href: "mailto:rafeekahamed046@gmail.com",
-    description: "For opportunities and professional inquiries",
   },
   {
-    label: "Phone",
-    value: "+91 7540074392",
-    href: "tel:+917540074392",
-    description: "Available for professional calls",
-  },
-  {
-    label: "LinkedIn",
+    label: "LINKEDIN",
     value: "linkedin.com/in/rafeek-ahamed-devops",
     href: "https://www.linkedin.com/in/rafeek-ahamed-devops",
-    description: "Connect with me professionally",
   },
   {
-    label: "GitHub",
+    label: "GITHUB",
     value: "github.com/RafeekAhamed",
     href: "https://github.com/RafeekAhamed",
-    description: "Explore my DevOps projects",
   },
   {
-    label: "LeetCode",
-    value: "leetcode.com/u/rafeek-ahamed-m/",
+    label: "LEETCODE",
+    value: "leetcode.com/u/rafeek-ahamed-m",
     href: "https://leetcode.com/u/rafeek-ahamed-m/",
-    description: "View my problem-solving practice",
   },
 ];
 
-function Contact() {
+export default function Contact() {
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden border-t border-slate-800/60 bg-[#050817] px-6 py-24 sm:px-8 lg:px-12"
-    >
-      {/* Background glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-96 w-96 -translate-x-1/2 rounded-full bg-cyan-400/5" />
+    <section id="contact" className="section-shell py-24 md:py-32">
+      <div className="container">
+        <div className="border border-cyan-400/20 bg-[#080c0e]">
+          <div className="border-b border-white/[0.07] px-5 py-4 md:px-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="section-label">08 / Contact</span>
 
-      <div className="relative z-10 mx-auto max-w-7xl">
-        {/* Section heading */}
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
-            Contact
-          </p>
+              <span className="technical-label">
+                OPEN TO DEVOPS / CLOUD OPPORTUNITIES
+              </span>
+            </div>
+          </div>
 
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Let&apos;s build reliable systems together.
-          </h2>
-
-          <p className="mt-6 text-base leading-8 text-slate-400 sm:text-lg">
-            I&apos;m open to DevOps, cloud engineering, platform operations,
-            and infrastructure-focused opportunities. Feel free to connect
-            with me through any of the channels below.
-          </p>
-        </div>
-
-        {/* Main CTA */}
-        <div className="mx-auto mt-12 max-w-5xl rounded-3xl border border-cyan-400/15 bg-slate-900/40 p-6 shadow-[0_20px_80px_rgba(8,145,178,0.06)] sm:p-8 lg:p-10">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              {/* Availability badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/5 px-3 py-2 text-xs font-medium text-emerald-400">
-                <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                Available for opportunities
-              </div>
-
-              <h3 className="mt-6 text-2xl font-bold text-white sm:text-3xl">
-                Interested in working together?
-              </h3>
-
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">
-                Reach out for DevOps, Azure, cloud infrastructure, CI/CD,
-                Kubernetes, or platform engineering opportunities.
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="border-b border-white/[0.07] p-6 md:p-10 lg:border-b-0 lg:border-r lg:p-12">
+              <p className="micro-label micro-label-cyan">
+                AVAILABLE FOR OPPORTUNITIES
               </p>
+
+              <h2 className="mt-6 max-w-4xl text-5xl font-semibold leading-[0.9] tracking-[-0.055em] text-white md:text-7xl">
+                Let&apos;s build
+                <br />
+                something
+                <br />
+                <span className="cyan-text">reliable.</span>
+              </h2>
+
+              <p className="mt-8 max-w-xl text-sm leading-7 text-slate-400 md:text-base">
+                I&apos;m looking for opportunities where I can contribute to
+                DevOps, Azure cloud operations, CI/CD, Kubernetes, and
+                infrastructure automation while continuing to grow as an
+                engineer.
+              </p>
+
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="mailto:rafeekahamed046@gmail.com"
+                  className="inline-flex items-center justify-center gap-2 bg-cyan-400 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-950 transition hover:bg-cyan-300"
+                >
+                  <Mail size={15} />
+                  Email Me
+                </a>
+
+                <a
+                  href="/Rafeek_Ahamed_DevOps_Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 border border-white/[0.12] px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-200 transition hover:border-cyan-400/40 hover:bg-cyan-400/[0.05]"
+                >
+                  <Download size={15} />
+                  View Resume
+                </a>
+              </div>
             </div>
 
-            {/* Email CTA */}
-            <a
-              href="mailto:rafeekahamedm@gmail.com"
-              className="inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-cyan-400 px-6 py-3.5 text-sm font-bold text-slate-950 transition-all duration-300 hover:-translate-y-1 hover:bg-cyan-300 hover:shadow-[0_10px_35px_rgba(34,211,238,0.18)]"
-            >
-              Email Me
-              <span className="text-lg">→</span>
-            </a>
-          </div>
-        </div>
+            <div>
+              <div className="border-b border-white/[0.07] p-6 md:p-8">
+                <p className="micro-label">HIRING SIGNALS</p>
 
-        {/* Contact links */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {contactLinks.map((link) => {
-            const isEmail = link.label === "Email";
-            const isPhone = link.label === "Phone";
-
-            return (
-              <a
-                key={link.label}
-                href={link.href}
-                target={isEmail || isPhone ? undefined : "_blank"}
-                rel={
-                  isEmail || isPhone
-                    ? undefined
-                    : "noopener noreferrer"
-                }
-                className="group rounded-2xl border border-slate-800 bg-slate-900/25 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:bg-slate-900/50"
-              >
-                <div className="flex items-start justify-between gap-5">
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
-                      {link.label}
+                <div className="mt-6 space-y-5">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.16em] text-slate-600">
+                      PRIMARY ROLE
                     </p>
-
-                    <p className="mt-3 break-all text-sm font-semibold text-white transition-colors group-hover:text-cyan-300 sm:text-base">
-                      {link.value}
-                    </p>
-
-                    <p className="mt-2 text-xs leading-6 text-slate-500">
-                      {link.description}
+                    <p className="mt-2 text-sm text-slate-200">
+                      DevOps Engineer
                     </p>
                   </div>
 
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-800 bg-slate-950 text-sm text-slate-500 transition-all duration-300 group-hover:border-cyan-400/30 group-hover:text-cyan-300">
-                    ↗
-                  </span>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.16em] text-slate-600">
+                      CORE FOCUS
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-slate-300">
+                      Azure · Azure DevOps · CI/CD · Kubernetes · Docker ·
+                      Terraform
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.16em] text-slate-600">
+                      LOCATION
+                    </p>
+                    <p className="mt-2 text-sm text-slate-200">
+                      India · Open to relocation
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.16em] text-slate-600">
+                      STATUS
+                    </p>
+                    <div className="mt-2 flex items-center gap-2 text-sm text-emerald-300">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      Available for opportunities
+                    </div>
+                  </div>
                 </div>
-              </a>
-            );
-          })}
-        </div>
+              </div>
 
-        {/* Availability / focus */}
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {/* Role */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/20 p-5 transition-colors duration-300 hover:border-slate-700">
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-600">
-              Role Focus
-            </p>
+              <div>
+                {contactLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                    rel={
+                      link.href.startsWith("mailto:")
+                        ? undefined
+                        : "noreferrer"
+                    }
+                    className="group flex items-center justify-between border-b border-white/[0.07] px-6 py-5 transition hover:bg-white/[0.02] md:px-8"
+                  >
+                    <div className="min-w-0">
+                      <p className="micro-label">{link.label}</p>
+                      <p className="mt-2 truncate font-mono text-xs text-slate-400 transition group-hover:text-cyan-300">
+                        {link.value}
+                      </p>
+                    </div>
 
-            <p className="mt-2 text-sm font-semibold text-slate-300">
-              DevOps Engineer
-            </p>
+                    <ArrowUpRight
+                      size={16}
+                      className="ml-4 shrink-0 text-slate-600 transition group-hover:text-cyan-300"
+                    />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Cloud */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/20 p-5 transition-colors duration-300 hover:border-slate-700">
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-600">
-              Cloud Focus
-            </p>
+          <div className="flex flex-col gap-3 border-t border-white/[0.07] px-5 py-4 md:flex-row md:items-center md:justify-between md:px-8">
+            <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-600">
+              RESPONSE CHANNEL / EMAIL
+            </span>
 
-            <p className="mt-2 text-sm font-semibold text-slate-300">
-              Azure Cloud Engineering
-            </p>
-          </div>
-
-          {/* Core Stack */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/20 p-5 transition-colors duration-300 hover:border-slate-700">
-            <p className="text-xs uppercase tracking-[0.18em] text-slate-600">
-              Core Stack
-            </p>
-
-            <p className="mt-2 text-sm font-semibold text-slate-300">
-              Kubernetes · Docker · Terraform
-            </p>
+            <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-600">
+              Tirunelveli, Tamil Nadu / India
+            </span>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-export default Contact;

@@ -1,16 +1,10 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
+/* =========================================================
+   ROOT / DESIGN TOKENS
+   ========================================================= */
 
-body {
-  margin: 0;
-  min-width: 320px;
-  overflow-x: hidden;
-  background: #050817;
-  color: #ffffff;
+:root {
   font-family:
     Inter,
     ui-sans-serif,
@@ -19,279 +13,1043 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  -webkit-font-smoothing: antialiased;
+
+  color: #f8fafc;
+  background: #050708;
+
+  font-synthesis: none;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  /* -------------------------
+     Core colors
+     ------------------------- */
+
+  --bg: #050708;
+  --surface: #0a0e10;
+  --surface-soft: #0d1214;
+
+  --border: rgba(148, 163, 184, 0.16);
+  --border-soft: rgba(148, 163, 184, 0.1);
+  --border-strong: rgba(34, 211, 238, 0.32);
+
+  --text: #f8fafc;
+  --muted: #94a3b8;
+
+  --cyan: #22d3ee;
+  --cyan-soft: rgba(34, 211, 238, 0.1);
+  --cyan-dim: rgba(34, 211, 238, 0.18);
+  --cyan-glow: rgba(34, 211, 238, 0.08);
+
+  --panel: rgba(8, 16, 18, 0.72);
+  --panel-hover: rgba(11, 22, 24, 0.88);
+
+  --line-soft: rgba(148, 163, 184, 0.11);
+  --line-medium: rgba(148, 163, 184, 0.18);
+
+  /* -------------------------
+     Layout
+     ------------------------- */
+
+  --content-width: 1280px;
+
+  /* -------------------------
+     CENTRAL SPACING CONTROL
+     Change these values only
+     ------------------------- */
+
+  --section-space-desktop: 5.5rem;
+  --section-space-tablet: 4.5rem;
+  --section-space-mobile: 3.75rem;
+
+  --section-header-gap: 3rem;
+  --section-description-gap: 1.5rem;
+
+  --card-content-gap: 1.25rem;
+  --card-description-gap: 0.75rem;
+
+  --divider-space: 1.5rem;
+
+  --tools-strip-gap: 1.25rem;
+
+  --metadata-gap: 2rem;
+
+  /* -------------------------
+     Container
+     ------------------------- */
+
+  --container-padding-desktop: 40px;
+  --container-padding-mobile: 28px;
+  --container-padding-small: 24px;
 }
 
-* {
-  box-sizing: border-box;
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+  background: var(--bg);
 }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(
+      circle at 75% 8%,
+      rgba(34, 211, 238, 0.045),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 15% 55%,
+      rgba(20, 184, 166, 0.025),
+      transparent 28%
+    ),
+    var(--bg);
+
+  color: var(--text);
+}
+
+
+/* =========================================================
+   GLOBAL GRID / TEXTURE
+   ========================================================= */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 9999;
+
+  opacity: 0.035;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.5) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.5) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+}
+
+
+/* =========================================================
+   GLOBAL ELEMENTS
+   ========================================================= */
 
 ::selection {
-  background: rgba(34, 211, 238, 0.25);
-  color: #ffffff;
+  color: #020617;
+  background: var(--cyan);
 }
 
 a {
   color: inherit;
   text-decoration: none;
-}
 
-button {
-  font: inherit;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
 }
 
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+
+  transition-timing-function:
+    cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* =========================================
-   Accessibility
-   ========================================= */
-
-:focus-visible {
-  outline: 2px solid #22d3ee;
-  outline-offset: 3px;
-}
-
-#main-content:focus {
-  outline: none;
-}
-
-a:focus-visible,
-button:focus-visible {
-  box-shadow:
-    0 0 0 3px rgba(5, 8, 23, 0.95),
-    0 0 0 5px rgba(34, 211, 238, 0.85);
-}
-
-/* =========================================
-   Section positioning
-   ========================================= */
-
-section[id] {
-  scroll-margin-top: 90px;
-}
-
-section {
+img,
+svg {
   max-width: 100%;
 }
 
-/* =========================================
-   Scrollbar
-   ========================================= */
-
-html {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(34, 211, 238, 0.35) #050817;
+img {
+  display: block;
 }
 
-::-webkit-scrollbar {
-  width: 9px;
+#main-content {
+  outline: none;
 }
 
-::-webkit-scrollbar-track {
-  background: #050817;
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+section {
+  position: relative;
+  scroll-margin-top: 90px;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(34, 211, 238, 0.3);
-  border-radius: 999px;
-  border: 2px solid #050817;
+
+/* =========================================================
+   CENTRALIZED SECTION SPACING
+   ========================================================= */
+
+main > section {
+  padding-top: var(--section-space-desktop);
+  padding-bottom: var(--section-space-desktop);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 211, 238, 0.55);
+main > section:first-child {
+  padding-top: 0;
 }
 
-/* =========================================
-   UI behavior
-   ========================================= */
 
-button,
-nav,
-header {
-  user-select: none;
+/* =========================================================
+   SECTION SEPARATOR
+   ========================================================= */
+
+main > section:not(:first-child)::before {
+  content: "";
+
+  position: absolute;
+  left: 50%;
+  top: 0;
+
+  width: min(
+    calc(100% - 40px),
+    var(--content-width)
+  );
+
+  height: 1px;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(148, 163, 184, 0.06) 20%,
+      rgba(34, 211, 238, 0.1) 50%,
+      rgba(148, 163, 184, 0.06) 80%,
+      transparent
+    );
 }
 
-/* =========================================
-   Section reveal
-   ========================================= */
 
-.section-reveal {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  content-visibility: auto;
-  contain-intrinsic-size: 900px;
+/* =========================================================
+   SECTION SHELL
+   ========================================================= */
+
+.section-shell {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-.section-reveal.is-visible {
-  animation: section-reveal 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.section-shell::after {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  right: -240px;
+  top: 10%;
+
+  border: 1px solid rgba(34, 211, 238, 0.035);
+  border-radius: 50%;
+
+  pointer-events: none;
 }
 
-@keyframes section-reveal {
-  to {
+
+/* =========================================================
+   CENTRAL SECTION HEADER SPACING
+   ========================================================= */
+
+.section-header {
+  margin-bottom: var(--section-header-gap);
+}
+
+.section-description {
+  margin-top: var(--section-description-gap);
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.container {
+  width: min(
+    100% - var(--container-padding-desktop),
+    var(--content-width)
+  );
+
+  margin-inline: auto;
+}
+
+
+/* =========================================================
+   SECTION LABELS
+   ========================================================= */
+
+.section-label {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: var(--cyan);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.section-label::before {
+  content: "";
+
+  width: 28px;
+  height: 1px;
+
+  background: currentColor;
+}
+
+.technical-label {
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.micro-label {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.4;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  color: #64748b;
+}
+
+.micro-label-cyan {
+  color: rgba(34, 211, 238, 0.72);
+
+  text-shadow:
+    0 0 18px rgba(34, 211, 238, 0.12);
+}
+
+
+/* =========================================================
+   EDITORIAL TYPOGRAPHY
+   ========================================================= */
+
+.editorial-title {
+  max-width: 900px;
+
+  font-size: clamp(
+    2.75rem,
+    7vw,
+    7rem
+  );
+
+  line-height: 0.9;
+
+  letter-spacing: -0.06em;
+
+  font-weight: 700;
+
+  color: #f8fafc;
+
+  text-wrap: balance;
+}
+
+.editorial-title .muted {
+  color: #64748b;
+}
+
+.cyan-text {
+  color: var(--cyan);
+}
+
+.cyan-line {
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(34, 211, 238, 0.8),
+      rgba(34, 211, 238, 0)
+    );
+}
+
+
+/* =========================================================
+   BACKGROUNDS
+   ========================================================= */
+
+.grid-background {
+  background-image:
+    linear-gradient(
+      rgba(148, 163, 184, 0.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(148, 163, 184, 0.045) 1px,
+      transparent 1px
+    );
+
+  background-size: 64px 64px;
+}
+
+.glass-panel {
+  background: rgba(10, 14, 16, 0.72);
+
+  border: 1px solid var(--border);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+
+/* =========================================================
+   SYSTEM CARDS
+   ========================================================= */
+
+.system-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(14, 26, 28, 0.72),
+      rgba(7, 13, 15, 0.72)
+    );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  transition:
+    border-color 350ms ease,
+    background 350ms ease,
+    transform 350ms ease,
+    box-shadow 350ms ease;
+
+  isolation: isolate;
+}
+
+.system-card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 90% 100%,
+      rgba(34, 211, 238, 0.055),
+      transparent 28%
+    );
+
+  pointer-events: none;
+
+  opacity: 0.8;
+}
+
+.system-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  right: -75px;
+  bottom: -75px;
+
+  border: 1px solid rgba(148, 163, 184, 0.06);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.system-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.system-card h3 {
+  text-wrap: balance;
+}
+
+.system-card p {
+  text-wrap: pretty;
+}
+
+
+/* =========================================================
+   CARD SPACING CONTROLLER
+   ========================================================= */
+
+.card-content {
+  gap: var(--card-content-gap);
+}
+
+.card-description {
+  margin-top: var(--card-description-gap);
+}
+
+.card-divider {
+  margin-block: var(--divider-space);
+}
+
+.tools-strip {
+  margin-top: var(--tools-strip-gap);
+}
+
+.section-metadata {
+  margin-top: var(--metadata-gap);
+}
+
+
+/* =========================================================
+   DESKTOP HOVER
+   ========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .system-card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(34, 211, 238, 0.24);
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(14, 29, 31, 0.88),
+        rgba(8, 16, 18, 0.88)
+      );
+
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  }
+
+  .system-card:hover::before {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
   }
 }
 
-/* =========================================
-   Hero reveal
-   ========================================= */
 
-.hero-reveal {
-  opacity: 1;
-  transform: none;
+/* =========================================================
+   SYSTEM CARD HEADER
+   ========================================================= */
+
+.system-card-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 46px;
+
+  padding: 0 20px;
+
+  border-bottom: 1px solid var(--line-soft);
+
+  background: rgba(255, 255, 255, 0.008);
 }
 
-/* =========================================
-   Premium design system
-   ========================================= */
+.system-card-number {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
 
-.premium-glass {
-  background: rgba(8, 15, 30, 0.68);
-  border: 1px solid rgba(148, 163, 184, 0.14);
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  color: var(--cyan);
+
+  font-variant-numeric: tabular-nums;
+}
+
+.system-card-type {
+  max-width: 70%;
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+
+  text-align: right;
+  text-transform: uppercase;
+
+  color: #475569;
+}
+
+
+/* =========================================================
+   SYSTEM GRID
+   ========================================================= */
+
+.system-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+/* =========================================================
+   TECHNOLOGY CHIPS
+   ========================================================= */
+
+.tech-chip {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 28px;
+
+  padding: 0 10px;
+
+  border: 1px solid rgba(148, 163, 184, 0.12);
+
+  border-radius: 2px;
+
+  background: rgba(255, 255, 255, 0.018);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 9px;
+
+  color: #94a3b8;
+
+  white-space: nowrap;
+
+  user-select: none;
+
+  transition:
+    border-color 220ms ease,
+    background 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tech-chip:hover {
+    border-color: rgba(34, 211, 238, 0.22);
+
+    background: rgba(34, 211, 238, 0.045);
+
+    color: #e2e8f0;
+
+    transform: translateY(-1px);
+  }
+}
+
+
+/* =========================================================
+   SYSTEM DIVIDER
+   ========================================================= */
+
+.system-divider {
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(34, 211, 238, 0.25),
+      rgba(148, 163, 184, 0.08),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+#home {
+  isolation: isolate;
+}
+
+#home::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: min(
+    calc(100% - 40px),
+    var(--content-width)
+  );
+
+  height: 1px;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(34, 211, 238, 0.12),
+      transparent
+    );
+}
+
+.hero-fact-grid {
+  position: relative;
+}
+
+.hero-fact-grid::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(34, 211, 238, 0.025),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   PROJECTS
+   ========================================================= */
+
+#projects .system-card {
+  transition:
+    transform 350ms ease,
+    border-color 350ms ease,
+    background 350ms ease,
+    box-shadow 350ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #projects .system-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+
+/* =========================================================
+   EXPERIENCE
+   ========================================================= */
+
+#experience .system-card {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+#contact .system-card {
+  min-height: 100%;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+header {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
 
-.premium-glow {
-  box-shadow:
-    0 0 40px rgba(34, 211, 238, 0.08),
-    0 0 100px rgba(59, 130, 246, 0.05);
-}
 
-.premium-card {
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+a[class*="rounded"],
+button[class*="rounded"] {
   transition:
-    transform 300ms ease,
-    border-color 300ms ease,
-    box-shadow 300ms ease,
-    background 300ms ease;
+    transform 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
 }
 
-.premium-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(34, 211, 238, 0.35);
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.25),
-    0 0 35px rgba(34, 211, 238, 0.04);
+@media (hover: hover) and (pointer: fine) {
+  a[class*="rounded"]:hover,
+  button[class*="rounded"]:hover {
+    transform: translateY(-1px);
+  }
 }
 
-/* =========================================
-   DevOps hero visual
-   ========================================= */
 
-.devops-visual {
-  --pointer-x: 0px;
-  --pointer-y: 0px;
-  transform-style: preserve-3d;
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+  outline: 1px solid var(--cyan);
+  outline-offset: 4px;
 }
 
-.devops-depth-layer {
-  transform-style: preserve-3d;
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.depth-ring {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border: 1px solid rgba(34, 211, 238, 0.10);
-  border-radius: 9999px;
-  transform: translate(-50%, -50%);
-  transform-style: preserve-3d;
-  pointer-events: none;
+::-webkit-scrollbar-track {
+  background: #050708;
 }
 
-.depth-ring-1 {
-  width: 280px;
-  height: 280px;
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.25);
+  border-radius: 10px;
 }
 
-.depth-ring-2 {
-  width: 360px;
-  height: 360px;
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.35);
 }
 
-.depth-ring-3 {
-  width: 440px;
-  height: 440px;
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  :root {
+    --section-space-desktop: var(--section-space-tablet);
+  }
+
+  .system-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
 }
 
-.devops-core {
-  transform-style: preserve-3d;
-  will-change: transform;
+
+@media (max-width: 768px) {
+  :root {
+    --section-header-gap: 2.5rem;
+  }
+
+  main > section {
+    padding-top: var(--section-space-tablet);
+    padding-bottom: var(--section-space-tablet);
+  }
+
+  main > section:first-child {
+    padding-top: 0;
+  }
+
+  main > section:not(:first-child)::before {
+    width: calc(100% - 28px);
+  }
+
+  #home::after {
+    width: calc(100% - 28px);
+  }
+
+  .container {
+    width: min(
+      100% - var(--container-padding-mobile),
+      var(--content-width)
+    );
+  }
+
+  .editorial-title {
+    max-width: 100%;
+
+    font-size: clamp(
+      2.45rem,
+      12.5vw,
+      4.6rem
+    );
+
+    line-height: 0.92;
+
+    letter-spacing: -0.05em;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+
+  .system-card {
+    min-width: 0;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .system-card-header {
+    min-height: 42px;
+    padding-inline: 15px;
+  }
+
+  .tech-chip {
+    min-height: 27px;
+    padding-inline: 9px;
+    font-size: 8px;
+  }
+
+  a,
+  button {
+    touch-action: manipulation;
+  }
 }
 
-.devops-card {
-  transform-style: preserve-3d;
-  will-change: transform;
+
+@media (max-width: 640px) {
+  .system-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .editorial-title {
+    text-wrap: pretty;
+  }
 }
 
-.devops-card-centered {
-  transform: translateX(-50%);
+
+@media (max-width: 480px) {
+  :root {
+    --section-header-gap: 2.25rem;
+  }
+
+  main > section {
+    padding-top: var(--section-space-mobile);
+    padding-bottom: var(--section-space-mobile);
+  }
+
+  main > section:not(:first-child)::before {
+    width: calc(100% - 24px);
+  }
+
+  #home::after {
+    width: calc(100% - 24px);
+  }
+
+  .container {
+    width: min(
+      100% - var(--container-padding-small),
+      var(--content-width)
+    );
+  }
+
+  section {
+    scroll-margin-top: 78px;
+  }
+
+  .editorial-title {
+    font-size: clamp(
+      2.3rem,
+      13.5vw,
+      4rem
+    );
+  }
+
+  .system-card {
+    border-radius: 2px;
+  }
+
+  .system-card-header {
+    min-height: 40px;
+  }
+
+  .system-card-type {
+    max-width: 60%;
+    line-height: 1.4;
+  }
 }
 
-.devops-orbit-outer,
-.devops-orbit-inner {
-  transform: translate(-50%, -50%);
-  transform-origin: center;
-  will-change: transform;
-}
 
-/* =========================================
-   Reduced motion
-   ========================================= */
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .section-reveal,
-  .section-reveal.is-visible {
-    opacity: 1;
-    transform: none;
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 
-  .premium-card {
-    transition: none;
-  }
-
-  .devops-core,
-  .devops-card,
-  .devops-orbit-outer,
-  .devops-orbit-inner {
+  .system-card:hover,
+  #projects .system-card:hover,
+  #experience .system-card:hover {
     transform: none !important;
-    animation: none !important;
-  }
-}
-
-/* =========================================
-   Small screens
-   ========================================= */
-
-@media (max-width: 640px) {
-  .depth-ring-3 {
-    width: 380px;
-    height: 380px;
-  }
-
-  .depth-ring-2 {
-    width: 320px;
-    height: 320px;
-  }
-
-  .depth-ring-1 {
-    width: 250px;
-    height: 250px;
-  }
-}
-
-@media (max-width: 359px) {
-  html {
-    font-size: 15px;
   }
 }

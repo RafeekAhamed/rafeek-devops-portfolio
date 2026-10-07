@@ -10,13 +10,25 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SectionReveal from "./components/SectionReveal";
 import NotFound from "./components/NotFound";
+import EngineeringWorkflow from "./components/EngineeringWorkflow";
+import EngineeringToolkit from "./components/EngineeringToolkit";
+import WhatIBring from "./components/WhatIBring";
 
-function Portfolio() {
+export default function App() {
+  const isHome =
+    window.location.pathname === "/" ||
+    window.location.pathname === "";
+
+  if (!isHome) {
+    return <NotFound />;
+  }
+
   return (
     <>
       <a
         href="#main-content"
-        className="sr-only fixed left-4 top-4 z-[100] rounded-lg bg-cyan-400 px-4 py-3 text-sm font-bold text-slate-950 shadow-lg focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-slate-950"
+        aria-label="Skip to main content"
+        className="sr-only focus:not-sr-only"
       >
         Skip to main content
       </a>
@@ -24,7 +36,9 @@ function Portfolio() {
       <Navbar />
 
       <main id="main-content" tabIndex="-1">
-        <Hero />
+        <SectionReveal>
+          <Hero />
+        </SectionReveal>
 
         <SectionReveal>
           <About />
@@ -43,11 +57,23 @@ function Portfolio() {
         </SectionReveal>
 
         <SectionReveal>
+          <EngineeringWorkflow />
+        </SectionReveal>
+
+        <SectionReveal>
+          <EngineeringToolkit />
+        </SectionReveal>
+
+        <SectionReveal>
           <Certifications />
         </SectionReveal>
 
         <SectionReveal>
           <Education />
+        </SectionReveal>
+
+        <SectionReveal>
+          <WhatIBring />
         </SectionReveal>
 
         <SectionReveal>
@@ -59,17 +85,3 @@ function Portfolio() {
     </>
   );
 }
-
-function App() {
-  const path = window.location.pathname;
-
-  const isHome = path === "/" || path === "";
-
-  if (!isHome) {
-    return <NotFound />;
-  }
-
-  return <Portfolio />;
-}
-
-export default App;

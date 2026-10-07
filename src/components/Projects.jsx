@@ -1,195 +1,298 @@
 const projects = [
   {
     number: "01",
-    title: "Terraform + Docker Infrastructure Automation",
-    category: "Infrastructure as Code",
+    category: "INFRASTRUCTURE / AUTOMATION",
+    title: "Terraform + Docker",
+    subtitle: "Infrastructure Automation",
     description:
-      "Reusable Terraform modules for provisioning a multi-environment Docker infrastructure with Nginx, Flask backend, PostgreSQL, isolated networks, and environment-specific configuration.",
-    technologies: [
+      "Modular infrastructure automation project using Terraform and Docker to provision isolated development and production environments.",
+    architecture:
+      "Terraform → Network → Nginx → Flask → PostgreSQL",
+    implementation: [
+      "Reusable Terraform modules for infrastructure components",
+      "Separate Dev and Prod environment configuration",
+      "Nginx reverse proxy with Flask backend",
+      "PostgreSQL database integration",
+      "GitHub Actions validation workflow",
+    ],
+    validation: [
+      "terraform fmt",
+      "terraform init",
+      "terraform validate",
+      "terraform plan",
+      "Application health checks",
+    ],
+    stack: [
       "Terraform",
       "Docker",
-      "Nginx",
+      "Python",
       "Flask",
       "PostgreSQL",
+      "Nginx",
       "GitHub Actions",
     ],
-    highlights: [
-      "Reusable Terraform modules",
-      "Separate Dev and Prod environments",
-      "Docker networking and service discovery",
-      "Terraform validation and CI automation",
-    ],
-    github: "https://github.com/RafeekAhamed/terraform-docker-infrastructure",
+    github:
+      "https://github.com/RafeekAhamed/terraform-docker-infrastructure",
   },
   {
     number: "02",
-    title: "Kubernetes Microservices Platform",
-    category: "Kubernetes & Container Orchestration",
+    category: "CONTAINERS / ORCHESTRATION",
+    title: "Kubernetes",
+    subtitle: "Microservices Platform",
     description:
-      "Containerized Flask microservices deployed on Kubernetes using Deployments, Services, ConfigMaps, Secrets, health probes, RBAC, rolling updates, HPA, and Helm.",
-    technologies: [
+      "Containerized microservices platform using Kubernetes with service discovery, ingress routing, configuration management, health probes, Helm, and autoscaling.",
+    architecture:
+      "Ingress → Backend → PostgreSQL → Services → HPA",
+    implementation: [
+      "Kubernetes Services for application communication",
+      "Ingress routing for microservices",
+      "ConfigMaps and Secrets for configuration",
+      "RBAC and namespace-based organization",
+      "Health probes and rolling updates",
+      "Helm-based deployment management",
+      "Horizontal Pod Autoscaling",
+    ],
+    validation: [
+      "kubectl workload validation",
+      "Pod health checks",
+      "Deployment status checks",
+      "Service connectivity",
+      "Application health validation",
+    ],
+    stack: [
       "Kubernetes",
       "Docker",
       "Helm",
+      "PostgreSQL",
       "YAML",
       "GitHub Actions",
-      "Linux",
+      "kubectl",
     ],
-    highlights: [
-      "Helm-based application deployment",
-      "Kubernetes Services and Ingress",
-      "ConfigMaps and Secrets",
-      "Health probes and rolling updates",
-      "Horizontal Pod Autoscaling",
-    ],
-    github: "https://github.com/RafeekAhamed/kubernetes-microservices",
+    github:
+      "https://github.com/RafeekAhamed/kubernetes-microservices",
   },
   {
     number: "03",
-    title: "Azure DevOps CI/CD Platform",
-    category: "Cloud & CI/CD",
+    category: "CI/CD / RELEASE ENGINEERING",
+    title: "Azure DevOps",
+    subtitle: "CI/CD Platform",
     description:
-      "Azure-focused DevOps project demonstrating Git-based development, YAML CI/CD pipelines, Docker containerization, Kubernetes deployment manifests, application testing, and AKS-oriented workflows.",
-    technologies: [
-      "Azure",
+      "CI/CD workflow focused on source control, build execution, artifact handling, release deployment, and post-deployment validation.",
+    architecture:
+      "Git → Build → Artifact → Release → Validation",
+    implementation: [
+      "Source-controlled deployment workflow",
+      "Build and artifact validation",
+      "Release deployment process",
+      "Environment-based deployment checks",
+      "Post-deployment application validation",
+    ],
+    validation: [
+      "Build status verification",
+      "Artifact validation",
+      "Deployment status checks",
+      "Application health checks",
+      "Release documentation",
+    ],
+    stack: [
       "Azure DevOps",
-      "Docker",
-      "Kubernetes",
       "Git",
       "YAML",
+      "CI/CD",
+      "PowerShell",
+      "Release Management",
     ],
-    highlights: [
-      "YAML-based CI/CD pipeline",
-      "Docker image workflow",
-      "Kubernetes deployment manifests",
-      "Automated application testing",
-    ],
-    github: "https://github.com/RafeekAhamed/project1-azure-devops",
+    github: "https://github.com/RafeekAhamed",
   },
 ];
 
-function Projects() {
+function ProjectCard({ project }) {
   return (
-    <section
-      id="projects"
-      className="relative overflow-hidden border-t border-slate-800/60 bg-[#030611] px-6 py-24 sm:px-8 lg:px-12"
-    >
-      <div className="mx-auto max-w-7xl">
-        {/* Section heading */}
-        <div className="mb-14 max-w-3xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
-            Projects
-          </p>
+    <article className="system-card overflow-hidden">
+      {/* Header */}
+      <div className="system-card-header">
+        <span className="system-card-number">
+          {project.number}
+        </span>
 
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Infrastructure built to demonstrate real DevOps workflows.
-          </h2>
+        <span className="system-card-type">
+          {project.category}
+        </span>
+      </div>
 
-          <p className="mt-6 text-base leading-8 text-slate-400 sm:text-lg">
-            Hands-on projects covering infrastructure automation, container
-            orchestration, CI/CD, cloud engineering, and production-oriented
-            deployment practices.
-          </p>
-        </div>
+      {/* Main content */}
+      <div className="p-6 md:p-8">
+        <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
+          {/* Left */}
+          <div>
+            <p className="micro-label micro-label-cyan">
+              PROJECT / {project.number}
+            </p>
 
-        {/* Project cards */}
-        <div className="grid gap-6 lg:grid-cols-3">
-          {projects.map((project) => (
-            <article
-              key={project.number}
-              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/30 p-6 transition-all duration-500 hover:-translate-y-2 hover:border-cyan-400/40 hover:bg-slate-900/60 hover:shadow-[0_20px_60px_rgba(8,145,178,0.08)] sm:p-7"
-            >
-              {/* Top accent */}
-              <div className="absolute left-0 top-0 h-px w-0 bg-cyan-400 transition-all duration-500 group-hover:w-full" />
+            <h3 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+              {project.title}
+            </h3>
 
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-cyan-400">
-                  {project.number}
-                </span>
+            <p className="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-slate-500">
+              {project.subtitle}
+            </p>
 
-                <span className="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-slate-500">
-                  {project.category}
-                </span>
-              </div>
+            <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-400 md:text-base">
+              {project.description}
+            </p>
 
-              <h3 className="mt-7 text-xl font-bold leading-8 text-white sm:text-2xl">
-                {project.title}
-              </h3>
-
-              <p className="mt-4 text-sm leading-7 text-slate-400">
-                {project.description}
+            {/* Architecture */}
+            <div className="mt-8">
+              <p className="micro-label mb-3">
+                ARCHITECTURE
               </p>
 
-              {/* Technologies */}
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.technologies.map((technology) => (
+              <div className="border border-white/[0.08] bg-white/[0.02] px-4 py-4 font-mono text-xs leading-6 text-cyan-300 md:text-sm">
+                {project.architecture}
+              </div>
+            </div>
+
+            {/* Stack */}
+            <div className="mt-8">
+              <p className="micro-label mb-3">
+                TECHNOLOGY STACK
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {project.stack.map((technology) => (
                   <span
                     key={technology}
-                    className="rounded-md border border-slate-800 bg-slate-950/70 px-2.5 py-1.5 text-[11px] font-medium text-slate-400 transition-colors duration-300 group-hover:border-slate-700 group-hover:text-slate-300"
+                    className="tech-chip"
                   >
                     {technology}
                   </span>
                 ))}
               </div>
+            </div>
+          </div>
 
-              {/* Highlights */}
-              <div className="mt-7 border-t border-slate-800/80 pt-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-                  Highlights
-                </p>
+          {/* Right */}
+          <div className="space-y-7">
+            {/* Implementation */}
+            <div>
+              <p className="micro-label micro-label-cyan mb-4">
+                IMPLEMENTATION
+              </p>
 
-                <ul className="mt-4 space-y-3">
-                  {project.highlights.map((highlight) => (
-                    <li
-                      key={highlight}
-                      className="flex gap-3 text-sm leading-6 text-slate-400"
-                    >
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul className="space-y-3">
+                {project.implementation.map((item) => (
+                  <li
+                    key={item}
+                    className="flex gap-3 text-sm leading-6 text-slate-400"
+                  >
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-cyan-400" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              {/* GitHub */}
-              <div className="mt-auto pt-8">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors duration-300 hover:text-cyan-300"
-                >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-700 bg-slate-950 text-xs font-bold transition-colors duration-300 group-hover:border-cyan-400/30">
-                    GH
-                  </span>
+            {/* Validation */}
+            <div>
+              <p className="micro-label micro-label-cyan mb-4">
+                VALIDATION
+              </p>
 
-                  <span>View on GitHub</span>
+              <ul className="space-y-3">
+                {project.validation.map((item) => (
+                  <li
+                    key={item}
+                    className="flex gap-3 text-sm leading-6 text-slate-400"
+                  >
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-500" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
 
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </a>
-              </div>
-            </article>
+        {/* Footer */}
+        <div className="mt-10 border-t border-white/[0.07] pt-5">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="micro-label">
+                REPOSITORY
+              </p>
+
+              <p className="mt-2 break-all font-mono text-xs text-slate-500">
+                github.com/RafeekAhamed
+              </p>
+            </div>
+
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex w-fit items-center gap-2 border border-cyan-400/30 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-cyan-300 transition hover:border-cyan-300 hover:bg-cyan-400/[0.06]"
+            >
+              View GitHub
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default function Projects() {
+  return (
+    <section
+      id="projects"
+      className="section-shell py-24 md:py-32"
+    >
+      <div className="container">
+        {/* Heading */}
+        <div className="mb-12 md:mb-16">
+          <div className="section-label">
+            05 / Projects
+          </div>
+
+          <div className="mt-6 max-w-6xl">
+            <h2 className="editorial-title">
+              Systems /
+              <br />
+              built to
+              <br />
+              <span className="cyan-text">operate.</span>
+            </h2>
+          </div>
+
+          <p className="mt-8 max-w-2xl text-sm leading-7 text-slate-400 md:text-base">
+            Hands-on infrastructure, Kubernetes, and CI/CD projects
+            demonstrating practical DevOps workflows from automation
+            and deployment to validation and operations.
+          </p>
+        </div>
+
+        {/* Projects */}
+        <div className="space-y-6">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.number}
+              project={project}
+            />
           ))}
         </div>
 
-        {/* GitHub CTA */}
-        <div className="mt-10 flex justify-center">
-          <a
-            href="https://github.com/RafeekAhamed"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 rounded-xl border border-slate-700 bg-slate-900/40 px-6 py-3.5 text-sm font-semibold text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-400/40 hover:text-cyan-300"
-          >
-            <span className="text-xs font-bold">GH</span>
-            Explore all projects
-            <span>→</span>
-          </a>
+        {/* Bottom status */}
+        <div className="mt-8 flex flex-col gap-4 border-t border-white/[0.07] pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <span className="micro-label">
+            PROJECT STATUS
+          </span>
+
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500">
+            Built / Tested / Documented
+          </span>
         </div>
       </div>
     </section>
   );
 }
-
-export default Projects;

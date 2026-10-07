@@ -1,296 +1,582 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-import {
-  Cloud,
-  Container,
-  Boxes,
-  GitBranch,
-  Server,
-  Workflow,
-} from "lucide-react";
+const pipeline = [
+  {
+    id: "01",
+    title: "SOURCE",
+    value: "Git",
+    detail: "Version Control",
+  },
+  {
+    id: "02",
+    title: "BUILD",
+    value: "CI/CD",
+    detail: "Azure DevOps",
+  },
+  {
+    id: "03",
+    title: "CONTAINER",
+    value: "Docker",
+    detail: "Image Build",
+  },
+  {
+    id: "04",
+    title: "PLATFORM",
+    value: "Kubernetes",
+    detail: "Workloads",
+  },
+  {
+    id: "05",
+    title: "MONITOR",
+    value: "Azure Monitor",
+    detail: "Operations",
+  },
+];
 
-function DevOpsVisual() {
-  const visualRef = useRef(null);
+export default function DevOpsVisual() {
+  const rootRef = useRef(null);
+  const lineRef = useRef(null);
+  const nodeRefs = useRef([]);
 
-  useGSAP(
-    () => {
-      const visual = visualRef.current;
+  useEffect(() => {
+    const root = rootRef.current;
 
-      if (!visual) return;
+    if (!root) return;
 
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-      if (prefersReducedMotion) return;
+    if (reduceMotion) return;
 
-      const core = visual.querySelector(".devops-core");
-      const cards = visual.querySelectorAll(".devops-card");
-      const outerOrbit = visual.querySelector(".devops-orbit-outer");
-      const innerOrbit = visual.querySelector(".devops-orbit-inner");
+    const ctx = gsap.context(() => {
+      /* ---------------------------------------------
+         Pipeline entrance
+         --------------------------------------------- */
 
-      const handleMouseMove = (event) => {
-        const rect = visual.getBoundingClientRect();
-
-        const x = event.clientX - rect.left - rect.width / 2;
-        const y = event.clientY - rect.top - rect.height / 2;
-
-        const normalizedX = x / rect.width;
-        const normalizedY = y / rect.height;
-
-        gsap.to(core, {
-          x: normalizedX * 18,
-          y: normalizedY * 18,
-          rotateY: normalizedX * 8,
-          rotateX: normalizedY * -8,
-          duration: 0.6,
+      gsap.fromTo(
+        lineRef.current,
+        {
+          scaleX: 0,
+          transformOrigin: "left center",
+        },
+        {
+          scaleX: 1,
+          duration: 1.4,
           ease: "power2.out",
-          overwrite: true,
-        });
+          delay: 0.2,
+        }
+      );
 
-        gsap.to(cards, {
-          x: normalizedX * 12,
-          y: normalizedY * 12,
-          duration: 0.7,
+      gsap.fromTo(
+        nodeRefs.current,
+        {
+          opacity: 0,
+          y: 14,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          stagger: 0.12,
           ease: "power2.out",
-          stagger: 0.02,
-          overwrite: true,
-        });
-      };
+          delay: 0.3,
+        }
+      );
 
-      const handleMouseLeave = () => {
-        gsap.to(core, {
-          x: 0,
-          y: 0,
-          rotateY: 0,
-          rotateX: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          overwrite: true,
-        });
+      /* ---------------------------------------------
+         Moving pipeline signal
+         --------------------------------------------- */
 
-        gsap.to(cards, {
-          x: 0,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          overwrite: true,
-        });
-      };
+      gsap.to(".pipeline-pulse", {
+        xPercent: 100,
+        duration: 2.4,
+        repeat: -1,
+        ease: "none",
+      });
 
-      visual.addEventListener("mousemove", handleMouseMove);
-      visual.addEventListener("mouseleave", handleMouseLeave);
+      /* ---------------------------------------------
+         Ambient orbit
+         --------------------------------------------- */
 
-      gsap.to(outerOrbit, {
-        rotation: 360,
+      gsap.to(".visual-orbit", {
+        rotate: 360,
         duration: 30,
         repeat: -1,
         ease: "none",
       });
 
-      gsap.to(innerOrbit, {
-        rotation: -360,
+      gsap.to(".visual-orbit-inner", {
+        rotate: -360,
         duration: 22,
         repeat: -1,
         ease: "none",
       });
+    }, root);
 
-      return () => {
-        visual.removeEventListener("mousemove", handleMouseMove);
-        visual.removeEventListener("mouseleave", handleMouseLeave);
+    return () => ctx.revert();
+  }, []);
 
-        gsap.killTweensOf(core);
-        gsap.killTweensOf(cards);
-        gsap.killTweensOf(outerOrbit);
-        gsap.killTweensOf(innerOrbit);
-      };
-    },
-    {
-      scope: visualRef,
+  /* =====================================================
+     MOUSE PARALLAX
+     ===================================================== */
+
+  const handleMouseMove = (event) => {
+    const root = rootRef.current;
+
+    if (!root) return;
+
+    if (
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+    ) {
+      return;
     }
-  );
+
+    const rect = root.getBoundingClientRect();
+
+    if (!rect.width || !rect.height) return;
+
+    const x =
+      ((event.clientX - rect.left) / rect.width - 0.5) * 8;
+
+    const y =
+      ((event.clientY - rect.top) / rect.height - 0.5) * 8;
+
+    gsap.to(".pipeline-core", {
+      x,
+      y,
+      duration: 0.55,
+      ease: "power2.out",
+      overwrite: true,
+    });
+
+    gsap.to(".pipeline-layer", {
+      x: x * 0.3,
+      y: y * 0.3,
+      duration: 0.7,
+      ease: "power2.out",
+      overwrite: true,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(".pipeline-core", {
+      x: 0,
+      y: 0,
+      duration: 0.7,
+      ease: "power3.out",
+    });
+
+    gsap.to(".pipeline-layer", {
+      x: 0,
+      y: 0,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+  };
 
   return (
     <div
-      ref={visualRef}
-      aria-hidden="true"
-      className="devops-visual relative mx-auto h-[470px] w-full max-w-[520px] [perspective:1200px]"
+      ref={rootRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="
+        relative
+        flex
+        min-h-[460px]
+        w-full
+        items-center
+        justify-center
+        overflow-visible
+        lg:min-h-[500px]
+        xl:min-h-[540px]
+      "
+      aria-label="DevOps delivery pipeline visualization"
     >
-      {/* Background glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/10 opacity-70 blur-2xl" />
 
-      {/* Premium depth rings */}
-      <div className="devops-depth-layer pointer-events-none absolute inset-0">
-        <div className="depth-ring depth-ring-1" />
-        <div className="depth-ring depth-ring-2" />
-        <div className="depth-ring depth-ring-3" />
+      {/* ===================================================
+          AMBIENT BACKGROUND
+          =================================================== */}
+
+      <div className="pointer-events-none absolute inset-0">
+
+        <div
+          className="
+            absolute
+            left-1/2
+            top-1/2
+            h-[360px]
+            w-[360px]
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+            bg-cyan-400/[0.025]
+            blur-3xl
+            lg:h-[400px]
+            lg:w-[400px]
+          "
+        />
+
+        <div
+          className="
+            visual-orbit
+            absolute
+            left-1/2
+            top-1/2
+            h-[350px]
+            w-[350px]
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+            border
+            border-cyan-400/[0.06]
+            lg:h-[390px]
+            lg:w-[390px]
+          "
+        />
+
+        <div
+          className="
+            visual-orbit-inner
+            absolute
+            left-1/2
+            top-1/2
+            h-[270px]
+            w-[270px]
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+            border
+            border-dashed
+            border-white/[0.06]
+            lg:h-[300px]
+            lg:w-[300px]
+          "
+        />
+
       </div>
 
-      {/* Grid */}
+
+      {/* ===================================================
+          MAIN VISUAL
+          =================================================== */}
+
       <div
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(34,211,238,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,0.08) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-          maskImage:
-            "radial-gradient(circle, black 20%, transparent 70%)",
-          WebkitMaskImage:
-            "radial-gradient(circle, black 20%, transparent 70%)",
-        }}
-      />
+        className="
+          pipeline-core
+          relative
+          z-10
+          w-full
+          max-w-[560px]
+          xl:max-w-[590px]
+        "
+      >
 
-      {/* Orbit rings */}
-      <div className="devops-orbit devops-orbit-outer pointer-events-none absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/10" />
+        {/* Top system label */}
 
-      <div className="devops-orbit devops-orbit-inner pointer-events-none absolute left-1/2 top-1/2 h-[260px] w-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/10" />
+        <div className="mb-4 flex items-center justify-between px-1">
 
-      {/* Crosshair */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[250px] w-px -translate-x-1/2 -translate-y-1/2 bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent" />
+          <span
+            className="
+              font-mono
+              text-[9px]
+              font-semibold
+              uppercase
+              tracking-[0.2em]
+              text-slate-600
+            "
+          >
+            DELIVERY PIPELINE
+          </span>
 
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-px w-[320px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
+          <span
+            className="
+              flex
+              items-center
+              gap-2
+              font-mono
+              text-[9px]
+              font-semibold
+              uppercase
+              tracking-[0.18em]
+              text-cyan-400/70
+            "
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+            SYSTEM ONLINE
+          </span>
 
-      {/* Azure core */}
-      <div className="devops-core premium-glass premium-glow absolute left-1/2 top-1/2 z-20 flex h-36 w-36 -translate-x-1/2 -translate-y-1/2 transform-gpu items-center justify-center rounded-3xl border border-cyan-400/30">
-        <div className="text-center">
-          <Cloud
-            aria-hidden="true"
-            className="mx-auto text-cyan-400"
-            size={42}
-            strokeWidth={1.7}
-          />
-
-          <p className="mt-3 text-sm font-bold text-white">
-            Azure
-          </p>
-
-          <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-            Cloud Platform
-          </p>
         </div>
-      </div>
 
-      {/* Git */}
-      <div className="devops-card premium-card absolute left-4 top-14 z-30 rounded-xl border border-slate-700/80 bg-slate-900/90 p-4 shadow-lg backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800">
-            <GitBranch
-              aria-hidden="true"
-              size={18}
-              className="text-cyan-400"
-            />
+
+        {/* =================================================
+            PIPELINE CARD
+            ================================================= */}
+
+        <div className="system-card relative overflow-hidden">
+
+          <div className="system-card-header">
+
+            <span className="system-card-number">
+              DEVOPS / 01
+            </span>
+
+            <span className="system-card-type">
+              SOURCE → PRODUCTION
+            </span>
+
           </div>
 
-          <div>
-            <p className="text-xs font-semibold text-white">
-              Git
-            </p>
 
-            <p className="text-[10px] text-slate-500">
-              Version Control
-            </p>
+          <div className="pipeline-layer p-4 md:p-6">
+
+            {/* Pipeline */}
+
+            <div className="relative">
+
+              {/* Base line */}
+
+              <div
+                className="
+                  absolute
+                  left-[7%]
+                  right-[7%]
+                  top-[27px]
+                  hidden
+                  h-px
+                  bg-white/[0.08]
+                  md:block
+                "
+              />
+
+              {/* Animated line */}
+
+              <div
+                ref={lineRef}
+                className="
+                  absolute
+                  left-[7%]
+                  right-[7%]
+                  top-[27px]
+                  hidden
+                  h-px
+                  bg-gradient-to-r
+                  from-cyan-400/60
+                  via-cyan-400/25
+                  to-transparent
+                  md:block
+                "
+              />
+
+              {/* Moving signal */}
+
+              <div
+                className="
+                  absolute
+                  left-[7%]
+                  top-[24px]
+                  hidden
+                  h-[7px]
+                  w-[18%]
+                  overflow-hidden
+                  md:block
+                "
+              >
+                <div
+                  className="
+                    pipeline-pulse
+                    h-full
+                    w-full
+                    -translate-x-full
+                    bg-gradient-to-r
+                    from-transparent
+                    via-cyan-300
+                    to-transparent
+                    opacity-60
+                  "
+                />
+              </div>
+
+
+              {/* Pipeline nodes */}
+
+              <div className="grid grid-cols-2 gap-2.5 md:grid-cols-5 md:gap-2">
+
+                {pipeline.map((item, index) => (
+                  <div
+                    key={item.id}
+                    ref={(element) => {
+                      nodeRefs.current[index] = element;
+                    }}
+                    className={`relative ${
+                      index === pipeline.length - 1
+                        ? "col-span-2 md:col-span-1"
+                        : ""
+                    }`}
+                  >
+
+                    <div
+                      className="
+                        relative
+                        z-10
+                        border
+                        border-white/[0.08]
+                        bg-[#091113]/90
+                        p-2.5
+                        backdrop-blur-md
+                        transition
+                        hover:border-cyan-400/25
+                        md:p-3
+                      "
+                    >
+
+                      <div className="mb-3 flex items-center justify-between">
+
+                        <span
+                          className="
+                            font-mono
+                            text-[8px]
+                            font-bold
+                            tracking-[0.14em]
+                            text-cyan-400/70
+                          "
+                        >
+                          {item.id}
+                        </span>
+
+                        <span
+                          className="
+                            h-1.5
+                            w-1.5
+                            rounded-full
+                            bg-cyan-400/70
+                            shadow-[0_0_10px_rgba(34,211,238,0.45)]
+                          "
+                        />
+
+                      </div>
+
+                      <p
+                        className="
+                          font-mono
+                          text-[8px]
+                          font-bold
+                          uppercase
+                          tracking-[0.14em]
+                          text-slate-600
+                        "
+                      >
+                        {item.title}
+                      </p>
+
+                      <p className="mt-2 text-[13px] font-semibold text-slate-200 md:text-sm">
+                        {item.value}
+                      </p>
+
+                      <p className="mt-1 text-[9px] leading-4 text-slate-600">
+                        {item.detail}
+                      </p>
+
+                    </div>
+
+                  </div>
+                ))}
+
+              </div>
+
+            </div>
+
+
+            {/* =================================================
+                PIPELINE STATUS
+                ================================================= */}
+
+            <div
+              className="
+                mt-6
+                grid
+                gap-3
+                border-t
+                border-white/[0.07]
+                pt-4
+                sm:grid-cols-3
+              "
+            >
+
+              <div>
+                <p className="micro-label">
+                  DEPLOYMENT
+                </p>
+
+                <p className="mt-2 font-mono text-[10px] text-slate-400">
+                  AUTOMATED
+                </p>
+              </div>
+
+              <div>
+                <p className="micro-label">
+                  VALIDATION
+                </p>
+
+                <p className="mt-2 font-mono text-[10px] text-slate-400">
+                  CONTINUOUS
+                </p>
+              </div>
+
+              <div>
+                <p className="micro-label">
+                  OPERATIONS
+                </p>
+
+                <p className="mt-2 font-mono text-[10px] text-cyan-400/80">
+                  MONITORED
+                </p>
+              </div>
+
+            </div>
+
           </div>
+
         </div>
-      </div>
 
-      {/* Terraform */}
-      <div className="devops-card premium-card absolute right-2 top-12 z-30 rounded-xl border border-slate-700/80 bg-slate-900/90 p-4 shadow-lg backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800">
-            <Workflow
-              aria-hidden="true"
-              size={18}
-              className="text-cyan-400"
-            />
-          </div>
 
-          <div>
-            <p className="text-xs font-semibold text-white">
-              Terraform
-            </p>
+        {/* ===================================================
+            BOTTOM ARCHITECTURE INDICATOR
+            =================================================== */}
 
-            <p className="text-[10px] text-slate-500">
-              Infrastructure as Code
-            </p>
-          </div>
+        <div className="mt-4 flex items-center justify-between px-1">
+
+          <span
+            className="
+              font-mono
+              text-[8px]
+              uppercase
+              tracking-[0.18em]
+              text-slate-700
+            "
+          >
+            AZURE / CONTAINERS / CI-CD
+          </span>
+
+          <span
+            className="
+              font-mono
+              text-[8px]
+              uppercase
+              tracking-[0.18em]
+              text-slate-700
+            "
+          >
+            v1.0 / ACTIVE
+          </span>
+
         </div>
+
       </div>
 
-      {/* Docker */}
-      <div className="devops-card premium-card absolute bottom-16 left-8 z-30 rounded-xl border border-slate-700/80 bg-slate-900/90 p-4 shadow-lg backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800">
-            <Container
-              aria-hidden="true"
-              size={18}
-              className="text-cyan-400"
-            />
-          </div>
-
-          <div>
-            <p className="text-xs font-semibold text-white">
-              Docker
-            </p>
-
-            <p className="text-[10px] text-slate-500">
-              Containers
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Kubernetes */}
-      <div className="devops-card premium-card absolute bottom-14 right-5 z-30 rounded-xl border border-slate-700/80 bg-slate-900/90 p-4 shadow-lg backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800">
-            <Boxes
-              aria-hidden="true"
-              size={18}
-              className="text-cyan-400"
-            />
-          </div>
-
-          <div>
-            <p className="text-xs font-semibold text-white">
-              Kubernetes
-            </p>
-
-            <p className="text-[10px] text-slate-500">
-              Container Orchestration
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* AKS */}
-      <div className="devops-card devops-card-centered premium-card absolute left-1/2 top-3 z-30 rounded-xl border border-cyan-400/20 bg-slate-900/90 px-4 py-3 shadow-lg backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <Server
-            aria-hidden="true"
-            size={18}
-            className="text-cyan-400"
-          />
-
-          <div>
-            <p className="text-xs font-semibold text-white">
-              AKS
-            </p>
-
-            <p className="text-[10px] text-slate-500">
-              Managed Kubernetes
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom label */}
-      <div className="absolute bottom-3 left-1/2 z-30 -translate-x-1/2 whitespace-nowrap rounded-full border border-slate-800 bg-slate-950/90 px-4 py-2 text-xs text-slate-400 backdrop-blur-md">
-        Cloud • Containers • Automation
-      </div>
     </div>
   );
 }
-
-export default DevOpsVisual;

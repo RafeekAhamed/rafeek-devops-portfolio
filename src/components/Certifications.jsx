@@ -1,107 +1,160 @@
 const certifications = [
   {
     number: "01",
-    title: "Microsoft Certified: Azure Fundamentals",
-    issuer: "Microsoft",
-    date: "2026",
-    type: "Certification",
-    badge: "AZ-900",
+    type: "MICROSOFT / CERTIFICATION",
+    title: "Azure Fundamentals",
+    subtitle: "Microsoft Certified: Azure Fundamentals",
+    meta: "AZ-900",
+    year: "2026",
+    description:
+      "Microsoft Azure fundamentals covering core cloud concepts, Azure services, architecture, security, and governance.",
+    tags: ["Microsoft Azure", "Cloud Fundamentals", "AZ-900"],
   },
   {
     number: "02",
-    title: "Microsoft Applied Skills: Generate Reports with AI Research Agents",
-    issuer: "Microsoft",
-    date: "Jul 2026",
-    type: "Applied Skills",
-    badge: "Microsoft",
+    type: "MICROSOFT / APPLIED SKILLS",
+    title: "AI Research Agents",
+    subtitle: "Generate Reports with AI Research Agents",
+    meta: "Applied Skills",
+    year: "Jul 2026",
+    description:
+      "Microsoft Applied Skills credential focused on generating reports with AI research agents.",
+    tags: ["AI", "Research Agents", "Microsoft"],
   },
   {
     number: "03",
-    title: "Professional Certification Program – Cloud Architect",
-    issuer: "Simplilearn",
-    date: "May 2026",
-    type: "Professional Certification",
-    badge: "Distinction",
+    type: "PROFESSIONAL / PROGRAM",
+    title: "Cloud Architect",
+    subtitle: "Professional Certification Program",
+    meta: "Distinction",
+    year: "May 2026",
+    description:
+      "Professional certification program focused on cloud architecture and infrastructure concepts.",
+    tags: ["Cloud Architecture", "Infrastructure", "Simplilearn"],
   },
   {
     number: "04",
-    title: "Python Full Stack Developer Certification",
-    issuer: "Inmakes Infotech Pvt. Ltd.",
-    date: "2023",
-    type: "Certification",
-    badge: "Python",
+    type: "DEVELOPMENT / CERTIFICATION",
+    title: "Python Full Stack Developer",
+    subtitle: "Python Full Stack Developer Certification",
+    meta: "Inmakes Infotech",
+    year: "2023",
+    description:
+      "Full-stack development certification covering Python, Django, REST APIs, databases, and application development.",
+    tags: ["Python", "Django", "REST APIs"],
   },
 ];
 
-function Certifications() {
+export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="relative overflow-hidden border-t border-slate-800/60 bg-[#050817] px-6 py-24 sm:px-8 lg:px-12"
+      className="section-shell py-24 md:py-32"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="container">
+        {/* Section heading */}
+        <div className="mb-12 md:mb-16">
+          <div className="section-label">06 / Certifications</div>
 
-        {/* Heading */}
-        <div className="mb-16 max-w-3xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
-            Certifications
-          </p>
+          <div className="mt-6 max-w-5xl">
+            <h2 className="editorial-title">
+              Credentials /
+              <br />
+              that support
+              <br />
+              the work.
+            </h2>
+          </div>
 
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Certifications and professional learning.
-          </h2>
-
-          <p className="mt-6 text-base leading-8 text-slate-400 sm:text-lg">
-            Credentials and structured learning focused on cloud computing,
-            Azure, AI research workflows, and application development.
-          </p>
+          <div className="mt-8 max-w-2xl">
+            <p className="text-sm leading-7 text-slate-400 md:text-base">
+              A focused set of Microsoft, cloud architecture, and
+              development credentials supporting my DevOps and cloud
+              engineering path.
+            </p>
+          </div>
         </div>
 
-        {/* Certification grid */}
-        <div className="grid gap-5 md:grid-cols-2">
-          {certifications.map((certification) => (
+        {/* Certification cards */}
+        <div className="system-grid">
+          {certifications.map((cert) => (
             <article
-              key={certification.number}
-              className="group rounded-2xl border border-slate-800 bg-slate-900/30 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:bg-slate-900/60 sm:p-8"
+              key={cert.number}
+              className="system-card flex min-h-[360px] flex-col"
             >
-              {/* Top row */}
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-cyan-400">
-                  {certification.number}
+              {/* Header */}
+              <div className="system-card-header">
+                <span className="system-card-number">
+                  {cert.number}
                 </span>
 
-                <span className="rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-xs text-slate-400">
-                  {certification.badge}
+                <span className="system-card-type">
+                  {cert.type}
                 </span>
               </div>
 
-              {/* Certification title */}
-              <h3 className="mt-7 text-xl font-bold leading-8 text-white sm:text-2xl">
-                {certification.title}
-              </h3>
+              {/* Content */}
+              <div className="flex flex-1 flex-col p-6 md:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="micro-label micro-label-cyan">
+                      {cert.meta}
+                    </p>
 
-              {/* Issuer */}
-              <p className="mt-4 text-sm font-medium text-cyan-400">
-                {certification.issuer}
-              </p>
+                    <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">
+                      {cert.title}
+                    </h3>
 
-              {/* Details */}
-              <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-slate-500">
-                <span>{certification.type}</span>
+                    <p className="mt-2 text-sm leading-6 text-slate-400">
+                      {cert.subtitle}
+                    </p>
+                  </div>
 
-                <span className="h-1 w-1 rounded-full bg-slate-700" />
+                  <span className="shrink-0 font-mono text-[10px] tracking-[0.16em] text-slate-600">
+                    {cert.year}
+                  </span>
+                </div>
 
-                <span>{certification.date}</span>
+                <div className="system-divider my-6" />
+
+                <p className="text-sm leading-7 text-slate-400">
+                  {cert.description}
+                </p>
+
+                {/* Tags */}
+                <div className="mt-auto pt-7">
+                  <p className="micro-label mb-3">
+                    CORE / AREAS
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {cert.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="tech-chip"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-
-              {/* Bottom line */}
-              <div className="mt-7 h-px w-12 bg-slate-700 transition-all duration-300 group-hover:w-20 group-hover:bg-cyan-400" />
             </article>
           ))}
+        </div>
+
+        {/* Bottom status strip */}
+        <div className="mt-8 flex flex-col gap-4 border-t border-white/[0.07] pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <span className="micro-label">
+            CREDENTIAL STATUS
+          </span>
+
+          <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500">
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+            Verified / Completed
+          </span>
         </div>
       </div>
     </section>
   );
 }
-
-export default Certifications;
