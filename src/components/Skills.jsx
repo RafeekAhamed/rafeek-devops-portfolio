@@ -1,18 +1,19 @@
+import SectionTitle from "./SectionTitle";
+
 const skillGroups = [
   {
     number: "01",
     category: "CLOUD & INFRASTRUCTURE",
-    title: "Cloud Platforms",
+    title: "Azure Cloud",
     description:
-      "Azure-focused infrastructure administration, cloud resources, networking, and platform operations.",
+      "Azure infrastructure, cloud resources, virtual networking, and platform operations.",
     skills: [
       "Microsoft Azure",
       "Azure VMs",
       "Azure Storage",
-      "Azure Networking",
-      "AKS",
-      "Virtual Networks",
+      "Azure Virtual Networks",
       "VNet Peering",
+      "Azure Kubernetes Service (AKS)",
     ],
   },
   {
@@ -20,7 +21,7 @@ const skillGroups = [
     category: "DEVOPS & CI/CD",
     title: "Delivery Engineering",
     description:
-      "Build and release workflows, source control, deployment automation, and CI/CD operations.",
+      "Source control, build and release workflows, deployment pipelines, and delivery automation.",
     skills: [
       "Azure DevOps",
       "Azure Pipelines",
@@ -29,25 +30,25 @@ const skillGroups = [
       "GitHub Actions",
       "YAML",
       "CI/CD",
+      "Release Management",
     ],
   },
   {
     number: "03",
-    category: "CONTAINERS & KUBERNETES",
+    category: "CONTAINERS & ORCHESTRATION",
     title: "Container Platforms",
     description:
-      "Containerized workloads, Kubernetes orchestration, service routing, configuration, and scaling.",
+      "Containerized applications, Kubernetes workloads, service routing, configuration, and scaling.",
     skills: [
       "Docker",
       "Kubernetes",
-      "AKS",
       "Helm",
       "Services",
       "Ingress",
       "ConfigMaps",
       "Secrets",
       "Health Probes",
-      "HPA",
+      "Horizontal Pod Autoscaling",
     ],
   },
   {
@@ -55,7 +56,7 @@ const skillGroups = [
     category: "INFRASTRUCTURE AS CODE",
     title: "Infrastructure Automation",
     description:
-      "Declarative infrastructure provisioning and repeatable environment configuration.",
+      "Declarative infrastructure provisioning, reusable configurations, and environment management.",
     skills: [
       "Terraform",
       "Terraform Modules",
@@ -67,15 +68,15 @@ const skillGroups = [
   },
   {
     number: "05",
-    category: "SECURITY & NETWORKING",
+    category: "IDENTITY & NETWORK SECURITY",
     title: "Cloud Security",
     description:
-      "Identity, access control, network segmentation, and secure Azure infrastructure configuration.",
+      "Identity management, access control, network security, and cloud network configuration.",
     skills: [
       "Microsoft Entra ID",
-      "RBAC",
-      "NSGs",
-      "Azure VNet",
+      "Azure RBAC",
+      "Network Security Groups (NSGs)",
+      "Azure Virtual Networks",
       "VNet Peering",
       "Private Endpoints",
       "Docker Networking",
@@ -84,26 +85,27 @@ const skillGroups = [
   {
     number: "06",
     category: "MONITORING & OPERATIONS",
-    title: "Production Operations",
+    title: "Cloud Operations",
     description:
-      "Application monitoring, deployment validation, incident troubleshooting, and operational support.",
+      "Deployment validation, monitoring, incident troubleshooting, and release support.",
     skills: [
       "Azure Monitor",
+      "Application Insights",
       "Deployment Validation",
       "Production Support",
       "Incident Troubleshooting",
-      "Release Management",
       "kubectl",
       "PowerShell",
+      "Release Management",
     ],
   },
 ];
 
 const tools = [
-  "Azure",
+  "Microsoft Azure",
   "Azure DevOps",
-  "Kubernetes",
   "Docker",
+  "Kubernetes",
   "Terraform",
   "Git",
   "GitHub Actions",
@@ -116,38 +118,20 @@ export default function Skills() {
   return (
     <section id="skills" className="section-shell">
       <div className="container">
-        {/* SECTION HEADER — LEFT ALIGNED */}
-        <div className="mb-12 lg:mb-16">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <span className="section-label">03 / Skills</span>
-
-            <span className="technical-label">
-              CLOUD / DEVOPS / PLATFORM
-            </span>
-          </div>
-
-          <h2 className="editorial-title mt-6 max-w-4xl">
-            The stack
-            <br />
-            behind the
-            <br />
-            <span className="muted">systems.</span>
-          </h2>
-
-          <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-400 md:text-base">
-            A practical engineering stack built around Azure cloud operations,
-            CI/CD, Kubernetes, containerization, infrastructure as code,
-            security, and production support.
-          </p>
-        </div>
+        {/* SECTION HEADER */}
+        <SectionTitle
+          eyebrow="03 / Technical Expertise"
+          title="The stack behind the"
+          highlight="systems."
+          description="Technical skills spanning Azure cloud infrastructure, CI/CD, Kubernetes, containerization, infrastructure as code, cloud security, monitoring, and operational support."
+          align="left"
+          className="mb-12 lg:mb-16"
+        />
 
         {/* SKILL CARDS */}
         <div className="system-grid">
           {skillGroups.map((group) => (
-            <article
-              key={group.number}
-              className="system-card"
-            >
+            <article key={group.number} className="system-card">
               <div className="system-card-header">
                 <span className="system-card-number">
                   {group.number}
@@ -171,10 +155,7 @@ export default function Skills() {
 
                 <div className="flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="tech-chip"
-                    >
+                    <span key={skill} className="tech-chip">
                       {skill}
                     </span>
                   ))}
@@ -200,10 +181,7 @@ export default function Skills() {
 
             <div className="flex flex-wrap gap-2">
               {tools.map((tool) => (
-                <span
-                  key={tool}
-                  className="tech-chip"
-                >
+                <span key={tool} className="tech-chip">
                   {tool}
                 </span>
               ))}

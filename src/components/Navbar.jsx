@@ -11,48 +11,81 @@ const navItems = [
   { label: "Education", id: "education", number: "07" },
 ];
 
+const CONTACT_ID = "contact";
+
 export default function Navbar() {
   const [active, setActive] = useState("home");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    let animationFrame = 0;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 24);
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
 
-      const sections = navItems
-        .map((item) => document.getElementById(item.id))
-        .filter(Boolean);
+      animationFrame = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 24);
 
-      const scrollPosition = window.scrollY + 140;
+        const marker = 160;
+        let current = "home";
 
-      let current = "home";
+        for (const item of navItems) {
+          const section = document.getElementById(item.id);
 
-      sections.forEach((section) => {
-        if (section.offsetTop <= scrollPosition) {
-          current = section.id;
+          if (section && section.getBoundingClientRect().top <= marker) {
+            current = item.id;
+          }
         }
-      });
 
-      setActive(current);
+        const nearBottom =
+          window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight - 8;
+
+        if (nearBottom) {
+          current = navItems[navItems.length - 1].id;
+        }
+
+        setActive(current);
+      });
     };
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
     };
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    if (!mobileOpen) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [mobileOpen]);
 
@@ -66,13 +99,11 @@ export default function Navbar() {
   };
 
   const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-
-    setMobileOpen(false);
+    scrollToSection(CONTACT_ID);
   };
+
+  const focusStyles =
+    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300";
 
   return (
     <>
@@ -88,7 +119,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => scrollToSection("home")}
-            className="group flex items-center gap-3 text-left"
+            className={`group flex items-center gap-3 text-left ${focusStyles}`}
             aria-label="Go to homepage"
           >
             <span className="flex h-9 w-9 items-center justify-center border border-cyan-400/25 bg-cyan-400/[0.06] font-mono text-[11px] font-bold text-cyan-300 transition group-hover:border-cyan-400/50 group-hover:bg-cyan-400/[0.1]">
@@ -119,7 +150,8 @@ export default function Navbar() {
                   key={item.id}
                   type="button"
                   onClick={() => scrollToSection(item.id)}
-                  className={`group relative flex items-center gap-2 px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] transition ${
+                  aria-current={isActive ? "location" : undefined}
+                  className={`group relative flex items-center gap-2 px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] transition ${focusStyles} ${
                     isActive
                       ? "text-cyan-300"
                       : "text-slate-500 hover:text-slate-200"
@@ -138,6 +170,7 @@ export default function Navbar() {
                   {item.label}
 
                   <span
+                    aria-hidden="true"
                     className={`absolute bottom-0 left-3 right-3 h-px origin-left bg-cyan-400 transition-transform duration-300 ${
                       isActive
                         ? "scale-x-100"
@@ -149,32 +182,31 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Desktop CTA */}
+          {/* Desktop contact CTA */}
           <button
             type="button"
             onClick={scrollToContact}
-            className="hidden min-h-10 items-center gap-2 border border-cyan-400/25 bg-cyan-400/[0.06] px-4 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-cyan-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.1] md:flex"
+            className={`hidden min-h-10 items-center gap-2 border border-cyan-400/25 bg-cyan-400/[0.06] px-4 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-cyan-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.1] md:flex ${focusStyles}`}
           >
             Contact
-            <ArrowUpRight size={13} />
+            <ArrowUpRight size={13} aria-hidden="true" />
           </button>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu toggle */}
           <button
             type="button"
             onClick={() => setMobileOpen((value) => !value)}
-            className="flex h-10 w-10 items-center justify-center border border-white/[0.08] bg-white/[0.025] text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-300 lg:hidden"
+            className={`flex h-10 w-10 items-center justify-center border border-white/[0.08] bg-white/[0.025] text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-300 lg:hidden ${focusStyles}`}
             aria-label={
-              mobileOpen
-                ? "Close navigation menu"
-                : "Open navigation menu"
+              mobileOpen ? "Close navigation menu" : "Open navigation menu"
             }
             aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileOpen ? (
-              <X size={18} />
+              <X size={18} aria-hidden="true" />
             ) : (
-              <Menu size={18} />
+              <Menu size={18} aria-hidden="true" />
             )}
           </button>
         </div>
@@ -182,27 +214,24 @@ export default function Navbar() {
 
       {/* Mobile navigation */}
       <div
+        id="mobile-navigation"
+        aria-hidden={!mobileOpen}
         className={`fixed inset-0 z-40 bg-[#050708]/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
           mobileOpen
             ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
+            : "pointer-events-none invisible opacity-0"
         }`}
       >
-        <div className="mx-auto flex h-full w-[min(100%-28px,1280px)] flex-col pt-28">
+        <div className="mx-auto flex h-full w-[min(100%-28px,1280px)] flex-col overflow-y-auto pb-6 pt-28">
           <div className="mb-8 flex items-center justify-between border-b border-white/[0.07] pb-5">
-            <span className="micro-label">
-              NAVIGATION / SYSTEM
-            </span>
+            <span className="micro-label">NAVIGATION / SYSTEM</span>
 
             <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-cyan-400/60">
               {active}
             </span>
           </div>
 
-          <nav
-            aria-label="Mobile navigation"
-            className="flex flex-col"
-          >
+          <nav aria-label="Mobile navigation links" className="flex flex-col">
             {navItems.map((item) => {
               const isActive = active === item.id;
 
@@ -211,7 +240,9 @@ export default function Navbar() {
                   key={item.id}
                   type="button"
                   onClick={() => scrollToSection(item.id)}
-                  className={`group flex items-center justify-between border-b border-white/[0.06] py-5 text-left transition ${
+                  aria-current={isActive ? "location" : undefined}
+                  tabIndex={mobileOpen ? 0 : -1}
+                  className={`group flex items-center justify-between border-b border-white/[0.06] py-5 text-left transition ${focusStyles} ${
                     isActive
                       ? "text-cyan-300"
                       : "text-slate-400 hover:text-white"
@@ -220,9 +251,7 @@ export default function Navbar() {
                   <span className="flex items-center gap-4">
                     <span
                       className={`font-mono text-[9px] ${
-                        isActive
-                          ? "text-cyan-400"
-                          : "text-slate-700"
+                        isActive ? "text-cyan-400" : "text-slate-700"
                       }`}
                     >
                       {item.number}
@@ -235,6 +264,7 @@ export default function Navbar() {
 
                   <ArrowUpRight
                     size={16}
+                    aria-hidden="true"
                     className={`transition-transform ${
                       isActive
                         ? "translate-x-0 text-cyan-400"
@@ -249,10 +279,11 @@ export default function Navbar() {
           <button
             type="button"
             onClick={scrollToContact}
-            className="mt-8 flex min-h-12 items-center justify-center gap-3 border border-cyan-400/25 bg-cyan-400/[0.06] font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.1]"
+            tabIndex={mobileOpen ? 0 : -1}
+            className={`mt-8 flex min-h-12 items-center justify-center gap-3 border border-cyan-400/25 bg-cyan-400/[0.06] font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.1] ${focusStyles}`}
           >
             Start a conversation
-            <ArrowUpRight size={14} />
+            <ArrowUpRight size={14} aria-hidden="true" />
           </button>
 
           <div className="mt-auto border-t border-white/[0.07] py-6">
