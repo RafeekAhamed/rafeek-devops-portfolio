@@ -1,71 +1,68 @@
-# Rafeek Ahamed — DevOps Engineer | Azure Cloud Engineer
+# Rafeek Ahamed M | DevOps Engineer | Azure Cloud Engineer
 
 <p align="center">
-  <a href="https://rafeek-devops-portfolio.vercel.app/">
+  <a href="https://rafeek.rafeekahamed046.workers.dev/">
     <img src="https://img.shields.io/badge/Live%20Portfolio-Visit%20Website-22D3EE?style=for-the-badge" alt="Live Portfolio" />
+  </a>
+  <a href="https://github.com/RafeekAhamed">
+    <img src="https://img.shields.io/badge/GitHub-View%20Repositories-181717?style=for-the-badge&logo=github" alt="GitHub Profile" />
+  </a>
+  <a href="https://www.linkedin.com/in/rafeek-ahamed-devops">
+    <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin" alt="LinkedIn Profile" />
   </a>
 </p>
 
 <p align="center">
-  <strong>Modern DevOps portfolio built with React, Vite, Tailwind CSS, GSAP, and Lucide React.</strong>
+  A personal portfolio showcasing my DevOps and Azure Cloud engineering skills, hands-on projects, professional experience, certifications, and technical interests.
 </p>
 
 ---
 
-## 🌐 Live Portfolio
+## 🌐 Portfolio & Professional Profiles
 
-**Website:** https://rafeek-devops-portfolio.vercel.app/
-
-**GitHub:** https://github.com/RafeekAhamed
-
-**LinkedIn:** https://www.linkedin.com/in/rafeek-ahamed-devops
-
-**LeetCode:** https://leetcode.com/u/rafeek-ahamed-m/
+* **Live Portfolio:** https://rafeek.rafeekahamed046.workers.dev/
+* **GitHub:** https://github.com/RafeekAhamed
+* **LinkedIn:** https://www.linkedin.com/in/rafeek-ahamed-devops
+* **LeetCode:** https://leetcode.com/u/rafeek-ahamed-m/
+* **Credly:** https://www.credly.com/users/rafeek-ahamed-m
 
 ---
 
 ## 👨‍💻 About
 
-This repository contains my personal DevOps and Azure Cloud Engineer portfolio.
+I am a DevOps and Azure Cloud engineering professional interested in cloud infrastructure, CI/CD automation, containerization, Kubernetes, and infrastructure management.
 
-The website presents my professional experience, technical skills, hands-on DevOps projects, certifications, education, and contact information in a responsive web interface.
+This repository contains my personal portfolio website, which presents my technical skills, professional experience, selected projects, certifications, education, and contact information in a responsive interface.
 
 ### Primary Focus Areas
 
-- Microsoft Azure
-- Azure DevOps
-- Kubernetes
-- Docker
-- Terraform
-- CI/CD
-- Infrastructure as Code
-- Cloud Infrastructure
-- Release Management
-- Monitoring and Operations
+* Microsoft Azure
+* Azure DevOps
+* CI/CD pipelines and release management
+* Docker and Kubernetes
+* Terraform and Infrastructure as Code (IaC)
+* Cloud infrastructure and operations
+* Monitoring and troubleshooting
+* Git, GitHub, YAML, and automation
 
 ---
 
-## 🚀 Portfolio Highlights
+## ✨ Portfolio Features
 
-- Responsive DevOps-focused portfolio
-- React + Vite architecture
-- Tailwind CSS styling
-- GSAP-powered animations
-- Interactive DevOps infrastructure visual
-- Responsive navigation with mobile menu
-- Project showcase with GitHub links
-- Professional experience timeline
-- Certifications section
-- Education section
-- Contact section
-- Custom 404 page
-- SEO metadata
-- Open Graph metadata
-- Twitter metadata
-- Custom favicon
-- SPA routing support
-- Reduced-motion accessibility support
-- Vercel deployment
+* Responsive design for desktop, laptop, tablet, and mobile
+* Hero section with professional profile photo
+* About section and technical skills
+* Professional experience timeline
+* Featured DevOps projects with GitHub links
+* Certifications and education sections
+* Contact information and professional profile links
+* Responsive navigation with mobile menu
+* GSAP animations and section reveal effects
+* Custom 404 page
+* SEO metadata and social sharing metadata
+* Custom favicon
+* Single-page application routing support
+* Reduced-motion accessibility support
 
 ---
 
@@ -73,24 +70,90 @@ The website presents my professional experience, technical skills, hands-on DevO
 
 ### Frontend
 
-- React
-- Vite
-- JavaScript
-- Tailwind CSS
+* React
+* Vite
+* JavaScript
+* Tailwind CSS
+* HTML5 and CSS
 
 ### Animation & UI
 
-- GSAP
-- @gsap/react
-- Lucide React
-- Semantic HTML
-- Responsive CSS
+* GSAP
+* `@gsap/react`
+* Lucide React
+* Responsive layouts
+* Semantic HTML
 
-### Deployment
+### Development & Deployment
 
-- Git
-- GitHub
-- Vercel
+* Git
+* GitHub
+* Cloudflare
+
+---
+
+## 💼 Featured DevOps Projects
+
+### 1. Terraform + Docker Infrastructure Automation
+
+A project demonstrating Terraform-based infrastructure automation for a multi-environment Docker setup.
+
+**Technologies:**
+
+* Terraform
+* Docker
+* Nginx
+* Flask
+* PostgreSQL
+* Docker networking
+* Infrastructure as Code
+* GitHub Actions
+
+**Repository:**
+https://github.com/RafeekAhamed/terraform-docker-infrastructure
+
+---
+
+### 2. Kubernetes Microservices Platform
+
+A containerized microservices project demonstrating application deployment and workload management with Kubernetes.
+
+**Technologies:**
+
+* Kubernetes
+* Docker
+* Helm
+* Services
+* Ingress
+* ConfigMaps and Secrets
+* RBAC
+* Health probes
+* Rolling updates
+* Horizontal Pod Autoscaling
+
+**Repository:**
+https://github.com/RafeekAhamed/kubernetes-microservices
+
+---
+
+### 3. Azure DevOps CI/CD Platform
+
+An Azure-focused project demonstrating CI/CD concepts and application deployment workflow configuration.
+
+**Technologies:**
+
+* Microsoft Azure
+* Azure DevOps
+* Git
+* YAML
+* Docker
+* Kubernetes
+* CI/CD
+* Application testing
+* Deployment manifests
+
+**Repository:**
+https://github.com/RafeekAhamed/project1-azure-devops
 
 ---
 
@@ -98,12 +161,10 @@ The website presents my professional experience, technical skills, hands-on DevO
 
 ```text
 rafeek-devops-portfolio/
-│
 ├── public/
+│   ├── profile.jpg
 │   ├── favicon.svg
-│   ├── Rafeek_Ahamed_DevOps_Resume.pdf
-│   └── Rafeek_Ahamed_DevOps_Resume.docx
-│
+│   └── resume files, if included
 ├── src/
 │   ├── components/
 │   │   ├── About.jsx
@@ -119,81 +180,18 @@ rafeek-devops-portfolio/
 │   │   ├── Projects.jsx
 │   │   ├── SectionReveal.jsx
 │   │   └── Skills.jsx
-│   │
 │   ├── App.jsx
 │   ├── index.css
 │   └── main.jsx
-│
 ├── .gitignore
 ├── index.html
 ├── package.json
 ├── package-lock.json
-├── vercel.json
-└── README.md
+├── README.md
+└── deployment configuration
 ```
 
----
-
-## 💼 Featured DevOps Projects
-
-### 01. Terraform + Docker Infrastructure Automation
-
-Reusable Terraform modules for provisioning a multi-environment Docker infrastructure with:
-
-- Terraform
-- Docker
-- Nginx
-- Flask
-- PostgreSQL
-- Docker networking
-- Infrastructure as Code
-- GitHub Actions
-
-Repository:
-
-https://github.com/RafeekAhamed/terraform-docker-infrastructure
-
----
-
-### 02. Kubernetes Microservices Platform
-
-Containerized Flask microservices deployed on Kubernetes using:
-
-- Kubernetes
-- Docker
-- Helm
-- Services
-- Ingress
-- ConfigMaps
-- Secrets
-- RBAC
-- Health probes
-- Rolling updates
-- Horizontal Pod Autoscaling
-
-Repository:
-
-https://github.com/RafeekAhamed/kubernetes-microservices
-
----
-
-### 03. Azure DevOps CI/CD Platform
-
-Azure-focused DevOps project demonstrating:
-
-- Azure
-- Azure DevOps
-- Git
-- YAML
-- Docker
-- Kubernetes
-- CI/CD
-- Application testing
-- Deployment manifests
-
-Repository:
-
-https://github.com/RafeekAhamed/project1-azure-devops
+*This is a representative structure. Keep the file and folder names aligned with your actual repository.*
 
 ---
 
@@ -201,146 +199,171 @@ https://github.com/RafeekAhamed/project1-azure-devops
 
 ### Prerequisites
 
-- Node.js
-- npm
-- Git
+Install the following tools:
 
-### Clone
+* Node.js
+* npm
+* Git
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/RafeekAhamed/rafeek-devops-portfolio.git
 cd rafeek-devops-portfolio
 ```
 
-### Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Start Development Server
+### 3. Start the Development Server
 
 ```bash
 npm run dev
 ```
 
-The application will be available through the local Vite development URL shown in the terminal.
+Open the local development URL displayed in your terminal.
 
 ---
 
-## 🏗️ Production Build
+## 🧪 Build and Validate
 
-Create a production build:
+### Create a Production Build
 
 ```bash
 npm run build
 ```
 
-Preview the production build:
+### Preview the Production Build
 
 ```bash
 npm run preview
 ```
 
-Run ESLint:
+### Run ESLint
 
 ```bash
 npm run lint
 ```
 
+Run these checks after making changes to help identify build errors and code-quality issues.
+
 ---
 
-## 🚀 Deployment
+## ☁️ Deployment
 
-The portfolio is deployed using Vercel.
+**Live Portfolio:**
+https://rafeek.rafeekahamed046.workers.dev/
+
+The portfolio is hosted on Cloudflare. If automatic Git deployment is enabled in the Cloudflare project, pushing changes to the configured branch can trigger a new deployment.
+
+### Deployment Workflow
 
 ```text
 Local Development
        ↓
-      Git
+   Git Commit
        ↓
-    GitHub
+   GitHub Push
        ↓
-     Vercel
+Cloudflare Deployment
        ↓
- Production
+ Live Portfolio
 ```
 
-Updates can be committed and pushed to the `main` branch for deployment through the connected Vercel project.
+Before pushing changes, validate the project:
+
+```bash
+npm run build
+```
+
+Then commit and push your changes:
+
+```bash
+git add .
+git commit -m "Update portfolio"
+git push origin main
+```
+
+Confirm that your Cloudflare project is configured to deploy from the repository and branch you are updating.
 
 ---
 
 ## 🔐 Environment Variables
 
-The current portfolio does not require environment variables.
+The portfolio is not documented as requiring environment variables.
 
-No API keys or secrets are required for the application.
+If you add integrations or external services in the future, store credentials securely and never commit API keys, passwords, tokens, or other secrets to Git.
 
 ---
 
 ## 📱 Responsive Design
 
-The portfolio is designed for:
+The website is designed to support:
 
-- Desktop
-- Laptop
-- Tablet
-- Mobile
+* Desktop
+* Laptop
+* Tablet
+* Mobile
 
-The navigation automatically switches to a mobile menu on smaller screens.
+The navigation adapts to smaller screens to provide a mobile-friendly browsing experience.
 
 ---
 
 ## ♿ Accessibility
 
-The portfolio includes:
+Accessibility considerations include:
 
-- Semantic HTML
-- Accessible navigation labels
-- Keyboard focus states
-- `aria-label` attributes where required
-- Reduced-motion support
-- Responsive touch targets
-- Accessible external links
+* Semantic HTML
+* Accessible navigation labels
+* Keyboard focus states
+* Appropriate `aria-label` attributes
+* Reduced-motion support
+* Responsive touch targets
+* Accessible external links
+
+Continue testing keyboard navigation, image alternative text, color contrast, and mobile layouts as the portfolio evolves.
 
 ---
 
 ## 🔎 SEO
 
-The portfolio includes:
+The portfolio includes SEO and social-sharing features such as:
 
-- Descriptive page title
-- Meta description
-- Keywords
-- Author metadata
-- Canonical URL
-- Open Graph metadata
-- Twitter metadata
-- Robots metadata
-- Theme color
-- Favicon
+* Descriptive page title
+* Meta description
+* Author metadata
+* Canonical URL
+* Open Graph metadata
+* Twitter metadata
+* Robots metadata
+* Theme color
+* Favicon
+
+Keep the canonical URL and metadata consistent with the live portfolio domain.
 
 ---
 
 ## 📜 License
 
-This project is a personal portfolio website.
+This is a personal portfolio project.
 
-The source code is available for learning and reference purposes.
+Unless a separate license is provided, the original portfolio content and branding remain the property of their respective owner. Check the licensing terms of any third-party assets or dependencies you use.
 
 ---
 
 ## 📬 Contact
 
-**Rafeek Ahamed**
-
+**Rafeek Ahamed M**
 DevOps Engineer | Azure Cloud Engineer
 
-- Portfolio: https://rafeek-devops-portfolio.vercel.app/
-- GitHub: https://github.com/RafeekAhamed
-- LinkedIn: https://www.linkedin.com/in/rafeek-ahamed-devops
-- LeetCode: https://leetcode.com/u/rafeek-ahamed-m/
-- Email: rafeekahamedm@gmail.com
+* **Portfolio:** https://rafeek.rafeekahamed046.workers.dev/
+* **GitHub:** https://github.com/RafeekAhamed
+* **LinkedIn:** https://www.linkedin.com/in/rafeek-ahamed-devops
+* **LeetCode:** https://leetcode.com/u/rafeek-ahamed-m/
+* **Email:** [rafeekahamedm@gmail.com](mailto:rafeekahamedm@gmail.com)
 
 ---
 
