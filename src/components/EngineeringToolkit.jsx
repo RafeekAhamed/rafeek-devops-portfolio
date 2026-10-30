@@ -1,39 +1,85 @@
 const toolkit = [
   {
-    category: "CLOUD",
-    items: ["Microsoft Azure", "Azure VMs", "Azure Storage", "Azure Networking", "AKS"],
+    category: "CLOUD PLATFORM",
+    items: [
+      "Microsoft Azure",
+      "Azure VMs",
+      "Azure Storage",
+      "Azure Networking",
+      "VNets",
+      "AKS",
+    ],
   },
   {
-    category: "DEVOPS",
-    items: ["Azure DevOps", "CI/CD", "Git", "GitHub", "GitHub Actions", "YAML"],
+    category: "DEVOPS & CI/CD",
+    items: [
+      "Azure DevOps",
+      "Azure Pipelines",
+      "CI/CD",
+      "Git",
+      "GitHub",
+      "GitHub Actions",
+      "YAML",
+    ],
   },
   {
     category: "CONTAINERS",
-    items: ["Docker", "Kubernetes", "Helm", "Ingress", "ConfigMaps", "Secrets"],
+    items: [
+      "Docker",
+      "Kubernetes",
+      "Helm",
+      "Ingress",
+      "ConfigMaps",
+      "Secrets",
+    ],
   },
   {
-    category: "INFRASTRUCTURE",
-    items: ["Terraform", "Terraform Modules", "ARM Templates", "PowerShell"],
+    category: "INFRASTRUCTURE & AUTOMATION",
+    items: [
+      "Terraform",
+      "Terraform Modules",
+      "ARM Templates",
+      "PowerShell",
+    ],
   },
   {
-    category: "SECURITY",
-    items: ["Entra ID", "RBAC", "NSGs", "VNets", "Private Endpoints"],
+    category: "IDENTITY & NETWORK SECURITY",
+    items: [
+      "Microsoft Entra ID",
+      "RBAC",
+      "Network Security Groups",
+      "VNets",
+      "Private Endpoints",
+    ],
   },
   {
-    category: "OPERATIONS",
-    items: ["Azure Monitor", "kubectl", "Production Support", "Release Management"],
+    category: "MONITORING & OPERATIONS",
+    items: [
+      "Azure Monitor",
+      "Application Insights",
+      "kubectl",
+      "Release Management",
+      "Production Support",
+    ],
   },
 ];
 
 export default function EngineeringToolkit() {
   return (
-    <section className="section-shell py-20 md:py-24">
+    <section
+      id="toolkit"
+      className="section-shell py-20 md:py-24"
+      aria-labelledby="toolkit-heading"
+    >
       <div className="container">
         <div className="mb-10 flex flex-col gap-4 border-b border-white/[0.07] pb-6 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="section-label">Engineering Toolkit</div>
 
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+            <h2
+              id="toolkit-heading"
+              className="mt-5 text-3xl font-semibold tracking-tight text-white md:text-4xl"
+            >
               Tools I use to build,
               <span className="cyan-text"> deploy & operate.</span>
             </h2>
@@ -77,7 +123,7 @@ export default function EngineeringToolkit() {
           </span>
 
           <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-slate-600">
-            Azure → CI/CD → Containers → Infrastructure → Operations
+            Cloud → CI/CD → Containers → IaC → Security → Operations
           </span>
         </div>
       </div>

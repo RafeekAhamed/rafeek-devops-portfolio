@@ -3,50 +3,54 @@ const strengths = [
     number: "01",
     title: "RELEASE ENGINEERING",
     description:
-      "Hands-on experience supporting CI/CD release operations, deployment validation, build artifacts, quality checks, and controlled production releases.",
+      "Professional experience supporting enterprise application releases, including build and artifact tracking, deployment coordination, database script validation, release documentation, and post-deployment checks.",
     tags: ["Azure DevOps", "CI/CD", "Release Management"],
   },
   {
     number: "02",
-    title: "CLOUD OPERATIONS",
+    title: "AZURE CLOUD OPERATIONS",
     description:
-      "Practical Azure experience across infrastructure monitoring, AKS workloads, networking checks, availability support, and operational troubleshooting.",
-    tags: ["Azure", "AKS", "Azure Monitor"],
+      "Experience supporting Azure-based environments through infrastructure and network health checks, AKS workload monitoring, service connectivity checks, and operational troubleshooting.",
+    tags: ["Microsoft Azure", "AKS", "Azure Monitor"],
   },
   {
     number: "03",
     title: "CONTAINER PLATFORMS",
     description:
-      "Built and worked with containerized workloads using Docker and Kubernetes, including services, ingress, configuration, health checks, Helm, and autoscaling.",
+      "Hands-on project experience with Docker and Kubernetes, including workload deployments, services, ingress, configuration, health probes, Helm, and autoscaling.",
     tags: ["Docker", "Kubernetes", "Helm"],
   },
   {
     number: "04",
     title: "INFRASTRUCTURE AUTOMATION",
     description:
-      "Developed infrastructure automation projects using Terraform and ARM Templates with reusable configuration and environment-focused deployment practices.",
-    tags: ["Terraform", "IaC", "ARM Templates"],
+      "Practical infrastructure-as-code work using Terraform, reusable modules, environment-specific configurations, and infrastructure automation concepts.",
+    tags: ["Terraform", "IaC", "Terraform Modules"],
   },
 ];
 
 export default function WhatIBring() {
   return (
-    <section className="section-shell py-24 md:py-32">
+    <section
+      id="value"
+      className="section-shell py-24 md:py-32"
+      aria-labelledby="value-heading"
+    >
       <div className="container">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <div>
             <div className="section-label">Why Hire Me</div>
 
-            <h2 className="editorial-title mt-6">
+            <h2 id="value-heading" className="editorial-title mt-6">
               What I
               <br />
               <span className="cyan-text">bring.</span>
             </h2>
 
             <p className="mt-8 max-w-md text-sm leading-7 text-slate-400 md:text-base">
-              A practical DevOps foundation combining cloud operations,
-              release engineering, container platforms, infrastructure
-              automation, and production support.
+              A practical DevOps foundation built on enterprise release
+              management experience, Azure cloud operations, container
+              platforms, infrastructure automation, and continuous learning.
             </p>
 
             <div className="mt-10 border-l border-cyan-400/30 pl-5">
@@ -55,8 +59,8 @@ export default function WhatIBring() {
               </p>
 
               <p className="mt-3 text-sm leading-6 text-slate-300">
-                Junior DevOps Engineer · Azure Cloud Engineer · Cloud
-                Operations · Cloud Support
+                DevOps Engineer · Azure DevOps Engineer · Azure Cloud
+                Engineer · Cloud Operations Engineer
               </p>
             </div>
           </div>

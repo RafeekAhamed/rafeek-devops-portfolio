@@ -5,6 +5,8 @@ export default function SectionTitle({
   description,
   align = "center",
   className = "",
+  id,
+  as: Heading = "h2",
 }) {
   const alignment =
     align === "left"
@@ -13,7 +15,7 @@ export default function SectionTitle({
 
   return (
     <div
-      className={`flex w-full flex-col ${alignment} ${className}`}
+      className={`flex w-full flex-col ${alignment} ${className}`.trim()}
     >
       {eyebrow && (
         <span className="section-label">
@@ -21,12 +23,18 @@ export default function SectionTitle({
         </span>
       )}
 
-      <h2 className="editorial-title mt-6 max-w-4xl">
-        {title}{" "}
+      <Heading
+        id={id}
+        className="editorial-title mt-6 max-w-4xl"
+      >
+        {title}
         {highlight && (
-          <span className="muted">{highlight}</span>
+          <>
+            {" "}
+            <span className="muted">{highlight}</span>
+          </>
         )}
-      </h2>
+      </Heading>
 
       {description && (
         <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-400 md:text-base">

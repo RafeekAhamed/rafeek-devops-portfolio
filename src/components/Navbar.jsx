@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 const navItems = [
@@ -7,49 +7,55 @@ const navItems = [
   { label: "Skills", id: "skills", number: "03" },
   { label: "Experience", id: "experience", number: "04" },
   { label: "Projects", id: "projects", number: "05" },
-  { label: "Certifications", id: "certifications", number: "06" },
+  { label: "Credentials", id: "certifications", number: "06" },
   { label: "Education", id: "education", number: "07" },
+  { label: "Contact", id: "contact", number: "08" },
 ];
-
-const CONTACT_ID = "contact";
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const menuButtonRef = useRef(null);
+  const firstMobileLinkRef = useRef(null);
+
   useEffect(() => {
     let animationFrame = 0;
+
+    const updateNavigation = () => {
+      animationFrame = 0;
+
+      setScrolled(window.scrollY > 24);
+
+      const marker = 160;
+      let current = "home";
+
+      for (const item of navItems) {
+        const section = document.getElementById(item.id);
+
+        if (section && section.getBoundingClientRect().top <= marker) {
+          current = item.id;
+        }
+      }
+
+      const nearBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 8;
+
+      if (nearBottom) {
+        current = "contact";
+      }
+
+      setActive(current);
+    };
 
     const handleScroll = () => {
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
 
-      animationFrame = requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 24);
-
-        const marker = 160;
-        let current = "home";
-
-        for (const item of navItems) {
-          const section = document.getElementById(item.id);
-
-          if (section && section.getBoundingClientRect().top <= marker) {
-            current = item.id;
-          }
-        }
-
-        const nearBottom =
-          window.innerHeight + window.scrollY >=
-          document.documentElement.scrollHeight - 8;
-
-        if (nearBottom) {
-          current = navItems[navItems.length - 1].id;
-        }
-
-        setActive(current);
-      });
+      animationFrame = requestAnimationFrame(updateNavigation);
     };
 
     handleScroll();
@@ -73,20 +79,33 @@ export default function Navbar() {
     }
 
     const previousOverflow = document.body.style.overflow;
+
     document.body.style.overflow = "hidden";
+
+    const focusFrame = requestAnimationFrame(() => {
+      firstMobileLinkRef.current?.focus();
+    });
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setMobileOpen(false);
+        menuButtonRef.current?.focus();
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!mobileOpen) {
+      menuButtonRef.current?.focus();
+    }
   }, [mobileOpen]);
 
   const scrollToSection = (id) => {
@@ -96,10 +115,6 @@ export default function Navbar() {
     });
 
     setMobileOpen(false);
-  };
-
-  const scrollToContact = () => {
-    scrollToSection(CONTACT_ID);
   };
 
   const focusStyles =
@@ -116,9 +131,12 @@ export default function Navbar() {
       >
         <div className="mx-auto flex h-[76px] w-[min(100%-28px,1280px)] items-center justify-between">
           {/* Brand */}
-          <button
-            type="button"
-            onClick={() => scrollToSection("home")}
+          <a
+            href="#home"
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToSection("home");
+            }}
             className={`group flex items-center gap-3 text-left ${focusStyles}`}
             aria-label="Go to homepage"
           >
@@ -135,7 +153,7 @@ export default function Navbar() {
                 DEVOPS / CLOUD ENGINEERING
               </span>
             </span>
-          </button>
+          </a>
 
           {/* Desktop navigation */}
           <nav
@@ -185,7 +203,7 @@ export default function Navbar() {
           {/* Desktop contact CTA */}
           <button
             type="button"
-            onClick={scrollToContact}
+            onClick={() => scrollToSection("contact")}
             className={`hidden min-h-10 items-center gap-2 border border-cyan-400/25 bg-cyan-400/[0.06] px-4 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-cyan-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.1] md:flex ${focusStyles}`}
           >
             Contact
@@ -194,6 +212,7 @@ export default function Navbar() {
 
           {/* Mobile menu toggle */}
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setMobileOpen((value) => !value)}
             className={`flex h-10 w-10 items-center justify-center border border-white/[0.08] bg-white/[0.025] text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-300 lg:hidden ${focusStyles}`}
@@ -216,6 +235,7 @@ export default function Navbar() {
       <div
         id="mobile-navigation"
         aria-hidden={!mobileOpen}
+        inert={!mobileOpen}
         className={`fixed inset-0 z-40 bg-[#050708]/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
           mobileOpen
             ? "pointer-events-auto opacity-100"
@@ -232,16 +252,16 @@ export default function Navbar() {
           </div>
 
           <nav aria-label="Mobile navigation links" className="flex flex-col">
-            {navItems.map((item) => {
+            {navItems.map((item, index) => {
               const isActive = active === item.id;
 
               return (
                 <button
                   key={item.id}
+                  ref={index === 0 ? firstMobileLinkRef : null}
                   type="button"
                   onClick={() => scrollToSection(item.id)}
                   aria-current={isActive ? "location" : undefined}
-                  tabIndex={mobileOpen ? 0 : -1}
                   className={`group flex items-center justify-between border-b border-white/[0.06] py-5 text-left transition ${focusStyles} ${
                     isActive
                       ? "text-cyan-300"
@@ -275,16 +295,6 @@ export default function Navbar() {
               );
             })}
           </nav>
-
-          <button
-            type="button"
-            onClick={scrollToContact}
-            tabIndex={mobileOpen ? 0 : -1}
-            className={`mt-8 flex min-h-12 items-center justify-center gap-3 border border-cyan-400/25 bg-cyan-400/[0.06] font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.1] ${focusStyles}`}
-          >
-            Start a conversation
-            <ArrowUpRight size={14} aria-hidden="true" />
-          </button>
 
           <div className="mt-auto border-t border-white/[0.07] py-6">
             <p className="font-mono text-[8px] uppercase tracking-[0.18em] text-slate-700">

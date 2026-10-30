@@ -5,12 +5,12 @@ const RESUME_PATH = "/Rafeek%20Ahamed%20M.pdf";
 const quickFacts = [
   { label: "EXPERIENCE", value: "1+ Year" },
   { label: "SPECIALIZATION", value: "Azure / DevOps" },
-  { label: "PLATFORM", value: "Kubernetes" },
+  { label: "PLATFORM", value: "Kubernetes / AKS" },
   { label: "AVAILABILITY", value: "Immediate Joiner" },
 ];
 
 const stack = [
-  "Azure",
+  "Microsoft Azure",
   "Azure DevOps",
   "CI/CD",
   "Kubernetes",
@@ -18,16 +18,12 @@ const stack = [
   "Terraform",
 ];
 
-export default function Hero() {
-  const scrollToProjects = () => {
-    document.getElementById("projects")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+const focusStyles =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300";
 
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({
+export default function Hero() {
+  const scrollTo = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
@@ -39,6 +35,7 @@ export default function Hero() {
       className="relative min-h-screen overflow-hidden"
       aria-labelledby="hero-heading"
     >
+      {/* BACKGROUND ACCENTS */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
@@ -48,8 +45,12 @@ export default function Hero() {
       </div>
 
       <div className="container">
+        {/* AVAILABILITY */}
         <div className="flex items-center gap-3 pb-6 pt-24 md:pt-28">
-          <span aria-hidden="true" className="relative flex h-2 w-2 shrink-0">
+          <span
+            aria-hidden="true"
+            className="relative flex h-2 w-2 shrink-0"
+          >
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
           </span>
@@ -60,53 +61,65 @@ export default function Hero() {
         </div>
 
         <div className="grid min-h-[calc(100vh-190px)] items-center gap-12 pb-12 lg:grid-cols-[1fr_0.8fr] lg:gap-12 xl:grid-cols-[1fr_0.75fr] xl:gap-16">
+          {/* INTRODUCTION */}
           <div className="min-w-0">
-            <div className="section-label">01 / Overview</div>
+            <div className="section-label">
+              01 / Overview
+            </div>
 
             <div className="mt-7">
               <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-cyan-400">
                 DevOps Engineer / Azure Cloud Engineer
               </p>
 
-              <h1 id="hero-heading" className="editorial-title max-w-4xl">
+              <h1
+                id="hero-heading"
+                className="editorial-title max-w-4xl"
+              >
                 Building
                 <br />
                 reliable
                 <br />
-                <span className="cyan-text">cloud systems.</span>
+                <span className="cyan-text">
+                  cloud systems.
+                </span>
               </h1>
             </div>
 
             <div className="mt-7 max-w-2xl">
               <p className="text-base leading-8 text-slate-400 md:text-lg">
-                Azure-focused DevOps Engineer with hands-on experience in
-                release management, CI/CD deployment validation, Kubernetes
-                monitoring, and cloud operations. Building practical
-                solutions with Azure DevOps, Docker, Terraform, and
-                infrastructure automation.
+                DevOps Engineer with professional experience in
+                enterprise release management, Azure cloud
+                operations, CI/CD deployment validation, and
+                Kubernetes monitoring. Building hands-on
+                solutions with Docker, Terraform, Azure DevOps,
+                and infrastructure automation.
               </p>
             </div>
 
-            <div
+            {/* CORE TECHNOLOGIES */}
+            <ul
               className="mt-6 flex max-w-2xl flex-wrap gap-2"
               aria-label="Core technologies"
             >
               {stack.map((item) => (
-                <span key={item} className="tech-chip">
+                <li key={item} className="tech-chip">
                   {item}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
 
+            {/* ACTIONS */}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href={RESUME_PATH}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View resume PDF in a new tab"
-                className="group inline-flex min-h-12 items-center justify-center gap-3 border border-cyan-400/30 bg-cyan-400/[0.08] px-6 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-300 transition hover:border-cyan-400/60 hover:bg-cyan-400/[0.13] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                className={`group inline-flex min-h-12 items-center justify-center gap-3 border border-cyan-400/30 bg-cyan-400/[0.08] px-6 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-300 transition hover:border-cyan-400/60 hover:bg-cyan-400/[0.13] ${focusStyles}`}
               >
                 View Resume
+
                 <ArrowUpRight
                   size={15}
                   aria-hidden="true"
@@ -119,9 +132,10 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit GitHub profile in a new tab"
-                className="inline-flex min-h-12 items-center justify-center gap-3 border border-white/10 bg-white/[0.025] px-6 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300 transition hover:border-white/20 hover:bg-white/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                className={`inline-flex min-h-12 items-center justify-center gap-3 border border-white/10 bg-white/[0.025] px-6 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300 transition hover:border-white/20 hover:bg-white/[0.05] ${focusStyles}`}
               >
                 GitHub
+
                 <span
                   aria-hidden="true"
                   className="font-mono text-[10px] text-slate-600"
@@ -132,17 +146,21 @@ export default function Hero() {
 
               <button
                 type="button"
-                onClick={scrollToProjects}
-                className="inline-flex min-h-12 items-center justify-center gap-3 border border-transparent px-5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                onClick={() => scrollTo("projects")}
+                className={`inline-flex min-h-12 items-center justify-center gap-3 border border-transparent px-5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 transition hover:text-white ${focusStyles}`}
               >
                 Explore Projects
-                <ArrowUpRight size={14} aria-hidden="true" />
+
+                <ArrowUpRight
+                  size={14}
+                  aria-hidden="true"
+                />
               </button>
 
               <button
                 type="button"
-                onClick={scrollToContact}
-                className="inline-flex min-h-12 items-center justify-center gap-3 border border-transparent px-5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                onClick={() => scrollTo("contact")}
+                className={`inline-flex min-h-12 items-center justify-center gap-3 border border-transparent px-5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 transition hover:text-white ${focusStyles}`}
               >
                 <Mail size={14} aria-hidden="true" />
                 Contact Me
@@ -150,6 +168,7 @@ export default function Hero() {
             </div>
           </div>
 
+          {/* PROFILE IMAGE */}
           <div className="relative mx-auto w-full max-w-[380px] lg:ml-auto lg:mr-0">
             <div
               aria-hidden="true"
@@ -162,6 +181,7 @@ export default function Hero() {
                 alt="Rafeek Ahamed M, DevOps Engineer and Azure Cloud Engineer"
                 width={1122}
                 height={1402}
+                loading="eager"
                 fetchPriority="high"
                 decoding="async"
                 className="aspect-[4/5] w-full object-cover object-center"
@@ -182,6 +202,7 @@ export default function Hero() {
                     className="relative flex h-2 w-2"
                   >
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
+
                     <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
                   </span>
 
@@ -204,7 +225,11 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="border-y border-white/[0.07]">
+        {/* QUICK FACTS */}
+        <div
+          className="border-y border-white/[0.07]"
+          aria-label="Professional quick facts"
+        >
           <div className="grid grid-cols-2 md:grid-cols-4">
             {quickFacts.map((item, index) => (
               <div
@@ -219,7 +244,9 @@ export default function Hero() {
                     : ""
                 }`}
               >
-                <p className="micro-label">{item.label}</p>
+                <p className="micro-label">
+                  {item.label}
+                </p>
 
                 <p className="mt-3 text-sm font-medium text-slate-200">
                   {item.value}
@@ -229,6 +256,7 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* FOOTER */}
         <div className="flex flex-col gap-3 py-6 sm:flex-row sm:items-center sm:justify-between">
           <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-600">
             Azure / Cloud Engineering / DevOps

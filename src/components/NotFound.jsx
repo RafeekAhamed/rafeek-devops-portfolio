@@ -2,7 +2,10 @@ import { ArrowLeft, Home, Terminal } from "lucide-react";
 
 function NotFound() {
   return (
-    <main className="flex min-h-screen items-center justify-center overflow-hidden bg-[#050817] px-6 py-24">
+    <main
+      className="flex min-h-screen items-center justify-center overflow-hidden bg-[#050817] px-6 py-24"
+      aria-labelledby="not-found-heading"
+    >
       <div className="relative w-full max-w-3xl text-center">
         <div
           aria-hidden="true"
@@ -20,7 +23,10 @@ function NotFound() {
           Error 404
         </p>
 
-        <h1 className="relative mt-5 text-6xl font-black tracking-tight text-white sm:text-8xl">
+        <h1
+          id="not-found-heading"
+          className="relative mt-5 text-6xl font-black tracking-tight text-white sm:text-8xl"
+        >
           404
         </h1>
 
@@ -38,11 +44,7 @@ function NotFound() {
             href="/"
             className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-cyan-400 px-6 py-3.5 text-sm font-bold text-slate-950 transition-all duration-300 hover:-translate-y-1 hover:bg-cyan-300 hover:shadow-[0_10px_35px_rgba(34,211,238,0.18)] focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-slate-950 sm:w-auto"
           >
-            <Home
-              aria-hidden="true"
-              size={17}
-            />
-
+            <Home aria-hidden="true" size={17} />
             Back to Home
           </a>
 
@@ -90,7 +92,7 @@ function NotFound() {
 
             <p className="text-slate-500">
               <span className="text-cyan-400">$</span>{" "}
-              status
+              check --resource
             </p>
 
             <p className="text-red-400">
@@ -99,11 +101,11 @@ function NotFound() {
 
             <p className="mt-2 text-slate-500">
               <span className="text-cyan-400">$</span>{" "}
-              cd /home
+              return --home
             </p>
 
             <p className="text-emerald-400">
-              ✓ Redirect path available
+              ✓ Home page is available
             </p>
           </div>
         </div>

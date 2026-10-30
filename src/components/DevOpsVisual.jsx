@@ -48,47 +48,50 @@ export default function DevOpsVisual() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    if (reduceMotion) return;
+    if (reduceMotion) {
+      root.classList.add("visual-ready");
+      return;
+    }
 
     const ctx = gsap.context(() => {
-      /* ---------------------------------------------
-         Pipeline entrance
-         --------------------------------------------- */
+      // Pipeline entrance
+      if (lineRef.current) {
+        gsap.fromTo(
+          lineRef.current,
+          {
+            scaleX: 0,
+            transformOrigin: "left center",
+          },
+          {
+            scaleX: 1,
+            duration: 1.4,
+            ease: "power2.out",
+            delay: 0.2,
+          }
+        );
+      }
 
-      gsap.fromTo(
-        lineRef.current,
-        {
-          scaleX: 0,
-          transformOrigin: "left center",
-        },
-        {
-          scaleX: 1,
-          duration: 1.4,
-          ease: "power2.out",
-          delay: 0.2,
-        }
-      );
+      const nodes = nodeRefs.current.filter(Boolean);
 
-      gsap.fromTo(
-        nodeRefs.current,
-        {
-          opacity: 0,
-          y: 14,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.55,
-          stagger: 0.12,
-          ease: "power2.out",
-          delay: 0.3,
-        }
-      );
+      if (nodes.length) {
+        gsap.fromTo(
+          nodes,
+          {
+            opacity: 0,
+            y: 14,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.55,
+            stagger: 0.12,
+            ease: "power2.out",
+            delay: 0.3,
+          }
+        );
+      }
 
-      /* ---------------------------------------------
-         Moving pipeline signal
-         --------------------------------------------- */
-
+      // Moving pipeline signal
       gsap.to(".pipeline-pulse", {
         xPercent: 100,
         duration: 2.4,
@@ -96,10 +99,7 @@ export default function DevOpsVisual() {
         ease: "none",
       });
 
-      /* ---------------------------------------------
-         Ambient orbit
-         --------------------------------------------- */
-
+      // Ambient orbit
       gsap.to(".visual-orbit", {
         rotate: 360,
         duration: 30,
@@ -118,10 +118,7 @@ export default function DevOpsVisual() {
     return () => ctx.revert();
   }, []);
 
-  /* =====================================================
-     MOUSE PARALLAX
-     ===================================================== */
-
+  // Mouse parallax
   const handleMouseMove = (event) => {
     const root = rootRef.current;
 
@@ -130,6 +127,15 @@ export default function DevOpsVisual() {
     if (
       window.matchMedia(
         "(prefers-reduced-motion: reduce)"
+      ).matches
+    ) {
+      return;
+    }
+
+    // Avoid unnecessary parallax on touch-oriented devices.
+    if (
+      window.matchMedia(
+        "(hover: none), (pointer: coarse)"
       ).matches
     ) {
       return;
@@ -145,7 +151,7 @@ export default function DevOpsVisual() {
     const y =
       ((event.clientY - rect.top) / rect.height - 0.5) * 8;
 
-    gsap.to(".pipeline-core", {
+    gsap.to(root.querySelector(".pipeline-core"), {
       x,
       y,
       duration: 0.55,
@@ -153,7 +159,7 @@ export default function DevOpsVisual() {
       overwrite: true,
     });
 
-    gsap.to(".pipeline-layer", {
+    gsap.to(root.querySelector(".pipeline-layer"), {
       x: x * 0.3,
       y: y * 0.3,
       duration: 0.7,
@@ -163,18 +169,32 @@ export default function DevOpsVisual() {
   };
 
   const handleMouseLeave = () => {
-    gsap.to(".pipeline-core", {
+    const root = rootRef.current;
+
+    if (!root) return;
+
+    if (
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+    ) {
+      return;
+    }
+
+    gsap.to(root.querySelector(".pipeline-core"), {
       x: 0,
       y: 0,
       duration: 0.7,
       ease: "power3.out",
+      overwrite: true,
     });
 
-    gsap.to(".pipeline-layer", {
+    gsap.to(root.querySelector(".pipeline-layer"), {
       x: 0,
       y: 0,
       duration: 0.8,
       ease: "power3.out",
+      overwrite: true,
     });
   };
 
@@ -194,15 +214,15 @@ export default function DevOpsVisual() {
         lg:min-h-[500px]
         xl:min-h-[540px]
       "
-      aria-label="DevOps delivery pipeline visualization"
+      role="img"
+      aria-label="DevOps delivery pipeline showing Git source control, Azure DevOps CI/CD, Docker containerization, Kubernetes workloads, and Azure Monitor operations."
     >
+      {/* Ambient background */}
 
-      {/* ===================================================
-          AMBIENT BACKGROUND
-          =================================================== */}
-
-      <div className="pointer-events-none absolute inset-0">
-
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden="true"
+      >
         <div
           className="
             absolute
@@ -256,13 +276,9 @@ export default function DevOpsVisual() {
             lg:w-[300px]
           "
         />
-
       </div>
 
-
-      {/* ===================================================
-          MAIN VISUAL
-          =================================================== */}
+      {/* Main visual */}
 
       <div
         className="
@@ -274,11 +290,9 @@ export default function DevOpsVisual() {
           xl:max-w-[590px]
         "
       >
-
         {/* Top system label */}
 
         <div className="mb-4 flex items-center justify-between px-1">
-
           <span
             className="
               font-mono
@@ -305,21 +319,18 @@ export default function DevOpsVisual() {
               text-cyan-400/70
             "
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+            <span
+              className="h-1.5 w-1.5 rounded-full bg-cyan-400"
+              aria-hidden="true"
+            />
             SYSTEM ONLINE
           </span>
-
         </div>
 
-
-        {/* =================================================
-            PIPELINE CARD
-            ================================================= */}
+        {/* Pipeline card */}
 
         <div className="system-card relative overflow-hidden">
-
           <div className="system-card-header">
-
             <span className="system-card-number">
               DEVOPS / 01
             </span>
@@ -327,16 +338,12 @@ export default function DevOpsVisual() {
             <span className="system-card-type">
               SOURCE → PRODUCTION
             </span>
-
           </div>
 
-
           <div className="pipeline-layer p-4 md:p-6">
-
             {/* Pipeline */}
 
             <div className="relative">
-
               {/* Base line */}
 
               <div
@@ -350,6 +357,7 @@ export default function DevOpsVisual() {
                   bg-white/[0.08]
                   md:block
                 "
+                aria-hidden="true"
               />
 
               {/* Animated line */}
@@ -369,6 +377,7 @@ export default function DevOpsVisual() {
                   to-transparent
                   md:block
                 "
+                aria-hidden="true"
               />
 
               {/* Moving signal */}
@@ -384,6 +393,7 @@ export default function DevOpsVisual() {
                   overflow-hidden
                   md:block
                 "
+                aria-hidden="true"
               >
                 <div
                   className="
@@ -400,11 +410,9 @@ export default function DevOpsVisual() {
                 />
               </div>
 
-
               {/* Pipeline nodes */}
 
               <div className="grid grid-cols-2 gap-2.5 md:grid-cols-5 md:gap-2">
-
                 {pipeline.map((item, index) => (
                   <div
                     key={item.id}
@@ -417,7 +425,6 @@ export default function DevOpsVisual() {
                         : ""
                     }`}
                   >
-
                     <div
                       className="
                         relative
@@ -432,9 +439,7 @@ export default function DevOpsVisual() {
                         md:p-3
                       "
                     >
-
                       <div className="mb-3 flex items-center justify-between">
-
                         <span
                           className="
                             font-mono
@@ -455,8 +460,8 @@ export default function DevOpsVisual() {
                             bg-cyan-400/70
                             shadow-[0_0_10px_rgba(34,211,238,0.45)]
                           "
+                          aria-hidden="true"
                         />
-
                       </div>
 
                       <p
@@ -479,20 +484,13 @@ export default function DevOpsVisual() {
                       <p className="mt-1 text-[9px] leading-4 text-slate-600">
                         {item.detail}
                       </p>
-
                     </div>
-
                   </div>
                 ))}
-
               </div>
-
             </div>
 
-
-            {/* =================================================
-                PIPELINE STATUS
-                ================================================= */}
+            {/* Pipeline status */}
 
             <div
               className="
@@ -505,7 +503,6 @@ export default function DevOpsVisual() {
                 sm:grid-cols-3
               "
             >
-
               <div>
                 <p className="micro-label">
                   DEPLOYMENT
@@ -535,20 +532,13 @@ export default function DevOpsVisual() {
                   MONITORED
                 </p>
               </div>
-
             </div>
-
           </div>
-
         </div>
 
-
-        {/* ===================================================
-            BOTTOM ARCHITECTURE INDICATOR
-            =================================================== */}
+        {/* Bottom architecture indicator */}
 
         <div className="mt-4 flex items-center justify-between px-1">
-
           <span
             className="
               font-mono
@@ -572,11 +562,8 @@ export default function DevOpsVisual() {
           >
             v1.0 / ACTIVE
           </span>
-
         </div>
-
       </div>
-
     </div>
   );
 }

@@ -16,73 +16,46 @@
 
   color: #f8fafc;
   background: #050708;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 
-  /* -------------------------
-     Core colors
-     ------------------------- */
-
+  /* Core colors */
   --bg: #050708;
   --surface: #0a0e10;
   --surface-soft: #0d1214;
-
   --border: rgba(148, 163, 184, 0.16);
   --border-soft: rgba(148, 163, 184, 0.1);
   --border-strong: rgba(34, 211, 238, 0.32);
-
   --text: #f8fafc;
   --muted: #94a3b8;
-
   --cyan: #22d3ee;
   --cyan-soft: rgba(34, 211, 238, 0.1);
   --cyan-dim: rgba(34, 211, 238, 0.18);
   --cyan-glow: rgba(34, 211, 238, 0.08);
-
   --panel: rgba(8, 16, 18, 0.72);
   --panel-hover: rgba(11, 22, 24, 0.88);
-
   --line-soft: rgba(148, 163, 184, 0.11);
   --line-medium: rgba(148, 163, 184, 0.18);
 
-  /* -------------------------
-     Layout
-     ------------------------- */
-
+  /* Layout */
   --content-width: 1280px;
-
-  /* -------------------------
-     CENTRAL SPACING CONTROL
-     Change these values only
-     ------------------------- */
-
   --section-space-desktop: 5.5rem;
   --section-space-tablet: 4.5rem;
   --section-space-mobile: 3.75rem;
-
   --section-header-gap: 3rem;
   --section-description-gap: 1.5rem;
-
   --card-content-gap: 1.25rem;
   --card-description-gap: 0.75rem;
-
   --divider-space: 1.5rem;
-
   --tools-strip-gap: 1.25rem;
-
   --metadata-gap: 2rem;
 
-  /* -------------------------
-     Container
-     ------------------------- */
-
+  /* Container */
   --container-padding-desktop: 40px;
   --container-padding-mobile: 28px;
   --container-padding-small: 24px;
 }
-
 
 /* =========================================================
    BASE
@@ -95,6 +68,8 @@ html {
 }
 
 body {
+  position: relative;
+  isolation: isolate;
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
@@ -116,7 +91,6 @@ body {
   color: var(--text);
 }
 
-
 /* =========================================================
    GLOBAL GRID / TEXTURE
    ========================================================= */
@@ -125,10 +99,8 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-
+  z-index: -1;
   pointer-events: none;
-  z-index: 9999;
-
   opacity: 0.035;
 
   background-image:
@@ -145,7 +117,6 @@ body::before {
   background-size: 80px 80px;
 }
 
-
 /* =========================================================
    GLOBAL ELEMENTS
    ========================================================= */
@@ -158,7 +129,6 @@ body::before {
 a {
   color: inherit;
   text-decoration: none;
-
   transition:
     color 180ms ease,
     opacity 180ms ease;
@@ -167,7 +137,6 @@ a {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
-
   transition-timing-function:
     cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -185,9 +154,8 @@ img {
   outline: none;
 }
 
-
 /* =========================================================
-   SECTIONS
+   SECTION BASE
    ========================================================= */
 
 section {
@@ -195,39 +163,57 @@ section {
   scroll-margin-top: 90px;
 }
 
+/* =========================================================
+   SECTION REVEAL
+   Content remains visible unless JavaScript enables animation.
+   ========================================================= */
+
+.section-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.js-reveal .section-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js-reveal .section-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* =========================================================
    CENTRALIZED SECTION SPACING
+   Supports SectionReveal wrappers in App.jsx
    ========================================================= */
 
-main > section {
+main > .section-reveal > section {
   padding-top: var(--section-space-desktop);
   padding-bottom: var(--section-space-desktop);
 }
 
-main > section:first-child {
+main > .section-reveal:nth-of-type(1) > section {
   padding-top: 0;
 }
-
 
 /* =========================================================
    SECTION SEPARATOR
    ========================================================= */
 
-main > section:not(:first-child)::before {
+main > .section-reveal:not(:nth-of-type(1)) > section::before {
   content: "";
-
   position: absolute;
   left: 50%;
   top: 0;
-
   width: min(
     calc(100% - 40px),
     var(--content-width)
   );
-
   height: 1px;
-
   transform: translateX(-50%);
 
   background:
@@ -241,7 +227,6 @@ main > section:not(:first-child)::before {
     );
 }
 
-
 /* =========================================================
    SECTION SHELL
    ========================================================= */
@@ -254,21 +239,15 @@ main > section:not(:first-child)::before {
 
 .section-shell::after {
   content: "";
-
   position: absolute;
-
   width: 420px;
   height: 420px;
-
   right: -240px;
   top: 10%;
-
   border: 1px solid rgba(34, 211, 238, 0.035);
   border-radius: 50%;
-
   pointer-events: none;
 }
-
 
 /* =========================================================
    CENTRAL SECTION HEADER SPACING
@@ -282,20 +261,17 @@ main > section:not(:first-child)::before {
   margin-top: var(--section-description-gap);
 }
 
-
 /* =========================================================
    CONTAINER
    ========================================================= */
 
 .container {
   width: min(
-    100% - var(--container-padding-desktop),
+    calc(100% - var(--container-padding-desktop)),
     var(--content-width)
   );
-
   margin-inline: auto;
 }
-
 
 /* =========================================================
    SECTION LABELS
@@ -304,36 +280,27 @@ main > section:not(:first-child)::before {
 .section-label {
   position: relative;
   z-index: 2;
-
   display: inline-flex;
   align-items: center;
-
   gap: 10px;
-
   color: var(--cyan);
-
   font-size: 11px;
   font-weight: 700;
-
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .section-label::before {
   content: "";
-
   width: 28px;
   height: 1px;
-
   background: currentColor;
 }
 
 .technical-label {
   color: #64748b;
-
   font-size: 10px;
   font-weight: 700;
-
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -346,24 +313,18 @@ main > section:not(:first-child)::before {
     Monaco,
     Consolas,
     monospace;
-
   font-size: 9px;
   font-weight: 700;
   line-height: 1.4;
-
   letter-spacing: 0.2em;
   text-transform: uppercase;
-
   color: #64748b;
 }
 
 .micro-label-cyan {
   color: rgba(34, 211, 238, 0.72);
-
-  text-shadow:
-    0 0 18px rgba(34, 211, 238, 0.12);
+  text-shadow: 0 0 18px rgba(34, 211, 238, 0.12);
 }
-
 
 /* =========================================================
    EDITORIAL TYPOGRAPHY
@@ -371,21 +332,11 @@ main > section:not(:first-child)::before {
 
 .editorial-title {
   max-width: 900px;
-
-  font-size: clamp(
-    2.75rem,
-    7vw,
-    7rem
-  );
-
+  font-size: clamp(2.75rem, 7vw, 7rem);
   line-height: 0.9;
-
   letter-spacing: -0.06em;
-
   font-weight: 700;
-
   color: #f8fafc;
-
   text-wrap: balance;
 }
 
@@ -399,7 +350,6 @@ main > section:not(:first-child)::before {
 
 .cyan-line {
   height: 1px;
-
   background:
     linear-gradient(
       90deg,
@@ -407,7 +357,6 @@ main > section:not(:first-child)::before {
       rgba(34, 211, 238, 0)
     );
 }
-
 
 /* =========================================================
    BACKGROUNDS
@@ -424,19 +373,15 @@ main > section:not(:first-child)::before {
       rgba(148, 163, 184, 0.045) 1px,
       transparent 1px
     );
-
   background-size: 64px 64px;
 }
 
 .glass-panel {
   background: rgba(10, 14, 16, 0.72);
-
   border: 1px solid var(--border);
-
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
-
 
 /* =========================================================
    SYSTEM CARDS
@@ -444,9 +389,7 @@ main > section:not(:first-child)::before {
 
 .system-card {
   position: relative;
-
   overflow: hidden;
-
   border: 1px solid var(--line-soft);
   border-radius: 3px;
 
@@ -471,7 +414,6 @@ main > section:not(:first-child)::before {
 
 .system-card::before {
   content: "";
-
   position: absolute;
   inset: 0;
 
@@ -483,25 +425,18 @@ main > section:not(:first-child)::before {
     );
 
   pointer-events: none;
-
   opacity: 0.8;
 }
 
 .system-card::after {
   content: "";
-
   position: absolute;
-
   width: 150px;
   height: 150px;
-
   right: -75px;
   bottom: -75px;
-
   border: 1px solid rgba(148, 163, 184, 0.06);
-
   border-radius: 50%;
-
   pointer-events: none;
 }
 
@@ -517,7 +452,6 @@ main > section:not(:first-child)::before {
 .system-card p {
   text-wrap: pretty;
 }
-
 
 /* =========================================================
    CARD SPACING CONTROLLER
@@ -543,7 +477,6 @@ main > section:not(:first-child)::before {
   margin-top: var(--metadata-gap);
 }
 
-
 /* =========================================================
    DESKTOP HOVER
    ========================================================= */
@@ -551,7 +484,6 @@ main > section:not(:first-child)::before {
 @media (hover: hover) and (pointer: fine) {
   .system-card:hover {
     transform: translateY(-3px);
-
     border-color: rgba(34, 211, 238, 0.24);
 
     background:
@@ -571,23 +503,17 @@ main > section:not(:first-child)::before {
   }
 }
 
-
 /* =========================================================
    SYSTEM CARD HEADER
    ========================================================= */
 
 .system-card-header {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
   min-height: 46px;
-
   padding: 0 20px;
-
   border-bottom: 1px solid var(--line-soft);
-
   background: rgba(255, 255, 255, 0.008);
 }
 
@@ -599,20 +525,15 @@ main > section:not(:first-child)::before {
     Monaco,
     Consolas,
     monospace;
-
   font-size: 10px;
   font-weight: 700;
-
   letter-spacing: 0.16em;
-
   color: var(--cyan);
-
   font-variant-numeric: tabular-nums;
 }
 
 .system-card-type {
   max-width: 70%;
-
   font-family:
     ui-monospace,
     SFMono-Regular,
@@ -620,18 +541,13 @@ main > section:not(:first-child)::before {
     Monaco,
     Consolas,
     monospace;
-
   font-size: 9px;
   font-weight: 600;
-
   letter-spacing: 0.16em;
-
   text-align: right;
   text-transform: uppercase;
-
   color: #475569;
 }
-
 
 /* =========================================================
    SYSTEM GRID
@@ -639,13 +555,9 @@ main > section:not(:first-child)::before {
 
 .system-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
-
 
 /* =========================================================
    TECHNOLOGY CHIPS
@@ -653,17 +565,11 @@ main > section:not(:first-child)::before {
 
 .tech-chip {
   display: inline-flex;
-
   align-items: center;
-
   min-height: 28px;
-
   padding: 0 10px;
-
   border: 1px solid rgba(148, 163, 184, 0.12);
-
   border-radius: 2px;
-
   background: rgba(255, 255, 255, 0.018);
 
   font-family:
@@ -675,11 +581,8 @@ main > section:not(:first-child)::before {
     monospace;
 
   font-size: 9px;
-
   color: #94a3b8;
-
   white-space: nowrap;
-
   user-select: none;
 
   transition:
@@ -692,15 +595,11 @@ main > section:not(:first-child)::before {
 @media (hover: hover) and (pointer: fine) {
   .tech-chip:hover {
     border-color: rgba(34, 211, 238, 0.22);
-
     background: rgba(34, 211, 238, 0.045);
-
     color: #e2e8f0;
-
     transform: translateY(-1px);
   }
 }
-
 
 /* =========================================================
    SYSTEM DIVIDER
@@ -708,7 +607,6 @@ main > section:not(:first-child)::before {
 
 .system-divider {
   height: 1px;
-
   background:
     linear-gradient(
       90deg,
@@ -717,7 +615,6 @@ main > section:not(:first-child)::before {
       transparent
     );
 }
-
 
 /* =========================================================
    HERO
@@ -729,19 +626,14 @@ main > section:not(:first-child)::before {
 
 #home::after {
   content: "";
-
   position: absolute;
-
   left: 50%;
   bottom: 0;
-
   width: min(
     calc(100% - 40px),
     var(--content-width)
   );
-
   height: 1px;
-
   transform: translateX(-50%);
 
   background:
@@ -759,10 +651,8 @@ main > section:not(:first-child)::before {
 
 .hero-fact-grid::before {
   content: "";
-
   position: absolute;
   inset: 0;
-
   pointer-events: none;
 
   background:
@@ -773,7 +663,6 @@ main > section:not(:first-child)::before {
       transparent
     );
 }
-
 
 /* =========================================================
    PROJECTS
@@ -793,7 +682,6 @@ main > section:not(:first-child)::before {
   }
 }
 
-
 /* =========================================================
    EXPERIENCE
    ========================================================= */
@@ -801,7 +689,6 @@ main > section:not(:first-child)::before {
 #experience .system-card {
   overflow: hidden;
 }
-
 
 /* =========================================================
    CONTACT
@@ -811,7 +698,6 @@ main > section:not(:first-child)::before {
   min-height: 100%;
 }
 
-
 /* =========================================================
    NAVBAR
    ========================================================= */
@@ -820,7 +706,6 @@ header {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
-
 
 /* =========================================================
    BUTTONS
@@ -843,7 +728,6 @@ button[class*="rounded"] {
   }
 }
 
-
 /* =========================================================
    ACCESSIBILITY
    ========================================================= */
@@ -852,7 +736,6 @@ button[class*="rounded"] {
   outline: 1px solid var(--cyan);
   outline-offset: 4px;
 }
-
 
 /* =========================================================
    SCROLLBAR
@@ -875,9 +758,8 @@ button[class*="rounded"] {
   background: rgba(34, 211, 238, 0.35);
 }
 
-
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
    ========================================================= */
 
 @media (max-width: 1024px) {
@@ -886,27 +768,29 @@ button[class*="rounded"] {
   }
 
   .system-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
 
 @media (max-width: 768px) {
   :root {
     --section-header-gap: 2.5rem;
   }
 
-  main > section {
+  main > .section-reveal > section {
     padding-top: var(--section-space-tablet);
     padding-bottom: var(--section-space-tablet);
   }
 
-  main > section:first-child {
+  main > .section-reveal:nth-of-type(1) > section {
     padding-top: 0;
   }
 
-  main > section:not(:first-child)::before {
+  main > .section-reveal:not(:nth-of-type(1)) > section::before {
     width: calc(100% - 28px);
   }
 
@@ -916,22 +800,15 @@ button[class*="rounded"] {
 
   .container {
     width: min(
-      100% - var(--container-padding-mobile),
+      calc(100% - var(--container-padding-mobile)),
       var(--content-width)
     );
   }
 
   .editorial-title {
     max-width: 100%;
-
-    font-size: clamp(
-      2.45rem,
-      12.5vw,
-      4.6rem
-    );
-
+    font-size: clamp(2.45rem, 12.5vw, 4.6rem);
     line-height: 0.92;
-
     letter-spacing: -0.05em;
   }
 
@@ -942,7 +819,6 @@ button[class*="rounded"] {
 
   .system-card {
     min-width: 0;
-
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -964,6 +840,9 @@ button[class*="rounded"] {
   }
 }
 
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+   ========================================================= */
 
 @media (max-width: 640px) {
   .system-grid {
@@ -976,18 +855,21 @@ button[class*="rounded"] {
   }
 }
 
-
 @media (max-width: 480px) {
   :root {
     --section-header-gap: 2.25rem;
   }
 
-  main > section {
+  main > .section-reveal > section {
     padding-top: var(--section-space-mobile);
     padding-bottom: var(--section-space-mobile);
   }
 
-  main > section:not(:first-child)::before {
+  main > .section-reveal:nth-of-type(1) > section {
+    padding-top: 0;
+  }
+
+  main > .section-reveal:not(:nth-of-type(1)) > section::before {
     width: calc(100% - 24px);
   }
 
@@ -997,7 +879,7 @@ button[class*="rounded"] {
 
   .container {
     width: min(
-      100% - var(--container-padding-small),
+      calc(100% - var(--container-padding-small)),
       var(--content-width)
     );
   }
@@ -1007,11 +889,7 @@ button[class*="rounded"] {
   }
 
   .editorial-title {
-    font-size: clamp(
-      2.3rem,
-      13.5vw,
-      4rem
-    );
+    font-size: clamp(2.3rem, 13.5vw, 4rem);
   }
 
   .system-card {
@@ -1027,7 +905,6 @@ button[class*="rounded"] {
     line-height: 1.4;
   }
 }
-
 
 /* =========================================================
    REDUCED MOTION
@@ -1045,6 +922,13 @@ button[class*="rounded"] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .section-reveal,
+  .section-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .system-card:hover,

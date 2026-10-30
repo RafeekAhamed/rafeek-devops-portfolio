@@ -12,8 +12,8 @@ const experiences = [
         label: "CLIENT ENVIRONMENTS",
       },
       {
-        value: "99%+",
-        label: "AVAILABILITY SUPPORTED",
+        value: "AKS",
+        label: "WORKLOAD MONITORING",
       },
       {
         value: "CI/CD",
@@ -94,6 +94,7 @@ export default function Experience() {
     <section
       id="experience"
       className="section-shell py-24 md:py-32"
+      aria-labelledby="experience-heading"
     >
       <div className="container">
         {/* SECTION HEADER */}
@@ -108,7 +109,10 @@ export default function Experience() {
             </span>
           </div>
 
-          <h2 className="editorial-title mt-6 max-w-5xl">
+          <h2
+            id="experience-heading"
+            className="editorial-title mt-6 max-w-5xl"
+          >
             Experience in
             <br />
             <span className="muted">production.</span>
@@ -170,7 +174,11 @@ export default function Experience() {
                 </div>
 
                 {/* EXPERIENCE HIGHLIGHTS */}
-                <div className="mt-8 grid grid-cols-1 border-y border-white/[0.07] sm:grid-cols-3">
+                <div
+                  className="mt-8 grid grid-cols-1 border-y border-white/[0.07] sm:grid-cols-3"
+                  role="group"
+                  aria-label={`${experience.role} highlights`}
+                >
                   {experience.impact.map((item, index) => (
                     <div
                       key={item.label}
@@ -205,24 +213,27 @@ export default function Experience() {
                       RESPONSIBILITIES
                     </p>
 
-                    <div className="space-y-4">
+                    <ol className="space-y-4">
                       {experience.responsibilities.map(
                         (responsibility, index) => (
-                          <div
+                          <li
                             key={responsibility}
                             className="flex gap-4"
                           >
-                            <span className="shrink-0 font-mono text-[9px] font-bold tracking-[0.12em] text-cyan-400/70">
+                            <span
+                              aria-hidden="true"
+                              className="shrink-0 font-mono text-[9px] font-bold tracking-[0.12em] text-cyan-400/70"
+                            >
                               {String(index + 1).padStart(2, "0")}
                             </span>
 
                             <p className="text-sm leading-7 text-slate-400">
                               {responsibility}
                             </p>
-                          </div>
+                          </li>
                         )
                       )}
-                    </div>
+                    </ol>
                   </div>
 
                   <div>
@@ -230,18 +241,21 @@ export default function Experience() {
                       TECHNOLOGY STACK
                     </p>
 
-                    <div className="flex flex-wrap gap-2 lg:max-w-xs">
+                    <ul
+                      className="flex flex-wrap gap-2 lg:max-w-xs"
+                      aria-label={`${experience.role} technologies`}
+                    >
                       {experience.technologies.map(
                         (technology) => (
-                          <span
+                          <li
                             key={technology}
                             className="tech-chip"
                           >
                             {technology}
-                          </span>
+                          </li>
                         )
                       )}
-                    </div>
+                    </ul>
                   </div>
                 </div>
 
