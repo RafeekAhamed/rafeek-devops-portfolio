@@ -28,7 +28,7 @@ const certifications = [
     type: "PROFESSIONAL / PROGRAM",
     title: "Professional Certification Program in Cloud Architecture",
     subtitle: "Simplilearn Learning Platform",
-    meta: "GRADE A",
+    meta: "PROGRAM COMPLETED",
     year: "May 2026",
     status: "Completed",
     description:

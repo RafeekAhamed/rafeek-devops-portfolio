@@ -1,4 +1,5 @@
 import { ArrowUpRight, Mail } from "lucide-react";
+import InfrastructureScene from "./InfrastructureScene.jsx";
 
 const RESUME_PATH = "/Rafeek%20Ahamed%20M.pdf";
 
@@ -127,36 +128,6 @@ export default function Hero() {
                 />
               </a>
 
-              <a
-                href="https://github.com/RafeekAhamed"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit GitHub profile in a new tab"
-                className={`inline-flex min-h-12 items-center justify-center gap-3 border border-white/10 bg-white/[0.025] px-6 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-slate-300 transition hover:border-white/20 hover:bg-white/[0.05] ${focusStyles}`}
-              >
-                GitHub
-
-                <span
-                  aria-hidden="true"
-                  className="font-mono text-[10px] text-slate-600"
-                >
-                  GH
-                </span>
-              </a>
-
-              <button
-                type="button"
-                onClick={() => scrollTo("projects")}
-                className={`inline-flex min-h-12 items-center justify-center gap-3 border border-transparent px-5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 transition hover:text-white ${focusStyles}`}
-              >
-                Explore Projects
-
-                <ArrowUpRight
-                  size={14}
-                  aria-hidden="true"
-                />
-              </button>
-
               <button
                 type="button"
                 onClick={() => scrollTo("contact")}
@@ -168,59 +139,27 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* PROFILE IMAGE */}
-          <div className="relative mx-auto w-full max-w-[380px] lg:ml-auto lg:mr-0">
-            <div
-              aria-hidden="true"
-              className="absolute -inset-5 rounded-3xl bg-cyan-400/[0.07] blur-3xl"
-            />
-
-            <div className="relative overflow-hidden rounded-3xl border border-cyan-400/20 bg-slate-900 shadow-2xl shadow-cyan-950/30">
+          {/* PROMINENT PROFESSIONAL PORTRAIT + 3D INFRASTRUCTURE */}
+          <div className="hero-visual-column relative mx-auto w-full max-w-[470px] lg:ml-auto lg:mr-0">
+            <div className="hero-portrait-card">
               <img
                 src="/profile.jpg"
-                alt="Rafeek Ahamed M, DevOps Engineer and Azure Cloud Engineer"
-                width={1122}
-                height={1402}
+                alt="Professional portrait of Rafeek Ahamed M"
+                width={1100}
+                height={1400}
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
-                className="aspect-[4/5] w-full object-cover object-center"
+                className="hero-portrait-image"
               />
-
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#050817] via-[#050817]/75 to-transparent p-6 pt-24">
-                <p className="text-xl font-semibold tracking-tight text-white">
-                  Rafeek Ahamed M
-                </p>
-
-                <p className="mt-2 text-sm text-cyan-300">
-                  DevOps Engineer | Azure Cloud Engineer
-                </p>
-
-                <div className="mt-4 flex items-center gap-2">
-                  <span
-                    aria-hidden="true"
-                    className="relative flex h-2 w-2"
-                  >
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
-
-                    <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
-                  </span>
-
-                  <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-300">
-                    Immediate Joiner
-                  </span>
-                </div>
-              </div>
             </div>
 
-            <div className="mt-5 flex items-center justify-between gap-3">
-              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-500">
-                Cloud Engineering
-              </span>
-
-              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-cyan-400/70">
-                Automation · Reliability
-              </span>
+            <div className="hero-infrastructure-card">
+              <div className="hero-infrastructure-heading">
+                <span>ENGINEERING TOOLCHAIN</span>
+                <span>AZURE / DEVOPS</span>
+              </div>
+              <InfrastructureScene />
             </div>
           </div>
         </div>

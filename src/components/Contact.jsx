@@ -1,6 +1,7 @@
-import { Mail, ArrowUpRight, Download } from "lucide-react";
+import { Mail, ArrowUpRight, Download, Phone } from "lucide-react";
 
 const EMAIL = "rafeekahamed046@gmail.com";
+const PHONE = "+917540074392";
 const RESUME_PATH = "/Rafeek%20Ahamed%20M.pdf";
 const EMAIL_SUBJECT = "DevOps / Azure Cloud Opportunity";
 
@@ -9,6 +10,12 @@ const emailHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
 )}`;
 
 const contactLinks = [
+  {
+    label: "PHONE",
+    value: "+91 7540074392",
+    href: `tel:${PHONE}`,
+    icon: Phone,
+  },
   {
     label: "EMAIL",
     value: EMAIL,
@@ -155,16 +162,19 @@ export default function Contact() {
                 {contactLinks.map((link) => {
                   const isEmail = link.href.startsWith("mailto:");
 
+                  const isPhone = link.href.startsWith("tel:");
                   return (
                     <a
                       key={link.label}
                       href={link.href}
-                      target={isEmail ? undefined : "_blank"}
-                      rel={isEmail ? undefined : "noopener noreferrer"}
+                      target={isEmail || isPhone ? undefined : "_blank"}
+                      rel={isEmail || isPhone ? undefined : "noopener noreferrer"}
                       aria-label={
                         isEmail
                           ? `Email ${EMAIL}`
-                          : `Open ${link.label} profile in a new tab`
+                          : isPhone
+                            ? `Call ${link.value}`
+                            : `Open ${link.label} profile in a new tab`
                       }
                       className="group flex items-center justify-between border-b border-white/[0.07] px-6 py-5 transition hover:bg-white/[0.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-cyan-400 md:px-8"
                     >

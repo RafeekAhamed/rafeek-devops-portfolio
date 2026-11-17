@@ -145,11 +145,11 @@ export default function Navbar() {
             </span>
 
             <span className="hidden sm:block">
-              <span className="block text-xs font-semibold tracking-[0.08em] text-slate-200">
+              <span className="nav-brand-name block text-sm font-bold tracking-[0.06em] text-slate-100">
                 RAFEEK AHAMED
               </span>
 
-              <span className="mt-0.5 block font-mono text-[8px] uppercase tracking-[0.16em] text-slate-600">
+              <span className="mt-0.5 block font-mono text-[9px] uppercase tracking-[0.14em] text-slate-500">
                 DEVOPS / CLOUD ENGINEERING
               </span>
             </span>
@@ -169,14 +169,14 @@ export default function Navbar() {
                   type="button"
                   onClick={() => scrollToSection(item.id)}
                   aria-current={isActive ? "location" : undefined}
-                  className={`group relative flex items-center gap-2 px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] transition ${focusStyles} ${
+                  className={`group relative flex items-center gap-2 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.10em] transition ${focusStyles} ${
                     isActive
                       ? "text-cyan-300"
                       : "text-slate-500 hover:text-slate-200"
                   }`}
                 >
                   <span
-                    className={`text-[8px] transition ${
+                    className={`text-[9px] transition ${
                       isActive
                         ? "text-cyan-400/80"
                         : "text-slate-700 group-hover:text-slate-500"
@@ -204,7 +204,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => scrollToSection("contact")}
-            className={`hidden min-h-10 items-center gap-2 border border-cyan-400/25 bg-cyan-400/[0.06] px-4 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-cyan-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.1] md:flex ${focusStyles}`}
+            className={`hidden min-h-10 items-center gap-2 border border-cyan-400/25 bg-cyan-400/[0.06] px-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.1] md:flex ${focusStyles}`}
           >
             Contact
             <ArrowUpRight size={13} aria-hidden="true" />
@@ -297,7 +297,7 @@ export default function Navbar() {
           </nav>
 
           <div className="mt-auto border-t border-white/[0.07] py-6">
-            <p className="font-mono text-[8px] uppercase tracking-[0.18em] text-slate-700">
+            <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-500">
               Azure / DevOps / Kubernetes / CI-CD
             </p>
           </div>

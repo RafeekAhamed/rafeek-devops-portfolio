@@ -57,7 +57,7 @@ This repository contains my personal portfolio website, which presents my techni
 * Certifications and education sections
 * Contact information and professional profile links
 * Responsive navigation with mobile menu
-* GSAP animations and section reveal effects
+* GSAP section reveals and a lightweight CSS 3D cloud-infrastructure hero visual
 * Custom 404 page
 * SEO metadata and social sharing metadata
 * Custom favicon
@@ -81,6 +81,7 @@ This repository contains my personal portfolio website, which presents my techni
 * GSAP
 * `@gsap/react`
 * Lucide React
+* Lightweight CSS 3D transforms (no WebGL model dependency)
 * Responsive layouts
 * Semantic HTML
 
@@ -370,3 +371,10 @@ DevOps Engineer | Azure Cloud Engineer
 <p align="center">
   Built with React, Vite, Tailwind CSS, GSAP, and JavaScript.
 </p>
+
+
+## Contact
+
+- Phone: +91 7540074392
+- Email: rafeekahamed046@gmail.com
+- LinkedIn: https://www.linkedin.com/in/rafeek-ahamed-devops/
