@@ -1693,3 +1693,182 @@ main > .section-reveal:not(:nth-of-type(1)) > section::before {
 @media(prefers-reduced-motion:reduce) {
  .hero-primary-action,.hero-secondary-action,.portrait-frame { transition:none; transform:none; }
 }
+
+
+
+/* =========================================================
+   FINAL PORTFOLIO OVERRIDES
+   Centered section headings + refined contact presentation
+   ========================================================= */
+
+/* Consistent, large, centered section introductions */
+main > .section-reveal > section .section-header,
+main > .section-reveal > section .section-heading,
+main > .section-reveal > section .section-intro {
+  width: 100%;
+  margin-inline: auto;
+  text-align: center;
+}
+
+main > .section-reveal > section .section-label {
+  justify-content: center;
+  margin-inline: auto;
+}
+
+main > .section-reveal > section .editorial-title {
+  width: 100%;
+  max-width: 1000px;
+  margin: 18px auto 0;
+  text-align: center;
+  font-size: clamp(3rem, 7vw, 6.25rem);
+  line-height: .98;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+
+main > .section-reveal > section .section-description {
+  max-width: 720px;
+  margin: 22px auto 0;
+  text-align: center;
+  color: #9aa9c2;
+  font-size: clamp(14px, 1.35vw, 16px);
+  line-height: 1.85;
+}
+
+/* Keep the hero's intentionally left-aligned composition unchanged. */
+#home .editorial-title,
+#home .section-header,
+#home .section-description,
+#home .section-label {
+  text-align: left;
+}
+#home .section-label {
+  justify-content: flex-start;
+}
+
+/* More deliberate spacing between section intro and content */
+main > .section-reveal > section .section-header {
+  margin-bottom: clamp(38px, 5vw, 64px);
+}
+
+/* CONTACT — premium split-panel treatment using the existing markup */
+#contact {
+  position: relative;
+  isolation: isolate;
+}
+
+#contact .section-header {
+  margin-bottom: clamp(38px, 5vw, 60px);
+}
+
+#contact .border[class~="border-cyan-400/20"] {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(116, 174, 255, .24) !important;
+  border-radius: 28px !important;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(79, 132, 255, .16), transparent 38%),
+    linear-gradient(145deg, rgba(15, 27, 49, .98), rgba(7, 13, 27, .98)) !important;
+  box-shadow:
+    0 30px 85px rgba(0, 0, 0, .32),
+    inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+#contact .border[class~="border-cyan-400/20"]::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, #65ddff, #8c9cff, transparent);
+  opacity: .9;
+  pointer-events: none;
+}
+
+#contact .system-card {
+  border: 1px solid rgba(132, 166, 224, .2) !important;
+  border-radius: 24px !important;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(66, 126, 255, .12), transparent 42%),
+    linear-gradient(145deg, rgba(17, 29, 52, .96), rgba(8, 15, 30, .98)) !important;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .24), inset 0 1px 0 rgba(255, 255, 255, .045);
+}
+
+#contact .group {
+  border: 1px solid rgba(145, 169, 211, .14);
+  border-radius: 15px;
+  background: rgba(18, 31, 54, .58);
+  transition: border-color .22s ease, background .22s ease, transform .22s ease;
+}
+
+#contact .group:hover {
+  border-color: rgba(91, 211, 255, .42);
+  background: rgba(31, 54, 88, .72);
+  transform: translateY(-3px);
+}
+
+#contact a,
+#contact button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#contact a:focus-visible,
+#contact button:focus-visible {
+  outline: 2px solid #65ddff;
+  outline-offset: 4px;
+}
+
+/* Ensure contact content remains readable and balanced */
+#contact p {
+  color: #aab8d0;
+}
+
+#contact .tech-chip {
+  border-color: rgba(101, 221, 255, .24);
+  background: rgba(73, 177, 255, .08);
+  color: #c8edff;
+}
+
+/* Responsive heading scale and contact spacing */
+@media (max-width: 768px) {
+  main > .section-reveal > section .editorial-title {
+    font-size: clamp(2.65rem, 10vw, 4.5rem);
+    line-height: 1;
+  }
+
+  main > .section-reveal > section .section-description {
+    max-width: 560px;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  main > .section-reveal > section .section-header {
+    margin-bottom: 34px;
+  }
+
+  #contact .border[class~="border-cyan-400/20"] {
+    border-radius: 21px !important;
+  }
+
+  #contact .system-card {
+    border-radius: 19px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  main > .section-reveal > section .editorial-title {
+    font-size: clamp(2.35rem, 11vw, 3.4rem);
+    letter-spacing: -.055em;
+  }
+
+  #contact .group {
+    border-radius: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #contact .group,
+  #contact .group:hover {
+    transition: none;
+    transform: none;
+  }
+}
