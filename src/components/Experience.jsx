@@ -1,7 +1,48 @@
 const experiences = [
   {
     number: "01",
-    company: "Global Software Solution (TVL) Pvt. Ltd.",
+    company: "UPSCALE",
+    role: "Freelance — Website Development & Deployment",
+    location: "Tirunelveli, Tamil Nadu",
+    period: "May 2026 — Present",
+    impact: [
+      { value: "REACT", label: "RESPONSIVE DEVELOPMENT" },
+      { value: "VITE", label: "PRODUCTION BUILDS" },
+      { value: "GIT", label: "SOURCE CONTROL" },
+    ],
+    summary:
+      "Contributing to the development, maintenance, and deployment readiness of the UPSCALE business website.",
+    responsibilities: [
+      "Developed a responsive Payment Details page using React.js and Vite.",
+      "Improved website navigation, footer components, and UI consistency using Lucide React.",
+      "Managed source code and repository updates using Git and GitHub.",
+      "Performed ESLint checks and Vite production builds to validate code quality and build readiness.",
+    ],
+    technologies: ["React.js", "Vite", "Lucide React", "Git", "GitHub", "ESLint"],
+  },
+  {
+    number: "02",
+    company: "Independent Learning & Hands-on Projects",
+    role: "Career Development & Job Search",
+    location: "Tirunelveli, Tamil Nadu",
+    period: "Jul 2025 — Apr 2026",
+    impact: [
+      { value: "AZURE", label: "CLOUD INFRASTRUCTURE" },
+      { value: "KUBERNETES", label: "CONTAINER ORCHESTRATION" },
+      { value: "CI/CD", label: "AUTOMATION PRACTICE" },
+    ],
+    summary:
+      "Focused on structured professional development, certification preparation, job searching, and practical cloud and DevOps projects. This period represents career development, not employment.",
+    responsibilities: [
+      "Strengthened practical skills in Azure infrastructure, Kubernetes, Docker, Terraform, and CI/CD automation.",
+      "Practised infrastructure provisioning, container orchestration, monitoring, and troubleshooting through hands-on projects.",
+      "Prepared for the Microsoft Azure Administrator (AZ-104) certification.",
+    ],
+    technologies: ["Microsoft Azure", "Kubernetes", "Docker", "Terraform", "CI/CD", "AZ-104 Preparation"],
+  },
+  {
+    number: "03",
+    company: "Global Software Solutions (TVL) Pvt. Ltd.",
     role: "DevOps Engineer — Release Management",
     location: "Tirunelveli, Tamil Nadu",
     period: "Dec 2024 — Jun 2025",
@@ -47,11 +88,11 @@ const experiences = [
   },
 
   {
-    number: "02",
+    number: "04",
     company: "Inmakes Infotech Pvt. Ltd.",
     role: "Python Full Stack Developer Intern",
     location: "Kochi, Kerala",
-    period: "Jul 2023 — Sep 2023",
+    period: "Jul 2024 — Sep 2024",
 
     impact: [
       {
@@ -119,9 +160,7 @@ export default function Experience() {
           </h2>
 
           <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-400 md:text-base">
-            Experience supporting enterprise releases, Azure cloud
-            operations, Kubernetes workloads, deployment validation,
-            monitoring, and production support.
+            Freelance website development, enterprise release management, and a clearly identified period of independent cloud and DevOps career development.
           </p>
         </div>
 
@@ -166,9 +205,13 @@ export default function Experience() {
 
                   <div className="flex items-start lg:justify-end">
                     <span className="tech-chip">
-                      {experience.number === "01"
+                      {experience.number === "03"
                         ? "RELEASE / OPERATIONS"
-                        : "SOFTWARE DEVELOPMENT"}
+                        : experience.number === "04"
+                          ? "SOFTWARE DEVELOPMENT"
+                          : experience.number === "01"
+                            ? "FREELANCE / WEB DEVELOPMENT"
+                            : "CAREER DEVELOPMENT"}
                     </span>
                   </div>
                 </div>
@@ -267,9 +310,11 @@ export default function Experience() {
                     </span>
 
                     <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-500">
-                      {experience.number === "01"
+                      {experience.number === "03"
                         ? "Azure / CI/CD / Production Operations"
-                        : "Python / Django / REST APIs"}
+                        : experience.number === "04"
+                          ? "Python / Django / REST APIs"
+                          : "React / Vite / Website Development"}
                     </span>
                   </div>
                 </div>

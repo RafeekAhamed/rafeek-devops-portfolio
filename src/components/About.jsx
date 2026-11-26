@@ -1,8 +1,8 @@
 const metrics = [
   {
-    value: "1+",
-    label: "YEAR EXPERIENCE",
-    detail: "Software and DevOps",
+    value: "CLOUD + DEVOPS",
+    label: "ENGINEERING FOCUS",
+    detail: "Professional operations and hands-on projects",
   },
   {
     value: "06",
@@ -10,9 +10,9 @@ const metrics = [
     detail: "Enterprise release support",
   },
   {
-    value: "03+",
-    label: "DEVOPS PROJECTS",
-    detail: "Cloud and automation",
+    value: "07",
+    label: "SELECTED PROJECTS",
+    detail: "Cloud and DevOps implementations",
   },
   {
     value: "AZ-900",

@@ -29,6 +29,7 @@ const skillGroups = [
       "React",
       "Vite",
       "Django",
+      "Flask",
       "REST APIs",
     ],
   },
@@ -53,8 +54,11 @@ const skillGroups = [
       "Cloud infrastructure, virtual machines, storage, networking, identity, and managed Kubernetes services.",
     skills: [
       "Microsoft Azure",
+      "AWS",
       "Azure Virtual Machines",
       "Azure Storage",
+      "Amazon S3",
+      "Amazon CloudFront",
       "Azure Virtual Networks",
       "VNet Peering",
       "Azure Kubernetes Service (AKS)",
@@ -162,7 +166,12 @@ const tools = [
   "PostgreSQL",
   "MySQL",
   "React",
+  "Vite",
   "Django",
+  "Flask",
+  "AWS",
+  "Amazon S3",
+  "CloudFront",
 ];
 
 export default function Skills() {

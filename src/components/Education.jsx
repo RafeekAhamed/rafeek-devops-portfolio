@@ -22,7 +22,7 @@ const learningPath = [
     provider: "Simplilearn Learning Platform",
     period: "Feb — May 2026",
     type: "PROFESSIONAL CERTIFICATION PROGRAM",
-    status: "COMPLETED · GRADE A",
+    status: "COMPLETED · DISTINCTION",
     statusType: "completed",
   },
   {
@@ -36,6 +36,15 @@ const learningPath = [
   },
   {
     number: "04",
+    title: "Career Development & Job Search",
+    provider: "Independent Learning & Hands-on Projects",
+    period: "Jul 2025 — Apr 2026",
+    type: "PROFESSIONAL DEVELOPMENT",
+    status: "COMPLETED",
+    statusType: "completed",
+  },
+  {
+    number: "05",
     title: "Azure Administrator",
     provider: "Microsoft",
     period: "In progress",

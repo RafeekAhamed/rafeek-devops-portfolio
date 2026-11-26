@@ -123,7 +123,75 @@ const projects = [
       "Release Management",
     ],
     github: "https://github.com/RafeekAhamed",
-    linkLabel: "Explore GitHub Profile",
+    linkLabel: "GitHub Profile",
+  },
+  {
+    number: "04",
+    category: "AZURE / NETWORK SECURITY",
+    title: "Azure Network Security & Access Management",
+    subtitle: "VNet Peering, Entra ID & RBAC",
+    description: "A cloud networking and access-management implementation using a three-VNet Azure environment, VNet Peering, Microsoft Entra ID, and role-based access controls.",
+    architecture: ["Azure VNets", "VNet Peering", "Entra ID", "RBAC"],
+    implementation: [
+      "Designed a three-VNet Azure environment using VNet Peering.",
+      "Implemented 5+ custom RBAC assignments following least-privilege principles.",
+      "Configured Microsoft Entra ID access controls.",
+    ],
+    validation: ["Cross-network connectivity testing", "Role and access assignment review", "Infrastructure configuration validation"],
+    stack: ["Microsoft Azure", "VNet Peering", "Microsoft Entra ID", "RBAC", "Virtual Machines"],
+    github: "https://github.com/RafeekAhamed",
+    linkLabel: "GitHub Profile",
+  },
+  {
+    number: "05",
+    category: "AZURE / INFRASTRUCTURE",
+    title: "Azure Infrastructure Deployment & Administration",
+    subtitle: "Virtual Machines & Network Configuration",
+    description: "An Azure infrastructure implementation covering virtual machine provisioning across multiple virtual networks and resource groups, followed by connectivity validation and troubleshooting.",
+    architecture: ["Resource Groups", "Virtual Networks", "VNet Peering", "Azure VMs"],
+    implementation: [
+      "Provisioned four Azure Virtual Machines across multiple VNets and Resource Groups.",
+      "Configured VNet Peering across three virtual networks.",
+      "Performed infrastructure connectivity testing and troubleshooting.",
+    ],
+    validation: ["VM provisioning checks", "VNet peering connectivity tests", "Infrastructure configuration review"],
+    stack: ["Azure Virtual Machines", "Azure Virtual Networks", "VNet Peering", "Resource Groups"],
+    github: "https://github.com/RafeekAhamed",
+    linkLabel: "GitHub Profile",
+  },
+  {
+    number: "06",
+    category: "AZURE / INFRASTRUCTURE AS CODE",
+    title: "Infrastructure Automation Using ARM Templates",
+    subtitle: "Azure Resource Provisioning",
+    description: "An infrastructure-as-code implementation using modular ARM templates to automate Azure virtual machine, storage account, and private endpoint provisioning.",
+    architecture: ["ARM Templates", "Azure VMs", "Storage Accounts", "Private Endpoints"],
+    implementation: [
+      "Authored 5+ modular ARM templates for Azure resource provisioning.",
+      "Automated VM, Storage Account, and Private Endpoint deployment.",
+      "Standardized infrastructure deployment workflows across environments.",
+    ],
+    validation: ["Template structure and parameter review", "Deployment workflow validation", "Provisioned resource checks"],
+    stack: ["ARM Templates", "Azure Virtual Machines", "Azure Storage", "Private Endpoints", "IaC"],
+    github: "https://github.com/RafeekAhamed",
+    linkLabel: "GitHub Profile",
+  },
+  {
+    number: "07",
+    category: "AWS / CLOUD ARCHITECTURE",
+    title: "Online Doctor's Clinic Application",
+    subtitle: "AWS Cloud Architecture",
+    description: "A cloud architecture design for an online doctor's clinic application using Amazon S3, CloudFront, and IAM, with emphasis on security, availability, scalability, and content delivery.",
+    architecture: ["Application", "Amazon S3", "CloudFront", "IAM"],
+    implementation: [
+      "Designed a cloud-based web application architecture.",
+      "Used Amazon S3 and CloudFront as core storage and content-delivery services.",
+      "Applied IAM-based access management concepts.",
+    ],
+    validation: ["Architecture component review", "Access-control design review", "Availability and content-delivery considerations"],
+    stack: ["AWS", "Amazon S3", "Amazon CloudFront", "IAM"],
+    github: "https://github.com/RafeekAhamed",
+    linkLabel: "GitHub Profile",
   },
 ];
 
@@ -320,7 +388,7 @@ export default function Projects() {
           eyebrow="05 / Selected Projects"
           title="Systems built to"
           highlight="operate."
-          description="Hands-on projects covering infrastructure automation, Kubernetes orchestration, CI/CD workflows, deployment validation, and release engineering practices."
+          description="Selected cloud and DevOps implementations covering Kubernetes, Terraform, Azure networking, infrastructure automation, AWS architecture, and CI/CD workflows."
           align="left"
           className="mb-12 md:mb-16"
         />

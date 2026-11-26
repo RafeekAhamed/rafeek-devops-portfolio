@@ -122,14 +122,13 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
+      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
+        <div className={`mx-auto flex min-h-[72px] w-[min(100%,1380px)] items-center justify-between gap-4 rounded-2xl border px-4 sm:px-5 transition-all duration-300 ${
           scrolled
-            ? "border-white/[0.09] bg-[#050708]/90 shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
-            : "border-white/[0.05] bg-[#050708]/70"
-        }`}
-      >
-        <div className="mx-auto flex h-[76px] w-[min(100%-28px,1280px)] items-center justify-between">
+            ? "border-cyan-300/20 bg-[#080f1d]/95 shadow-[0_16px_50px_rgba(0,0,0,0.42)]"
+            : "border-white/[0.10] bg-[#0b1220]/80 shadow-[0_12px_40px_rgba(0,0,0,0.20)]"
+        } backdrop-blur-2xl`}>
+
           {/* Brand */}
           <a
             href="#home"
@@ -137,15 +136,15 @@ export default function Navbar() {
               event.preventDefault();
               scrollToSection("home");
             }}
-            className={`group flex items-center gap-3 text-left ${focusStyles}`}
+            className={`group flex shrink-0 items-center gap-3 rounded-xl text-left ${focusStyles}`}
             aria-label="Go to homepage"
           >
-            <span className="flex h-9 w-9 items-center justify-center border border-cyan-400/25 bg-cyan-400/[0.06] font-mono text-[11px] font-bold text-cyan-300 transition group-hover:border-cyan-400/50 group-hover:bg-cyan-400/[0.1]">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300/30 bg-gradient-to-br from-cyan-300/20 to-blue-500/10 font-mono text-xs font-bold text-cyan-200 shadow-[0_0_24px_rgba(34,211,238,0.10)] transition group-hover:border-cyan-200/60">
               RA
             </span>
 
             <span className="hidden sm:block">
-              <span className="nav-brand-name block text-sm font-bold tracking-[0.06em] text-slate-100">
+              <span className="nav-brand-name block text-[13px] font-bold tracking-[0.04em] text-slate-100">
                 RAFEEK AHAMED
               </span>
 
@@ -158,7 +157,7 @@ export default function Navbar() {
           {/* Desktop navigation */}
           <nav
             aria-label="Primary navigation"
-            className="hidden items-center gap-1 lg:flex"
+            className="hidden items-center gap-1 rounded-xl border border-white/[0.06] bg-black/20 p-1 xl:flex"
           >
             {navItems.map((item) => {
               const isActive = active === item.id;
@@ -169,45 +168,30 @@ export default function Navbar() {
                   type="button"
                   onClick={() => scrollToSection(item.id)}
                   aria-current={isActive ? "location" : undefined}
-                  className={`group relative flex items-center gap-2 px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.10em] transition ${focusStyles} ${
+                  className={`group relative flex items-center rounded-lg px-3 py-2.5 text-[10px] font-semibold tracking-[0.02em] transition ${focusStyles} ${
                     isActive
-                      ? "text-cyan-300"
-                      : "text-slate-500 hover:text-slate-200"
+                      ? "bg-cyan-300 text-[#06111d] shadow-[0_4px_18px_rgba(34,211,238,0.16)]"
+                      : "text-slate-400 hover:bg-white/[0.06] hover:text-white"
                   }`}
                 >
-                  <span
-                    className={`text-[9px] transition ${
-                      isActive
-                        ? "text-cyan-400/80"
-                        : "text-slate-700 group-hover:text-slate-500"
-                    }`}
-                  >
-                    {item.number}
-                  </span>
-
                   {item.label}
-
-                  <span
-                    aria-hidden="true"
-                    className={`absolute bottom-0 left-3 right-3 h-px origin-left bg-cyan-400 transition-transform duration-300 ${
-                      isActive
-                        ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-50"
-                    }`}
-                  />
                 </button>
               );
             })}
           </nav>
 
-          {/* Desktop contact CTA */}
+          {/* Distinct desktop contact CTA */}
           <button
             type="button"
             onClick={() => scrollToSection("contact")}
-            className={`hidden min-h-10 items-center gap-2 border border-cyan-400/25 bg-cyan-400/[0.06] px-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.1] md:flex ${focusStyles}`}
+            className={`group hidden min-h-11 shrink-0 items-center gap-3 rounded-full border border-cyan-300/35 bg-[#071a29] px-5 text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_0_1px_rgba(34,211,238,0.06),0_8px_28px_rgba(34,211,238,0.10)] transition duration-300 hover:-translate-y-0.5 hover:border-cyan-200/70 hover:bg-cyan-300 hover:text-[#06111d] hover:shadow-[0_10px_32px_rgba(34,211,238,0.22)] md:flex ${focusStyles}`}
           >
-            Contact
-            <ArrowUpRight size={13} aria-hidden="true" />
+            <span className="relative flex h-2 w-2 items-center justify-center">
+              <span className="absolute h-2 w-2 animate-ping rounded-full bg-emerald-300/60 group-hover:bg-[#06111d]/40" />
+              <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-300 group-hover:bg-[#06111d]" />
+            </span>
+            Let&apos;s Talk
+            <ArrowUpRight size={14} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </button>
 
           {/* Mobile menu toggle */}
@@ -215,7 +199,7 @@ export default function Navbar() {
             ref={menuButtonRef}
             type="button"
             onClick={() => setMobileOpen((value) => !value)}
-            className={`flex h-10 w-10 items-center justify-center border border-white/[0.08] bg-white/[0.025] text-slate-300 transition hover:border-cyan-400/30 hover:text-cyan-300 lg:hidden ${focusStyles}`}
+            className={`flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.10] bg-white/[0.05] text-slate-200 transition hover:border-cyan-300/40 hover:text-cyan-200 xl:hidden ${focusStyles}`}
             aria-label={
               mobileOpen ? "Close navigation menu" : "Open navigation menu"
             }
@@ -236,7 +220,7 @@ export default function Navbar() {
         id="mobile-navigation"
         aria-hidden={!mobileOpen}
         inert={!mobileOpen}
-        className={`fixed inset-0 z-40 bg-[#050708]/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
+        className={`fixed inset-0 z-40 bg-[#050b16]/95 backdrop-blur-xl transition-all duration-300 2xl:hidden ${
           mobileOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none invisible opacity-0"

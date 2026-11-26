@@ -1,209 +1,55 @@
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Sparkles } from "lucide-react";
 import InfrastructureScene from "./InfrastructureScene.jsx";
 
 const RESUME_PATH = "/Rafeek%20Ahamed%20M.pdf";
-
-const quickFacts = [
-  { label: "EXPERIENCE", value: "1+ Year" },
-  { label: "SPECIALIZATION", value: "Azure / DevOps" },
-  { label: "PLATFORM", value: "Kubernetes / AKS" },
-  { label: "AVAILABILITY", value: "Immediate Joiner" },
-];
-
-const stack = [
-  "Microsoft Azure",
-  "Azure DevOps",
-  "CI/CD",
-  "Kubernetes",
-  "Docker",
-  "Terraform",
-];
-
-const focusStyles =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300";
+const stack = ["Microsoft Azure", "Azure DevOps", "Kubernetes", "Docker", "Terraform", "CI/CD"];
 
 export default function Hero() {
-  const scrollTo = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen overflow-hidden"
-      aria-labelledby="hero-heading"
-    >
-      {/* BACKGROUND ACCENTS */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute left-[8%] top-[18%] h-72 w-72 rounded-full bg-cyan-400/[0.035] blur-3xl" />
-        <div className="absolute right-[5%] top-[25%] h-96 w-96 rounded-full bg-cyan-400/[0.025] blur-3xl" />
-      </div>
-
-      <div className="container">
-        {/* AVAILABILITY */}
-        <div className="flex items-center gap-3 pb-6 pt-24 md:pt-28">
-          <span
-            aria-hidden="true"
-            className="relative flex h-2 w-2 shrink-0"
-          >
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
-          </span>
-
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Immediate Joiner / Open to DevOps &amp; Cloud Roles
-          </span>
+    <section id="home" className="hero-premium relative overflow-hidden" aria-labelledby="hero-heading">
+      <div className="hero-orb hero-orb-one" aria-hidden="true" />
+      <div className="hero-orb hero-orb-two" aria-hidden="true" />
+      <div className="container relative z-10">
+        <div className="hero-topline">
+          <span><span className="availability-dot" /> AVAILABLE FOR DEVOPS &amp; CLOUD OPPORTUNITIES</span>
+          <span className="hero-location"><MapPin size={14} /> Tirunelveli, Tamil Nadu, India</span>
         </div>
 
-        <div className="grid min-h-[calc(100vh-190px)] items-center gap-12 pb-12 lg:grid-cols-[1fr_0.8fr] lg:gap-12 xl:grid-cols-[1fr_0.75fr] xl:gap-16">
-          {/* INTRODUCTION */}
-          <div className="min-w-0">
-            <div className="section-label">
-              01 / Overview
+        <div className="hero-premium-grid">
+          <div className="hero-copy">
+            <div className="hero-eyebrow"><Sparkles size={15} /> DEVOPS ENGINEER / AZURE CLOUD ENGINEER</div>
+            <h1 id="hero-heading">Building reliable<br /><span>cloud infrastructure.</span></h1>
+            <p className="hero-summary">
+              I work across enterprise release management, Azure cloud operations, CI/CD deployment validation, and Kubernetes monitoring. I also build hands-on solutions with Docker, Terraform, and cloud infrastructure automation.
+            </p>
+            <div className="hero-stack" aria-label="Core technologies">
+              {stack.map((item) => <span key={item}>{item}</span>)}
             </div>
-
-            <div className="mt-7">
-              <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-cyan-400">
-                DevOps Engineer / Azure Cloud Engineer
-              </p>
-
-              <h1
-                id="hero-heading"
-                className="editorial-title max-w-4xl"
-              >
-                Building
-                <br />
-                reliable
-                <br />
-                <span className="cyan-text">
-                  cloud systems.
-                </span>
-              </h1>
+            <div className="hero-actions">
+              <a className="hero-primary-action" href={RESUME_PATH} target="_blank" rel="noopener noreferrer">View Resume <ArrowUpRight size={17} /></a>
+              <button className="hero-secondary-action" type="button" onClick={() => scrollTo("contact")}><Mail size={16} /> Contact Me</button>
             </div>
-
-            <div className="mt-7 max-w-2xl">
-              <p className="text-base leading-8 text-slate-400 md:text-lg">
-                DevOps Engineer with professional experience in
-                enterprise release management, Azure cloud
-                operations, CI/CD deployment validation, and
-                Kubernetes monitoring. Building hands-on
-                solutions with Docker, Terraform, Azure DevOps,
-                and infrastructure automation.
-              </p>
-            </div>
-
-            {/* CORE TECHNOLOGIES */}
-            <ul
-              className="mt-6 flex max-w-2xl flex-wrap gap-2"
-              aria-label="Core technologies"
-            >
-              {stack.map((item) => (
-                <li key={item} className="tech-chip">
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            {/* ACTIONS */}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a
-                href={RESUME_PATH}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View resume PDF in a new tab"
-                className={`group inline-flex min-h-12 items-center justify-center gap-3 border border-cyan-400/30 bg-cyan-400/[0.08] px-6 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-300 transition hover:border-cyan-400/60 hover:bg-cyan-400/[0.13] ${focusStyles}`}
-              >
-                View Resume
-
-                <ArrowUpRight
-                  size={15}
-                  aria-hidden="true"
-                  className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </a>
-
-              <button
-                type="button"
-                onClick={() => scrollTo("contact")}
-                className={`inline-flex min-h-12 items-center justify-center gap-3 border border-transparent px-5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 transition hover:text-white ${focusStyles}`}
-              >
-                <Mail size={14} aria-hidden="true" />
-                Contact Me
-              </button>
+            <div className="hero-proof-row">
+              <div><strong>6</strong><span>Enterprise client environments</span></div>
+              <div><strong>Azure</strong><span>Cloud &amp; operations focus</span></div>
+              <div><strong>Hands-on</strong><span>Cloud &amp; DevOps projects</span></div>
             </div>
           </div>
 
-          {/* PROMINENT PROFESSIONAL PORTRAIT + 3D INFRASTRUCTURE */}
-          <div className="hero-visual-column relative mx-auto w-full max-w-[470px] lg:ml-auto lg:mr-0">
-            <div className="hero-portrait-card">
-              <img
-                src="/profile.jpg"
-                alt="Professional portrait of Rafeek Ahamed M"
-                width={1100}
-                height={1400}
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-                className="hero-portrait-image"
-              />
+          <div className="hero-art-column">
+            <div className="portrait-frame">
+              <div className="portrait-frame-glow" />
+              <img src="/profile.jpg" alt="Professional portrait of Rafeek Ahamed M" width="1100" height="1400" fetchPriority="high" />
+              <div className="portrait-caption"><span>RAFEek AHAMED M.</span><small>DEVOPS / AZURE CLOUD</small></div>
             </div>
-
-            <div className="hero-infrastructure-card">
-              <div className="hero-infrastructure-heading">
-                <span>ENGINEERING TOOLCHAIN</span>
-                <span>AZURE / DEVOPS</span>
-              </div>
+            <div className="hero-floating-label"><span className="availability-dot" /> IMMEDIATE JOINER</div>
+            <div className="hero-3d-panel">
+              <div className="hero-3d-heading"><span>01 / CLOUD TOOLCHAIN</span><span>LIVE SYSTEM MAP</span></div>
               <InfrastructureScene />
             </div>
           </div>
-        </div>
-
-        {/* QUICK FACTS */}
-        <div
-          className="border-y border-white/[0.07]"
-          aria-label="Professional quick facts"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4">
-            {quickFacts.map((item, index) => (
-              <div
-                key={item.label}
-                className={`min-h-[105px] px-5 py-6 md:px-7 ${
-                  index !== quickFacts.length - 1
-                    ? "border-r border-white/[0.07]"
-                    : ""
-                } ${
-                  index >= 2
-                    ? "border-t border-white/[0.07] md:border-t-0"
-                    : ""
-                }`}
-              >
-                <p className="micro-label">
-                  {item.label}
-                </p>
-
-                <p className="mt-3 text-sm font-medium text-slate-200">
-                  {item.value}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* FOOTER */}
-        <div className="flex flex-col gap-3 py-6 sm:flex-row sm:items-center sm:justify-between">
-          <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-600">
-            Azure / Cloud Engineering / DevOps
-          </span>
-
-          <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-600">
-            India / Open to Relocation
-          </span>
         </div>
       </div>
     </section>
